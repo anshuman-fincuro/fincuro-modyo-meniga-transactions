@@ -708,7 +708,7 @@ background-color: #f1f1ff;
 .checkboxLabel-wrap {
     display: flex;
     align-items: center;
-    margin: 28px 0px 14px 0px;
+    margin: 20px 0px 14px 0px;
 }
 .checkboxLabel-wrap > div {
     margin-right: 10px;
@@ -722,8 +722,56 @@ background-color: #f1f1ff;
     width: 12px;
     margin-right: 10px;
 }
+.bill-table-form-wrap {
+    display: flex;
+}
+.bill-tableFrom-left {
+    width: 60%;
+}
+
+.bill-tableFrom-right {
+    width: 40%;
+    padding-left: 40px;
+    padding-top: 10px;
+} 
+.bill-tableFrom-right .billing-form-wrap .form-group .search-bar {
+    padding: 24px 12px !important;
+    color: #4d4d4d;
+    font-size: 18px !important;
+    }
+.bill-tableFrom-right .billing-form-wrap .form-group input[type=text], .bill-tableFrom-right .billing-form-wrap .form-group select {
+    padding: 6px 12px;
+    color: #4d4d4d;
+    font-size: 14px;
+}
+.bill-tableFrom-right .billing-form-wrap .form-group input[type=checkbox]:checked {
+    background-color: #4d4d4d;
+   border-color:#4d4d4d;
+}
+.bill-tableFrom-right .billing-form-wrap .form-group input[type=checkbox] {
+   border: 2px solid #ddd;
+   width: 20px;
+   height: 20px;
+   border-radius: 6px;
+}
+.bill-tableFrom-right .billing-form-wrap .form-group input[type=checkbox]:hover {
+    border: 2px solid #4d4d4d;
+ }
 /*  media start */
 @media (max-width: 768px) {
+    .bill-table-form-wrap {
+        flex-direction: column;
+    }
+    .bill-tableFrom-left {
+        width: 100%;
+        order: 2;
+    }
+    .bill-tableFrom-right {
+        width: 100%;
+        padding-left: 0px;
+        order: 1;
+        margin-bottom: 30px;
+    }
     .HSBar-container {
         width: auto;
     }
