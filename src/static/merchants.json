@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "merchantId": 100000034,
+      "text": "Blast Clothing",
+      "nettoAmount": -45.0000,
+      "transactionCount": 1
+    },
+    {
+      "merchantId": 100000022,
+      "text": "Sainsbury's",
+      "nettoAmount": -122.0000,
+      "transactionCount": 1
+    },
+    {
+      "merchantId": 100000010,
+      "text": "IKEA",
+      "nettoAmount": -12.0000,
+      "transactionCount": 1
+    },
+    {
+      "merchantId": 100000031,
+      "text": "Waitrose",
+      "nettoAmount": -112.0000,
+      "transactionCount": 1
+    },
+    {
+      "merchantId": 100000009,
+      "text": "Iceland",
+      "nettoAmount": -93.0000,
+      "transactionCount": 1
+    },
+    {
+      "merchantId": 100000003,
+      "text": "BP",
+      "nettoAmount": -87.0000,
+      "transactionCount": 2
+    },
+    {
+      "merchantId": 100000027,
+      "text": "Texaco",
+      "nettoAmount": -43.0000,
+      "transactionCount": 2
+    },
+    {
+      "merchantId": 100000051,
+      "text": "Muscleworks Gym",
+      "nettoAmount": -80.0000,
+      "transactionCount": 1
+    }
+  ]
+}

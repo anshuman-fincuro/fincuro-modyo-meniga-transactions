@@ -1,0 +1,812 @@
+/* insight start */
+.insights-bold-text {
+    padding: 0px 20px;
+}
+
+.separter-line {
+    height: 5px;
+    background: rgb(233, 89, 73);
+    width: 150px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.inside-left-description {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.insights-right {
+    width: 400px;
+    padding-top: 30px;
+}
+
+/* .wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+} */
+
+.barcharts {
+    height: 400px;
+}
+
+.barcharts-left {
+    width: 500px;
+    padding: 25px;
+    padding-left: 0;
+}
+
+.barcharts-left-title {
+    padding: 20px;
+    color: #1c242c;
+    padding-bottom: 14px;
+}
+
+.barcharts-left-content {
+    padding-top: 5px;
+    font-size: 14px;
+}
+
+.progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.progress-items-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.progress-items:first-child {
+    margin-left: 10px;
+    font-size: 13px;
+    color: #000;
+}
+
+.progress-items:nth-child(2) {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1c242c;
+}
+
+.barcharts-content {
+    width: 320px;
+    padding: 25px;
+    padding-left: 0;
+}
+
+.chart-wrapper {
+    margin: 0 auto;
+}
+
+/* end  */
+/* CarbonFootprint start */
+.carbonFootprint-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.carbonFootprint-inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.carbonFootprint-small-text {
+    font-size: 15px;
+    color: #1c242c;
+    opacity: 0.7;
+    font-weight: bold;
+    padding: 20px;
+    padding-bottom: 0;
+}
+
+.carbonFootprint-calenderMonth {
+    margin-top: 50px;
+}
+
+.carbonFootprint-calenderMonth select {
+    font-size: 16px;
+}
+
+.carbonFootprint-calenderYear {
+    margin-top: 50px;
+    margin-left: 25px;
+}
+
+.carbonFootprint-calenderYear select {
+    font-size: 16px;
+}
+
+.carousel-item {
+    float: inherit;
+    margin-right: auto;
+    margin: 0px 20px;
+}
+
+.footprint-lineChart div .footprint-lineChart-item {
+    padding: 20px;
+    padding-bottom: 0;
+}
+
+.footprint-item-horizontalBar {
+    padding: 20px;
+    padding-bottom: 0;
+}
+
+.carbonFootprint-progressBar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.progressBar-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-top: 2px;
+    justify-content: space-between;
+}
+
+.progressBar-wrapper.progressBar-item:first-child {
+    margin-left: 10px;
+    font-size: 13px;
+    padding-top: 5px;
+    color: #1c242c;
+}
+
+.progressBar-wrapper.progressBar-item:nth-child(2) {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1c242c;
+}
+
+.progressBar-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    width: 1100px
+}
+
+.lineChart-container {
+    margin-top: 50px;
+}
+
+.HSBar-container {
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    margin-left: 0px;
+}
+
+/* end  */
+/* account Dropdown start*/
+.account-warapper ul {
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.accountMenuItem {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 12px 60px 12px 24px;
+}
+
+.amountWithLabel {
+    font-size: 12px !important;
+}
+
+.amountWithLabel-amount {
+    font-size: 15px;
+    line-height: 17px;
+}
+
+.brown-color {
+    color: #f45516;
+}
+
+.green-color {
+    color: #2b8000;
+}
+
+.purple-color {
+    color: #593f72;
+}
+
+.amountWithLabel .amountWithLabel-label {
+    color: #666666;
+    text-transform: uppercase;
+    display: block;
+    margin: 0;
+}
+
+.amountWithLabel-amount {
+    font-size: 15px;
+    line-height: 17px;
+    font-weight: bold
+}
+
+.account-warapper ul li {
+    /* height: 80px; */
+    border: 1px solid #e6e6e6;
+    background: #ffffff;
+    flex-wrap: nowrap;
+    padding: 10px 0px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+    width: 33.3%;
+}
+
+.account-warapper ul li:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.account-warapper ul li:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.accountMenuItem .Icon-normal {
+    font-size: 16px;
+    color: #4d4d4d;
+}
+
+.bugdet-warapper {
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
+    /* margin-bottom: 24px; */
+    /* width: 33.3%; */
+}
+
+.budgetEquationContainer-header {
+    padding: 12px;
+    padding-bottom: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.budgetEquationContainer-header-icon {
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.budgetEquationContainer-header .Heading {
+    margin: 6px 0;
+    font-size: 14px;
+    line-height: 17.5px;
+    font-weight: bold;
+}
+
+.budgetEquation-data-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.text {
+    font-size: 14px;
+    line-height: 21px;
+    vertical-align: middle;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.budgetEquationContainer-data {
+    padding: 0 12px;
+    margin-bottom: 12px;
+}
+
+.budgetEquation-item-left,
+.budgetEquation-item-right {
+    padding: 16px 12px;
+}
+
+.budgetEquation-data-item:hover,
+.budgetEquation-data-item.active {
+    background-color: #eaf2fb;
+}
+
+.budgetEquation-data-item:hover .content,
+.budgetEquation-data-item.active .content {
+    color: #1c242c;
+    font-size: 16px;
+}
+
+.budgetEquation-data-item:hover .text,
+.budgetEquation-data-item.active .text {
+    color: #1c242c;
+    font-size: 16px;
+}
+
+.budgetEquationContainer-header-title h3 {
+    font-size: 14px;
+    color: #1c242c;
+}
+
+.budgetEquationContainer-select select {
+    border-radius: 0;
+    border: none;
+    color: #566B76;
+    font-size: 12px;
+}
+
+.budgetEquationContainer-select select:focus-visible,
+.budgetEquationContainer-select select:hover {
+    border-radius: 0;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000;
+}
+
+/* CarouselNew start */
+.carousel-wrapper .carousel-child {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border: 1px solid #D8D8D8 !important;
+}
+
+.carousel .control-arrow,
+.carousel.carousel-slider .control-arrow {
+    opacity: 1;
+}
+
+.carousel-wrapper .carousel .control-dots .dot {
+    background: #1c242c;
+}
+
+.carousel-status {
+    display: none;
+}
+
+.carousel-wrapper .carousel .control-dots .dot.selected {
+    width: 30px;
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+.carousel-wrapper .carousel.carousel-slider {
+    overflow: visible;
+}
+
+.carousel-wrapper .carousel .control-dots {
+    bottom: -46px;
+}
+
+.carousel .control-next.control-arrow:before {
+    border-left: 8px solid #1c242c !important;
+}
+
+.carousel .control-prev.control-arrow:before {
+    border-right: 8px solid #1c242c !important;
+}
+
+.carousel-wrapper {
+    margin-bottom: 50px;
+}
+
+.arrow-icon svg {
+    width: 14px;
+}
+
+.account-wrapper ul li:hover {
+    background: #F4F4F0;
+}
+
+.account-top-bar {
+    background-color: #F4F4F0;
+    padding: 10px 26px;
+    margin-bottom: 60px;
+}
+
+.budget-container {
+    background-color: #F4F4F0;
+    padding: 10px;
+}
+
+.budget-detail-wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.budget-detail-wrap .budget-flex {
+    flex: 0 0 28%;
+}
+
+.unpayed-bill-wrap {
+    font-size: 18px;
+    text-align: center;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    /* justify-content: center; */
+}
+
+.expeses-wrapper {
+    background-color: #fff;
+    padding: 0 18px;
+}
+
+.merchents-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0px;
+}
+
+
+.merchents-left {
+    width: 50%;
+}
+
+.bubble-chart-container .bubble-chart-text .bubble-label.medium {
+    font-size: 12px;
+    color: #fff;
+    word-break: break-word;
+}
+
+.bubble-chart-container .bubble-chart-text .bubble-label.small {
+    font-size: 12px;
+    color: #fff;
+    text-transform: lowercase;
+    line-height: 13px;
+}
+
+/* bills number  */
+.bill-number-text {
+    border: 2px solid #1c242c;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 46px;
+    color: #1c242c;
+    ;
+    margin-right: 24px;
+    font-weight: bold;
+}
+
+.bubble-chart-container .bubble-chart-text .bubble-label {
+    color: #fff;
+    font-size: 14px;
+}
+/* Expenses by categories */
+progress {
+    height: 20px;
+}
+
+.expeses-wrapper .progress-items {
+    font-size: 10px;
+}
+.merchents-wrapper .progress-items {
+    font-size: 10px;
+}
+
+.expeses-wrapper .budget-detail-wrap div {
+    flex: none;
+}
+
+.expeses-wrapper .insights-right {
+    padding-top: 4px;
+}
+
+.merchents-wrapper .progressBar-item-wrap {
+    width: auto;
+}
+
+.top-merchents-wrap .barcharts-content {
+    padding: 0;
+    padding-left: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.merchents-wrapper .progressBar-item {
+    font-size: 10px;
+}
+
+.merchents-left .progress {
+    width: 100%;
+}
+
+.merchents-wrapper hr {
+    margin: 4px 0px;
+    margin-left: 0px;
+}
+
+/* hsbar */
+.HSbar-headig {
+    text-align: left;
+    padding: 0px 0px 12px;
+}
+
+.expeses-wrapper progress {
+    margin-top: 10px;
+}
+
+.merchents-wrapper progress {
+    margin-top: 4px;
+}
+.top-merchents-wrap {
+    display: flex;
+}
+
+
+.bubblegraph-wrapper {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+}
+.unpayed-bill-wrap {
+    width: 40%;
+}
+.top-merchents-wrap {
+    display: flex;
+}
+.bill-content {
+font-size: 14px;
+}
+.account-warapper ul li:hover {
+    background-color: #f4f4f0;
+}
+.account-warapper ul li .arrow-icon svg{
+    fill:#706e6e;
+}
+.toggleBilling .account-warapper ul li.active .arrow-icon svg{
+    fill:#fff;
+    transform: rotate(180deg);
+}
+.toggleBilling .account-warapper ul li.active {
+    background-color: #1c242c;
+}
+.toggleBilling .account-warapper ul li.active .green-color {
+color: #fff;
+}
+.toggleBilling .account-warapper ul li.active .amountWithLabel .amountWithLabel-label {
+color: #fff;
+}
+/* billingTable start */
+.billingTable-wrapper {
+    padding: 12px 12px;
+    display: block;
+}
+.toggleBilling .billingTable-wrapper {
+    display: block;
+}
+.billingTable-heading {
+    color: #1c242c;
+    font-size: 24px;
+    font-weight: bold;
+    border-left: 6px solid;
+    padding-left: 14px;
+    margin-bottom: 12px;
+}
+
+.billingTable-row {
+    display: flex;
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    background: #ffffff;
+    border-bottom: 1px solid #e4e4e4;
+    align-items: center;
+}
+
+.billingTable-row:hover, .billingTable-row:hover select{
+background-color: #f1f1ff;
+}
+.billingTable-right-dropdown select:focus-visible,
+.billingTable-right-dropdown select:hover {
+    border-radius: 0;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000;
+}
+
+.billingTable-row:last-child {
+    border-bottom: none;
+}
+
+.billingTable-left {
+    display: flex;
+    color: #566B76;
+}
+
+.billingTable-right {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.billingTable-right-text {
+    color: #1c242c;
+    font-weight: bold;
+    line-height: 18px;
+    padding-left: 4px;
+    font-size: 16px;
+}
+.text-color-red{
+    color: #f45516;
+}
+.text-color-green{
+    color: #2B8000;
+}
+.billingTable-TransactionAmount {
+    padding-right: 12px;
+    font-size: 14px;
+}
+
+.billingTable-right-dropdown select {
+    border: none;
+    border-radius: 0;
+    font-size: 12px;
+    color: #566B76;
+    border: 1px solid transparent;
+}
+
+.billingTable-right-text-wrapper {
+    padding: 12px 14px; 
+}
+
+.billingTable-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e4e4e4;
+    padding: 12px 18px;
+}
+
+.billingTable-icon i {
+    font-size: 24px;
+    color: #a57fca;
+}
+
+.billingTable-date {
+    padding: 12px 18px;
+    border-right: 1px solid #e4e4e4;
+    font-size: 16px;
+}
+
+.billingTable-container {
+    border: 1px solid #ddd;
+}
+/* bill form */
+.billingFilter-wrapper label{
+  font-size: 16px;
+  color:#1c242c;
+  margin: 26px 0px;
+}
+.checkbox-text{
+    font-size: 12px;
+    color: #4d4d4d;
+}
+.checkboxLabel-wrap {
+    display: flex;
+    align-items: center;
+    margin: 28px 0px 14px 0px;
+}
+.checkboxLabel-wrap > div {
+    margin-right: 10px;
+}
+.checkboxLabel-wrap > div input {
+    width: 20px;
+    height: 20px;
+    margin: 0px;
+}
+.checkboxLabel-wrap .arrow-icon svg {
+    width: 12px;
+    margin-right: 10px;
+}
+/*  media start */
+@media (max-width: 768px) {
+    .HSBar-container {
+        width: auto;
+    }
+
+    .expeses-wrapper .insights-right {
+        width: 100%;
+    }
+
+    .bill-content {
+        width: 100%;
+    }
+
+    .bill-number-text {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+
+    .unpayed-bill-wrap {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .account-warapper ul {
+        flex-direction: column;
+    }
+
+    .accountMenuItem {
+        padding: 12px 16px;
+    }
+
+    .account-warapper ul li {
+        height: 100%;
+    }
+
+    .arrow-icon svg {
+        width: 10px;
+    }
+
+    .account-warapper ul li:first-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .account-warapper ul li:last-child {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .account-top-bar {
+        padding: 10px 16px;
+    }
+
+    .budget-detail-wrap {
+        flex-direction: column;
+    }
+
+    /* .budget-detail-wrap div{
+    flex: 0%;
+} */
+    .budget-detail-wrap .budget-flex {
+        flex: 0%;
+    }
+
+    .account-warapper ul li {
+        width: 100%;
+    }
+
+    .top-merchents-wrap .merchents-right {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .top-merchents-wrap .merchents-right .wrapper {
+        width: 320px;
+    }
+    .top-merchents-wrap {
+        flex-direction: column;
+    }
+    .bubblegraph-wrapper {
+        width: 100%;
+        justify-content: center;
+    }
+    .merchents-wrapper {
+        padding: 0 10px;
+    }
+}

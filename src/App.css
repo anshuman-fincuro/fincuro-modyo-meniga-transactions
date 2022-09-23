@@ -1,0 +1,77 @@
+.App {
+  text-align: center;
+}
+
+progress {
+  border: none;
+  width: 400px;
+  height: 40px;
+  margin-top: 20px;
+}
+
+progress::-webkit-progress-value {
+  background: #1c242c;
+}
+
+progress::-webkit-progress-bar {
+  background: gainsboro;
+}
+
+.first-column {
+  width: 440px;
+  height: 400px;
+  padding: 25px;
+  padding-left: 0;
+  display: 'flex';
+  flex-wrap: 'nowrap';
+  flex-direction: 'column';
+}
+
+.first-column-title {
+  padding: 5px 20px 20px;
+}
+
+.first-column-subpart1 {
+  padding: 32px;
+}
+
+.first-column-subpart2 {
+  padding: 32px;
+}
+
+@media screen and (max-width: 600px) {
+  progress {
+    border: none;
+    width: 300px;
+    height: 30px;
+  }
+
+  .first-column {
+    height: 300px;
+  }
+
+  .first-column-title {
+    font-size: 50px;
+  }
+
+  .first-column-subpart1 {
+    padding: 20px; 
+  }
+
+  .first-column-subpart2 {
+    padding: 13px; 
+  }
+}
+
+.chart__bubble {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+.chart__bubble .bubble {
+  fill: #a4a4a477;
+}
+
+.chart__bubble .leaf {
+  fill: #006e74;
+}
