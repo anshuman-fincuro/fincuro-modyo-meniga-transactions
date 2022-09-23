@@ -26,7 +26,7 @@ class BillingFilter extends Component {
                 <option value="3">Three</option>
               </Form.Select>
               <div className="checkboxLabel-wrap">
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1" className="checkbox" />
                 <span className="checkbox-text">Only uncertain categorization</span>
               </div>
             </div>
@@ -74,7 +74,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1" className="checkbox" />
                 <span className="checkbox-text ">Current</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -86,7 +86,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1" className="checkbox" />
                 <span className="checkbox-text">Credit</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -98,7 +98,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1" className="checkbox" />
                 <span className="checkbox-text">Savings</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -110,7 +110,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1" className="checkbox" />
                 <span className="checkbox-text">Wallet</span>
               </div>
             </div>
