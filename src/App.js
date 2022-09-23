@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import './App.css';
-import "../node_modules/react-bubble-chart/src/style.css";
 import { setAuthToken } from './store/actions/auth-action';
 import { SpinningCircles } from "react-loading-icons";
 import AccountDropdown from './components/AccountDropdown';
