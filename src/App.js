@@ -57,7 +57,7 @@ class App extends Component {
          { (this.props.token !== null && this.props.accountsData && this.props.categoriesData && this.props.spendingData && this.props.merchantData && this.props.planningData) ? 
       <div>
          <div id="billingDiv" className='toggleBilling'>
-         <h2 className="mb-4">Account Transactions</h2>
+         <h2 className="mb-4">Transactions</h2>
         <div className='account-top-bar'>
         <AccountDropdown accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
         </div>
