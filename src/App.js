@@ -39,15 +39,20 @@ class App extends Component {
       <div>
          { (this.props.token !== null && this.props.accountsData && this.props.categoriesData && this.props.spendingData && this.props.merchantData && this.props.planningData) ? 
       <div>
-         {/* <div id="billingDiv" className='toggleBilling'> */}
+         <div id="billingDiv" className='toggleBilling'>
          <h2 class="mb-4">Account Summary</h2>
         <div className='account-top-bar'>
         <AccountDropdown></AccountDropdown>
         </div>
-        <div>
+        <div className='bill-table-form-wrap'>
+          <div className='bill-tableFrom-left'>
         <BillingTable></BillingTable>
+        </div>
+        <div className='bill-tableFrom-right'>
         <BillingFilter></BillingFilter>
-        </div>     
+        </div>
+        </div> 
+        </div>    
       </div>
     :
     <SpinningCircles/> }

@@ -10,10 +10,10 @@ class BillingFilter extends Component {
   render() {
     return (
       <div className="billingFilter-wrapper">
-        <Form>
+        <Form className="billing-form-wrap">
           <div className="form-row">
             <div className="form-group col-md-12">
-              <Form.Control type="email" placeholder="scarch..." />
+              <Form.Control type="text" className="search-bar" placeholder="scarch..." />
             </div>
           </div>
           <div className="form-row">
@@ -26,7 +26,7 @@ class BillingFilter extends Component {
                 <option value="3">Three</option>
               </Form.Select>
               <div className="checkboxLabel-wrap">
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1"  />
                 <span className="checkbox-text">Only uncertain categorization</span>
               </div>
             </div>
@@ -44,10 +44,10 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <Form.Control type="email" placeholder="From" />
+              <Form.Control type="text" placeholder="From" />
             </div>
             <div className="form-group col-md-6">
-              <Form.Control type="email" placeholder="To" />
+              <Form.Control type="text" placeholder="To" />
             </div>
           </div>
           <div className="form-row">
@@ -74,7 +74,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1"  />
                 <span className="checkbox-text ">Current</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -86,7 +86,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1"  />
                 <span className="checkbox-text">Credit</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -98,7 +98,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1"  />
                 <span className="checkbox-text">Savings</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -110,7 +110,7 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1" clasName="checkbox" />
+                <Form.Check aria-label="option 1"  />
                 <span className="checkbox-text">Wallet</span>
               </div>
             </div>
