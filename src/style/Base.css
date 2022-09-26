@@ -743,6 +743,7 @@ background-color: #f1f1ff;
     padding: 6px 12px;
     color: #4d4d4d;
     font-size: 14px;
+    width: 100%;
 }
 .bill-tableFrom-right .billing-form-wrap .form-group input[type=checkbox]:checked {
     background-color: #4d4d4d;

@@ -43,10 +43,10 @@ class BillingFilter extends Component {
             </div>
           </div>
           <div className="form-row">
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-6 col-sm-12">
               <Form.Control type="text" placeholder="From" />
             </div>
-            <div className="form-group col-md-6">
+            <div className="form-group col-md-6 col-sm-12">
               <Form.Control type="text" placeholder="To" />
             </div>
           </div>
