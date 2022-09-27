@@ -625,6 +625,7 @@ background-color: #f1f1ff;
     border: none;
     outline: none;
     border-bottom: 1px solid #000;
+    z-index: 3;
 }
 
 .billingTable-row:last-child {
@@ -667,10 +668,12 @@ background-color: #f1f1ff;
     font-size: 12px;
     color: #566B76;
     border: 1px solid transparent;
+    z-index: 3;
 }
 
 .billingTable-right-text-wrapper {
-    padding: 12px 14px; 
+    padding: 12px 14px;
+    z-index: 10;
 }
 
 .billingTable-icon {

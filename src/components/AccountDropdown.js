@@ -12,16 +12,14 @@ class AccountDropdown extends Component {
       activeAccount: this.props.activeAccount
     }
   }
-  onTrigger = (index) => {
-    this.setState({activeAccount: index});
-  }
+  
   componentDidUpdate() {}
   render() {
     return (
       <div className="account-wrapper">
         <ul>
           {this.props.accountsData.map((x, i) => (
-            <li key={x.id} className={this.state.activeAccount===i ? 'active' : ''} onClick={()=>this.onTrigger(i)}>
+            <li key={x.id} className={this.props.activeAccount===i ? 'active' : ''} onClick={()=>this.props.changeAccount(i)}>
               <span className="tab-nav-item-link icon-1">
               <div className="accountMenuItem ">
                 <div className="amountWithLabel">

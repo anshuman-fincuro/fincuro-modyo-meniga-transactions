@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./App.css";
 import { setAuthToken } from "./store/actions/auth-action";
 import { SpinningCircles } from "react-loading-icons";
-// import AccountDropdown from './components/AccountDropdown';
+import AccountDropdown from './components/AccountDropdown';
 import {
   setAccountsData,
   setCategoriesData,
@@ -13,10 +13,8 @@ import {
   setPlanningData,
   setSpendingData,
 } from "./store/actions/component-action";
-// import BillingTable from './components/BillingTable';
-// import BillingFilter from './components/BillingFilter';
-import TransactionDetail from "./components/TransactionDetail";
-import LineCharts from "./components/LineCharts";
+import BillingTable from './components/BillingTable';
+import BillingFilter from './components/BillingFilter';
 
 class App extends Component {
   constructor(props) {
@@ -46,6 +44,10 @@ class App extends Component {
       this.props.spendingData.filter((x) => x.accountId===accountDropdownData[this.state.activeAccount].id) : [];
   }
 
+  onTrigger = (index) => {
+    this.setState({activeAccount: index});
+  }
+
   render() {
     var accountDropdownData = this.props.accountsData ?
       this.props.accountsData.filter((acc) => acc.accountCategory!=="Wallet") : [];
@@ -67,203 +69,18 @@ class App extends Component {
         this.props.planningData ? (
           <div>
             <div id="billingDiv" className="toggleBilling">
-              {/* <h2 className="mb-4">Account Summary</h2>
-        <div className='account-top-bar'>
-        <AccountDropdown accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
-        </div>
-        <div className='bill-table-form-wrap'>
-          <div className='bill-tableFrom-left'>
-        <BillingTable transactionData={groupedTransactions}></BillingTable>
-        </div>
-        <div className='bill-tableFrom-right'>
-        <BillingFilter></BillingFilter>
-        </div>
-        </div>  */}
-              <TransactionDetail></TransactionDetail>
-              <div className="linechart-wrapper">
-                <h2 className="heading">Total expenses this period</h2>
-                <div className="TransactionOverviewChart-dropdown">
-                            <select>
-                                <option value="fruit">Last 6 months</option>
-                                <option value="vegetable">Last year</option>
-                                <option value="meat">Last 1 year</option>
-                                <option value="vegetable">Last 3 year</option>
-                                <option value="meat">Last 6 year</option>
-                            </select>
-                        </div>
-                <div className="TransactionOverviewChart-tabs-wrapper">
-                  <div>
-                    <nav>
-                      <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a
-                          className="nav-item nav-link active"
-                          id="nav-home-tab"
-                          data-toggle="tab"
-                          href="#nav-home"
-                          role="tab"
-                          aria-controls="nav-home"
-                          aria-selected="true"
-                        >
-                          Home
-                        </a>
-                        <a
-                          className="nav-item nav-link"
-                          id="nav-profile-tab"
-                          data-toggle="tab"
-                          href="#nav-profile"
-                          role="tab"
-                          aria-controls="nav-profile"
-                          aria-selected="false"
-                        >
-                          Profile
-                        </a>
-                      </div>
-                    </nav>
-                    <div className="tab-content" id="nav-tabContent">
-                      <div
-                        className="tab-pane fade show active"
-                        id="nav-home"
-                        role="tabpanel"
-                        aria-labelledby="nav-home-tab"
-                      >
-                        <LineCharts spendingData={this.props.spendingData} />
-                        <table className="TransactionChartTable">
-                          <thead>
-                            <tr>
-                              <th className="TransactionChartTable-icon"></th>
-                              <th className="TransactionChartTable-name"></th>
-                              <th className="TransactionChartTable-text">
-                                Current month
-                              </th>
-                              <th className="TransactionChartTable-text">
-                                Average
-                              </th>
-                              <th className="TransactionChartTable-text">
-                                Total
-                              </th>
-                              <th className="TransactionChartTable-row-action"></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="TransactionChartTable-row ">
-                              <td
-                                title="[object Object]"
-                                className="TransactionChartTable-icon"
-                              >
-                                <div
-                                  className="GraphColorBox TransactionChartTable-row-colorBox"
-                                  
-                                ></div>
-                              </td>
-                              <td className="TransactionChartTable-name">
-                                <span className="TransactionChartTable-row-text">
-                                  Public Transportation
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-text">
-                                <span
-                                  className="FormatCurrency"
-                                 
-                                >
-                                  <span className="FormatCurrency-symbol">£ </span>
-                                  <span className="FormatCurrency-value">
-                                    -30.00
-                                  </span>
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-text">
-                                <span
-                                  className="FormatCurrency"
-                                  
-                                >
-                                  <span className="FormatCurrency-symbol">£ </span>
-                                  <span className="FormatCurrency-value">
-                                    -25.67
-                                  </span>
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-text">
-                                <span
-                                  className="FormatCurrency"
-                                  
-                                >
-                                  <span className="FormatCurrency-symbol">£ </span>
-                                  <span className="FormatCurrency-value">
-                                    -184.00
-                                  </span>
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-row-action">
-                                <i className="Icon Icon--normal Icon--xs Icon--line Icon--right"></i>
-                              </td>
-                            </tr>
-                            <tr className="TransactionChartTable-row ">
-                              <td
-                                title="[object Object]"
-                                className="TransactionChartTable-icon"
-                              >
-                                <div
-                                  className="GraphColorBox TransactionChartTable-row-colorBox"
-                                  
-                                ></div>
-                              </td>
-                              <td className="TransactionChartTable-name">
-                                <span className="TransactionChartTable-row-text">
-                                  Transport for London
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-text">
-                                <span
-                                  className="FormatCurrency"
-                                 
-                                >
-                                  <span className="FormatCurrency-symbol">£ </span>
-                                  <span className="FormatCurrency-value">
-                                    -30.00
-                                  </span>
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-text">
-                                <span
-                                  className="FormatCurrency"
-                             
-                                >
-                                  <span className="FormatCurrency-symbol">£ </span>
-                                  <span className="FormatCurrency-value">
-                                    -15.00
-                                  </span>
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-text">
-                                <span
-                                  className="FormatCurrency"
-                                 
-                                >
-                                  <span className="FormatCurrency-symbol">£ </span>
-                                  <span className="FormatCurrency-value">
-                                    -120.00
-                                  </span>
-                                </span>
-                              </td>
-                              <td className="TransactionChartTable-row-action">
-                                <i className="Icon Icon--normal Icon--xs Icon--line Icon--right"></i>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div
-                        className="tab-pane fade"
-                        id="nav-profile"
-                        role="tabpanel"
-                        aria-labelledby="nav-profile-tab"
-                      >
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <h2 className="mb-4">Account Summary</h2>
+            <div className='account-top-bar'>
+            <AccountDropdown changeAccount={this.onTrigger.bind(this)} accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
+            </div>
+            <div className='bill-table-form-wrap'>
+              <div className='bill-tableFrom-left'>
+            <BillingTable transactionData={groupedTransactions}></BillingTable>
+            </div>
+            <div className='bill-tableFrom-right'>
+            <BillingFilter></BillingFilter>
+            </div>
+            </div> 
             </div>
           </div>
         ) : (
