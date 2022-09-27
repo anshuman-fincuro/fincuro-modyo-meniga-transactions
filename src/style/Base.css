@@ -758,6 +758,276 @@ background-color: #f1f1ff;
 .bill-tableFrom-right .billing-form-wrap .form-group input[type=checkbox]:hover {
     border: 2px solid #4d4d4d;
  }
+
+
+ /* TransactionDetail start */
+ .overlay-content{
+    /* max-width: 816px; */
+    min-width: 816px;
+    margin: 0 auto;
+    position: relative;
+ }
+ .receipt--info{
+    color: #4d4d4d;
+    position: relative;
+    padding: 24px 0;
+    padding-top: 48px;
+    background: #ffffff;
+    box-sizing: border-box;
+    padding: 48px 0px;
+}
+
+.receipt-date{
+    position: absolute;
+    z-index: 1;
+    width: 80px;
+    height: 80px;
+    box-sizing: border-box;
+    top: -24px;
+    left: 50%;
+    margin-left: -40px;
+    border-radius: 50%;
+    text-align: center;
+    padding-top: 18px;
+    background: #62BDD0;
+    color: #ffffff;
+}
+.transactionDetail-wrapper{
+ background-color: #4b5e68;
+ height: 100vh;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-bottom: 30px;
+}
+.receipt-date-year {
+    display: block;
+    font-size: 10px;
+    line-height: 10px;
+}
+.receipt-date-day {
+    font-size: 24px;
+    line-height: 24px;
+    display: block;
+}
+.receipt-date-month {
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.receipt-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 48px 0px;
+}
+.SelectPlaceholder-text{
+ text-align: center;
+ color:#4d4d4d;
+   
+}
+.transactionReceipt-heading{
+   font-size: 30px;
+   padding-bottom: 12px;
+   color:#4d4d4d;
+   font-weight: bold;
+}
+.transaction-detail-dropdown select{
+    font-size: 16px;
+    color: #4d4d4d;
+}
+.transactionReceipt-amountAndAccount{
+   padding: 48px 0px;
+   text-align: center;
+}
+.transactionReceipt-account{
+   font-size: 14px;
+   color: #4d4d4d;
+}
+.transactionReceipt-amount{
+  color: #62BDD0;
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: bold;
+  display: block;
+}
+.transactionActionList-list{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.transactionActionList-item {
+    padding: 12px;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+.transactionActionList-item button {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    padding: 12px 0;
+    width: 100%;
+}
+.transactionActionList-item button:hover{
+    background-color: #617885;
+    border-radius: 4px;
+}
+.transactionActionList-item .Button-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+}
+.transactionActionList-item .Button-label svg{
+margin-bottom: 12px;
+}
+.receipt--info:before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-image: linear-gradient(45deg, transparent 33.333%, #ffffff 33.333%, #ffffff 66.667%, transparent 66.667%), linear-gradient(-45deg, transparent 33.333%, #ffffff 33.333%, #ffffff 66.667%, transparent 66.667%);
+    bottom: -10px;
+    background-size: 20px 40px;
+    background-position: 0 -20px;
+}
+/* TransactionOverviewCarbon */
+.transactionOverviewCarbon{
+    padding: 12px 84px;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0px 48px 24px;
+}
+
+.formattedNumber{
+    color: #62BDD0;
+    font-size: 30px;
+    
+}
+.transactionOverviewCarbon .heading{
+    font-size: 20px;
+    line-height: 25px;
+    color: #4d4d4d;
+    font-weight: bold;
+    margin: 14px 0px;
+}
+.estimated-text{
+    color: #566B76;
+    font-size: 14px;
+
+    padding-left: 4px;
+}
+.content-right{
+     line-height: 12px;
+}
+
+
+/* transactionOverviewChart-graph */
+.transactionOverviewChart-graph-wrapper{
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
+    padding: 24px 84px;
+    margin: 0px 48px 24px;
+}
+
+.transactionOverviewChart-graph-wrapper .heading{
+    font-size: 20px;
+    color: #4d4d4d;
+    font-weight: bold;
+    padding: 12px 0px;
+}
+.transactionOverviewChart-list{
+     display: flex;
+     justify-content: space-between;
+}
+.transactionOverviewChart-text{
+    font-size: 16px;
+    color: #4d4d4d;
+    padding: 6px 0px;
+}
+.transactionOverviewChart-amount{
+    font-weight: bold;
+    font-size: 24px;
+    color: #4d4d4d;
+}
+.transactionOverviewChart-list-item{
+    border-top: 5px solid #FEB734;
+    border-radius: 3px 3px 0 0;
+    width: 332px;
+
+}
+ .border-color-blue{
+    border-top: 5px solid #62BDD0 !important;
+}
+.border-color-purpel{
+    border-top: 5px solid #727DC0 !important;
+}
+
+
+/* linechart  */
+.linechart-wrapper{
+     padding: 24px 84px;
+     margin: 0px 48px 24px;
+     background: #ffffff;
+     border: 1px solid #e6e6e6;
+     border-radius: 6px;
+     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
+     position: relative;
+
+}
+.linechart-wrapper .heading{
+  color: #4d4d4d;
+  font-size: 20px;
+  margin: 20px 0;
+}
+.linechart-wrapper .TransactionOverviewChart-dropdown select{
+    position: absolute;
+    right: 90px;
+    margin-top: 9px;
+    border: none;
+    color: #4d4d4d;
+    font-size: 18px;
+}
+/* linechart strt */
+
+.TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-item.show .nav-link, .TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-link.active {
+    border: none;
+    border-bottom: 3px solid #E95949 !important;
+    color: #E95949;
+    text-decoration: none;
+}
+.TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-link:focus, .TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-link:hover {
+    text-decoration: none;
+    border: none;
+}
+.TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-link {
+    color: #4d4d4d;
+    font-size: 18px;
+    margin: 0 30px 0px 20px;
+}
+.TransactionChartTable {
+    width: 100%;
+    font-size: 18px;
+    color: #4d4d4d;
+}
+.TransactionChartTable-text {
+    text-align: right;
+}
 /*  media start */
 @media (max-width: 768px) {
     .bill-table-form-wrap {
@@ -858,4 +1128,52 @@ background-color: #f1f1ff;
     .merchents-wrapper {
         padding: 0 10px;
     }
+    .transactionDetail-wrapper {
+        height: 100%;
+    }
+    .overlay-content {
+        min-width: 100%;
+        width: 100%;
+    }
+    .receipt-date {
+        top: 0;
+        margin-top: 20px;
+    }
+    .receipt-content {
+        padding: 60px 0px 0px;
+    }
+    .transactionActionList-list {
+        flex-wrap: wrap;
+    }
+    .transactionActionList-item {
+        width: 100%;
+    }
+    .transactionActionList-item .Button-label {
+        font-size: 16px;
+    }
+    .transactionOverviewCarbon {
+        padding: 12px;
+        margin: 0px 10px 24px;
+    }
+    .transactionOverviewChart-graph-wrapper {
+    padding: 12px;
+    margin: 0px 10px 24px;
+    }
+    .transactionOverviewChart-list {
+        flex-wrap: wrap;
+    }
+    .transactionOverviewChart-list-item {
+        width: 100%;
+    margin-bottom: 20px;
+    }
+    .linechart-wrapper {
+        padding: 12px;
+        margin: 0px 10px 24px;
+    }
+    /* .lineChart-container .recharts-wrapper {
+        width: 100% !important;
+    }
+    .lineChart-container .recharts-wrapper svg {
+        width: 100% !important;
+    } */
 }
