@@ -21,7 +21,9 @@ import LineCharts from "./components/LineCharts";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      activeAccount: 0
+    };
   }
 
   async componentDidUpdate(previousProps, previousState) {
@@ -39,7 +41,22 @@ class App extends Component {
     await this.props.setAuth();
   }
 
+  getTransactionData(accountDropdownData) {
+    return this.props.spendingData ?
+      this.props.spendingData.filter((x) => x.accountId===accountDropdownData[this.state.activeAccount].id) : [];
+  }
+
   render() {
+    var accountDropdownData = this.props.accountsData ?
+      this.props.accountsData.filter((acc) => acc.accountCategory!=="Wallet") : [];
+    var transactionData = this.getTransactionData(accountDropdownData);
+    var months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var groups = transactionData.reduce((r, o) => {
+      var m = o.date.split(("-"))[1];
+      (r[m])? r[m].data.push(o) : r[m] = {group: months[parseInt(m)], data: [o]};
+      return r;
+    }, {});
+    var groupedTransactions = Object.keys(groups).map((k) => {return groups[k]; });
     return (
       <div>
         {this.props.token !== null &&
@@ -52,11 +69,11 @@ class App extends Component {
             <div id="billingDiv" className="toggleBilling">
               {/* <h2 className="mb-4">Account Summary</h2>
         <div className='account-top-bar'>
-        <AccountDropdown></AccountDropdown>
+        <AccountDropdown accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
         </div>
         <div className='bill-table-form-wrap'>
           <div className='bill-tableFrom-left'>
-        <BillingTable></BillingTable>
+        <BillingTable transactionData={groupedTransactions}></BillingTable>
         </div>
         <div className='bill-tableFrom-right'>
         <BillingFilter></BillingFilter>
