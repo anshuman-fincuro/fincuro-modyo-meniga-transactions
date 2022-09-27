@@ -1,5 +1,5 @@
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 import { Button } from "react-bootstrap";
 import React, { Component } from "react";
 import "./../style/Base.css";
@@ -13,7 +13,7 @@ class BillingFilter extends Component {
         <Form className="billing-form-wrap">
           <div className="form-row">
             <div className="form-group col-md-12">
-              <Form.Control type="text" className="search-bar" placeholder="scarch..." />
+              <Form.Control type="text" className="search-bar" placeholder="Search..." />
             </div>
           </div>
           <div className="form-row">

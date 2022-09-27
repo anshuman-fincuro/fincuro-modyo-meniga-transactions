@@ -191,7 +191,7 @@
 
 /* end  */
 /* account Dropdown start*/
-.account-warapper ul {
+.account-wrapper ul {
     list-style-type: none;
     display: flex;
     padding-left: 0;
@@ -240,7 +240,7 @@
     font-weight: bold
 }
 
-.account-warapper ul li {
+.account-wrapper ul li {
     /* height: 80px; */
     border: 1px solid #e6e6e6;
     background: #ffffff;
@@ -250,12 +250,12 @@
     width: 33.3%;
 }
 
-.account-warapper ul li:first-child {
+.account-wrapper ul li:first-child {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 
-.account-warapper ul li:last-child {
+.account-wrapper ul li:last-child {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 }
@@ -265,7 +265,7 @@
     color: #4d4d4d;
 }
 
-.bugdet-warapper {
+.bugdet-wrapper {
     background: #ffffff;
     border: 1px solid #e6e6e6;
     border-radius: 6px;
@@ -570,23 +570,23 @@ progress {
 .bill-content {
 font-size: 14px;
 }
-.account-warapper ul li:hover {
+.account-wrapper ul li:hover {
     background-color: #f4f4f0;
 }
-.account-warapper ul li .arrow-icon svg{
+.account-wrapper ul li .arrow-icon svg{
     fill:#706e6e;
 }
-.toggleBilling .account-warapper ul li.active .arrow-icon svg{
+.toggleBilling .account-wrapper ul li.active .arrow-icon svg{
     fill:#fff;
     transform: rotate(180deg);
 }
-.toggleBilling .account-warapper ul li.active {
+.toggleBilling .account-wrapper ul li.active {
     background-color: #1c242c;
 }
-.toggleBilling .account-warapper ul li.active .green-color {
+.toggleBilling .account-wrapper ul li.active .green-color {
 color: #fff;
 }
-.toggleBilling .account-warapper ul li.active .amountWithLabel .amountWithLabel-label {
+.toggleBilling .account-wrapper ul li.active .amountWithLabel .amountWithLabel-label {
 color: #fff;
 }
 /* billingTable start */
@@ -794,7 +794,7 @@ background-color: #f1f1ff;
         width: 100%;
     }
 
-    .account-warapper ul {
+    .account-wrapper ul {
         flex-direction: column;
     }
 
@@ -802,7 +802,7 @@ background-color: #f1f1ff;
         padding: 12px 16px;
     }
 
-    .account-warapper ul li {
+    .account-wrapper ul li {
         height: 100%;
     }
 
@@ -810,12 +810,12 @@ background-color: #f1f1ff;
         width: 10px;
     }
 
-    .account-warapper ul li:first-child {
+    .account-wrapper ul li:first-child {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
 
-    .account-warapper ul li:last-child {
+    .account-wrapper ul li:last-child {
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
     }
@@ -835,7 +835,7 @@ background-color: #f1f1ff;
         flex: 0%;
     }
 
-    .account-warapper ul li {
+    .account-wrapper ul li {
         width: 100%;
     }
 
