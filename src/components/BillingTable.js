@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Icon from '@mdi/react';
 import "./../style/Base.css";
 import "./../App.css";
-import { mdiCardAccountDetails, mdiCar, mdiCardRemoveOutline } from '@mdi/js';
+import {mdiHange, mdiSofaSingleOutline, mdiCart, mdiHomeSiloOutline, mdiCellphone, mdiFoodSteak, mdiFood, mdiHamburger, mdiCar, mdiCardRemoveOutline, mdiFoodHotDog, mdiFish } from '@mdi/js';
 import TransactionDetail from "./TransactionDetail";
-
+import { mdiCarTireAlert, mdiMagnify, mdiBank,   } from "@mdi/js";
 
 class BillingTable extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class BillingTable extends Component {
                                 {x.data.map((item, j) => (
                                     <div onClick={()=>this.setShowDetails(true)} key={j} className="billingTable-row">
                                         <div className="billingTable-left">
-                                            <div className="billingTable-icon"><Icon path={mdiCardAccountDetails}
+                                            <div className="billingTable-icon"><Icon path={mdiFoodHotDog}
                                                 size={2}
                                                 horizontal
                                                 vertical

@@ -18,6 +18,7 @@
       "hasUncertainCategorization": true,
       "accountId": 135,
       "mcc": 5813,
+      
       "detectedCategories": [
         {
           "categoryId": 79,

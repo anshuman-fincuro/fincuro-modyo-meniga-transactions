@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import "./../style/Base.css";
 import "./../App.css";
 import Form from "react-bootstrap/Form";
+import { mdiCarTireAlert, mdiMagnify, } from "@mdi/js";
 
 class BillingFilter extends Component {
   render() {
@@ -14,6 +15,9 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
               <Form.Control type="text" className="search-bar" placeholder="Search..." />
+              <span>
+             
+              </span>
             </div>
           </div>
           <div className="form-row">
