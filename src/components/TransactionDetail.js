@@ -34,7 +34,7 @@ class TransactionDetail extends Component {
               onClick={()=>this.props.changeShowDetails(false)}
               size={2}
               color="#dcdcdc"/>
-              <div className="overlay-content">
+              <div className="overlay-content-details">
                 <div className="receipt--info">
                   <div className="receipt-date">
                     <span

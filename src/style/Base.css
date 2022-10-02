@@ -768,9 +768,7 @@ background-color: #f1f1ff;
  svg.close-details-icon {
     align-self: flex-start!important;
  }
- .overlay-content{
-    /* max-width: 816px; */
-    min-width: 816px;
+ .overlay-content-details{
     margin: 0 auto;
     position: relative;
  }
@@ -1228,7 +1226,7 @@ background-color: #62BDD0;
     .transactionDetail-wrapper {
         height: 100%;
     }
-    .overlay-content {
+    .overlay-content-details {
         min-width: 100%;
         width: 100%;
     }
