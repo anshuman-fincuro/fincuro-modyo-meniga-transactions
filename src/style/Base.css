@@ -178,10 +178,6 @@
     width: 1100px
 }
 
-.lineChart-container {
-    margin-top: 50px;
-}
-
 .HSBar-container {
     width: 100%;
     padding: 0px;
@@ -764,6 +760,9 @@ background-color: #f1f1ff;
 
 
  /* TransactionDetail start */
+ svg.close-details-icon {
+    align-self: flex-start!important;
+ }
  .overlay-content{
     /* max-width: 816px; */
     min-width: 816px;
@@ -773,11 +772,9 @@ background-color: #f1f1ff;
  .receipt--info{
     color: #4d4d4d;
     position: relative;
-    padding: 24px 0;
-    padding-top: 48px;
+    padding-top: 24px;
     background: #ffffff;
     box-sizing: border-box;
-    padding: 48px 0px;
 }
 
 .receipt-date{
@@ -797,10 +794,9 @@ background-color: #f1f1ff;
 }
 .transactionDetail-wrapper{
  background-color: #4b5e68;
- height: 100vh;
+ height: 450px;
  display: flex;
  align-items: center;
- justify-content: center;
  margin-bottom: 30px;
 }
 .receipt-date-year {
@@ -824,7 +820,7 @@ background-color: #f1f1ff;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 48px 0px;
+    padding: 36px 0px;
 }
 .SelectPlaceholder-text{
  text-align: center;
@@ -842,7 +838,7 @@ background-color: #f1f1ff;
     color: #4d4d4d;
 }
 .transactionReceipt-amountAndAccount{
-   padding: 48px 0px;
+   padding: 24px 0px;
    text-align: center;
 }
 .transactionReceipt-account{
@@ -912,7 +908,6 @@ margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin: 0px 48px 24px;
 }
 
 .formattedNumber{
@@ -945,7 +940,6 @@ margin-bottom: 12px;
     border-radius: 6px;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 12%);
     padding: 24px 84px;
-    margin: 0px 48px 24px;
 }
 
 .transactionOverviewChart-graph-wrapper .heading{
@@ -985,7 +979,6 @@ margin-bottom: 12px;
 /* linechart  */
 .linechart-wrapper{
      padding: 24px 84px;
-     margin: 0px 48px 24px;
      background: #ffffff;
      border: 1px solid #e6e6e6;
      border-radius: 6px;
@@ -1173,10 +1166,4 @@ margin-bottom: 12px;
         padding: 12px;
         margin: 0px 10px 24px;
     }
-    /* .lineChart-container .recharts-wrapper {
-        width: 100% !important;
-    }
-    .lineChart-container .recharts-wrapper svg {
-        width: 100% !important;
-    } */
 }

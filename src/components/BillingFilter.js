@@ -18,7 +18,7 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-            <label for="inputEmail4">Category</label>
+            <label htmlFor="inputEmail4">Category</label>
               <Form.Select aria-label="Default select">
                 <option>Select categories</option>
                 <option value="1">One</option>
@@ -33,7 +33,7 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-            <label for="inputEmail4">Amount</label>
+            <label htmlFor="inputEmail4">Amount</label>
               <Form.Select aria-label="Default select">
                 <option>Select type</option>
                 <option value="1">One</option>
@@ -52,7 +52,7 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-            <label for="inputEmail4">Date</label>
+            <label htmlFor="inputEmail4">Date</label>
               <Form.Select aria-label="Default select example">
                 <option>Select period</option>
                 <option value="1">One</option>
@@ -63,7 +63,7 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
-              <label for="inputEmail4">Account</label>
+              <label htmlFor="inputEmail4">Account</label>
               <div className="checkboxLabel-wrap">
                 {" "}
                 <span className="arrow-icon">

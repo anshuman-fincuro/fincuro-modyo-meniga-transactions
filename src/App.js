@@ -15,12 +15,14 @@ import {
 } from "./store/actions/component-action";
 import BillingTable from './components/BillingTable';
 import BillingFilter from './components/BillingFilter';
+import TransactionDetail from "./components/TransactionDetail";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeAccount: 0
+      activeAccount: 0,
+      showDetails: false,
     };
   }
 
@@ -44,6 +46,11 @@ class App extends Component {
       this.props.spendingData.filter((x) => x.accountId===accountDropdownData[this.state.activeAccount].id) : [];
   }
 
+
+  setShowDetails(value) {
+    this.setState({showDetails: value});
+  }
+
   onTrigger = (index) => {
     this.setState({activeAccount: index});
   }
@@ -61,30 +68,36 @@ class App extends Component {
     var groupedTransactions = Object.keys(groups).map((k) => {return groups[k]; });
     return (
       <div>
-        {this.props.token !== null &&
-        this.props.accountsData &&
-        this.props.categoriesData &&
-        this.props.spendingData &&
-        this.props.merchantData &&
-        this.props.planningData ? (
-          <div>
-            <div id="billingDiv" className="toggleBilling">
-              <h2 className="mb-4">Account Summary</h2>
-            <div className='account-top-bar'>
-            <AccountDropdown changeAccount={this.onTrigger.bind(this)} accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
+        {this.state.showDetails===false ? (
+        <div>
+          {this.props.token !== null &&
+          this.props.accountsData &&
+          this.props.categoriesData &&
+          this.props.spendingData &&
+          this.props.merchantData &&
+          this.props.planningData ? (
+            <div>
+              <div id="billingDiv" className="toggleBilling">
+                <h2 className="mb-4">Account Summary</h2>
+              <div className='account-top-bar'>
+              <AccountDropdown changeAccount={this.onTrigger.bind(this)} accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
+              </div>
+              <div className='bill-table-form-wrap'>
+                <div className='bill-tableFrom-left'>
+              <BillingTable changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions}></BillingTable>
+              </div>
+              <div className='bill-tableFrom-right'>
+              <BillingFilter></BillingFilter>
+              </div>
+              </div> 
+              </div>
             </div>
-            <div className='bill-table-form-wrap'>
-              <div className='bill-tableFrom-left'>
-            <BillingTable transactionData={groupedTransactions}></BillingTable>
-            </div>
-            <div className='bill-tableFrom-right'>
-            <BillingFilter></BillingFilter>
-            </div>
-            </div> 
-            </div>
-          </div>
+          ) : (
+            <SpinningCircles />
+          )}
+        </div>
         ) : (
-          <SpinningCircles />
+        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails}></TransactionDetail>
         )}
       </div>
     );

@@ -3,7 +3,6 @@ import Icon from '@mdi/react';
 import "./../style/Base.css";
 import "./../App.css";
 import { mdiCardAccountDetails, mdiCar, mdiCardRemoveOutline } from '@mdi/js';
-import TransactionDetail from "./TransactionDetail";
 
 
 class BillingTable extends Component {
@@ -11,24 +10,19 @@ class BillingTable extends Component {
         super(props);
         this.state = {
           data: this.props.transactionData,
-          showDetails: false,
         }
-    }
-    setShowDetails(value) {
-        this.setState({showDetails: value});
     }
     
     render() {
         return (
             <div>
-                {this.state.showDetails===false ? (
                 <div className="billingTable-wrapper">
                     {this.props.transactionData.map((x, i) => (
                         <div key={i}>
                             <div className="billingTable-heading">{x.group}</div>
                             <div className="billingTable-container">
                                 {x.data.map((item, j) => (
-                                    <div onClick={()=>this.setShowDetails(true)} key={j} className="billingTable-row">
+                                    <div onClick={()=>this.props.changeShowDetails(true)} key={j} className="billingTable-row">
                                         <div className="billingTable-left">
                                             <div className="billingTable-icon"><Icon path={mdiCardAccountDetails}
                                                 size={2}
@@ -62,9 +56,6 @@ class BillingTable extends Component {
                         </div>
                     ))};
                 </div>
-                ) : (
-                <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails}></TransactionDetail>
-                )}
             </div>
         );
     }

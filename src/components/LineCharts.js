@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import * as moment from 'moment';
 
 import "./../style/Base.css";
@@ -59,19 +59,21 @@ class LineCharts extends Component {
 
   render() {
     return (
-      <div className="lineChart-container">
-        <LineChart layout="horizontal" width={1050} height={300} data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <XAxis dataKey="name" padding={{ left: 50, right: 50 }} />
-          <YAxis />
-          <Tooltip />
-          <Line
-            type="monotone"
-            dataKey="Total"
-            stroke="#1c242c"
-            activeDot={{ r: 8 }}
-            />
-          </LineChart>   
-      </div>       
+      <div className="mt-5 col-12">
+        <ResponsiveContainer width="70%" height={300}>
+          <LineChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="name" padding={{ left: 50, right: 50 }} />
+            <YAxis />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="Total"
+              stroke="#1c242c"
+              activeDot={{ r: 8 }}
+              />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }
