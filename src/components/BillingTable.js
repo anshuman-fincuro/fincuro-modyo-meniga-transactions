@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Icon from '@mdi/react';
 import "./../style/Base.css";
 import "./../App.css";
-import { mdiCardAccountDetails, mdiCar, mdiCardRemoveOutline } from '@mdi/js';
+import { mdiCardAccountDetails} from '@mdi/js';
 
 
 class BillingTable extends Component {

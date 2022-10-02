@@ -738,11 +738,16 @@ background-color: #f1f1ff;
     color: #4d4d4d;
     font-size: 18px !important;
     }
+    .bill-tableFrom-right .billing-form-wrap .form-group input[type=text]:focus {
+        box-shadow: none;
+    }
 .bill-tableFrom-right .billing-form-wrap .form-group input[type=text], .bill-tableFrom-right .billing-form-wrap .form-group select {
     padding: 6px 12px;
     color: #4d4d4d;
     font-size: 14px;
     width: 100%;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
 }
 .bill-tableFrom-right .billing-form-wrap .form-group input[type=checkbox]:checked {
     background-color: #4d4d4d;
@@ -999,6 +1004,9 @@ margin-bottom: 12px;
     color: #4d4d4d;
     font-size: 18px;
 }
+.TransactionOverviewChart-tabs-wrapper .nav-tabs{
+   padding-bottom: 18px;
+}
 /* linechart strt */
 
 .TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-item.show .nav-link, .TransactionOverviewChart-tabs-wrapper .nav-tabs .nav-link.active {
@@ -1024,6 +1032,99 @@ margin-bottom: 12px;
 .TransactionChartTable-text {
     text-align: right;
 }
+.transactionDetail-container {
+    position: absolute;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+    width: 100%;
+}
+.transactionDetail-container .icon-header {
+background-color: #4b5e68;
+padding: 14px 20px;
+}
+.TransactionChartTable-row:hover {
+    background-color: #f1faff;
+}
+.TransactionChartTable-dot:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #feb734;
+    position: absolute;
+    border-radius: 50%;
+    top: auto;
+    bottom: 8px;
+    left: 6px;
+}
+.TransactionChartTable-dot {
+    position: relative;
+    padding-left: 30px;
+}
+.TransactionChartTable-dot.dot-color::before {
+background-color: #62BDD0;
+}
+/* chart */
+.TransactionChart-wrapper .GraphTooltip.GraphTooltip--top{
+    display: none;
+    border-color:rgb(107, 193, 211);
+    transform: translate(158.679px, -64px);
+ }
+ .TransactionChart-wrapper .GraphTooltip-caret{
+     color:#6bc1d3;
+ }
+ .TransactionChart-wrapper .GraphColorBox.GraphTooltipTable-box{
+     background: rgb(107, 193, 211);
+ }
+ .TransactionChart-wrapper .FormatCurrency{
+     white-space: nowrap;
+ }
+ .TransactionChart-wrapper .GraphColorBox.GraphTooltipTable-box{
+     background: rgb(254, 183, 52);
+ }
+ .TransactionChart-wrapper .Graph-containerSvg{
+     overflow: visible;
+ }
+ .TransactionChart-wrapper .tick{
+     opacity: 1;
+ }
+ .TransactionChart-wrapper .tick.zero{
+     opacity: 1;
+ }
+ .TransactionChart-wrapper .js-circle.js-circle--above{
+     opacity: 1;
+ }
+ .TransactionChart-wrapper .GraphLegend-item{
+     color:#6bc1d3;
+ }
+ .TransactionChart-wrapper .GraphLegend-item2{
+     color:#FEB734;
+ }
+ .TransactionChart-wrapper {
+  padding: 70px 0px;
+ }
+ .TransactionChart-wrapper svg{
+     fill: #fff;
+     
+ }
+ .TransactionChart-wrapper svg .js-line {
+     stroke-width: 3px;
+ }
+ .TransactionChart-wrapper svg g.tick {
+     font-size: 14px;
+ }
+ .TransactionChart-wrapper svg .js-border{
+   color: #4d4d4d;
+ }
+ .TransactionChart-wrapper svg:not(:root){
+     overflow: unset;
+ }
+ .TransactionChart-wrapper .js-grid--vertical, .js-grid--horizontal, .js-axis .js-line {
+     fill: none;
+     shape-rendering: crispEdges;
+     stroke: #d8d8d8;
+     stroke-width: 1px;
+ }
 /*  media start */
 @media (max-width: 768px) {
     .bill-table-form-wrap {

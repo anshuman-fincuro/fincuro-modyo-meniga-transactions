@@ -25,8 +25,8 @@ class TransactionDetail extends Component {
     return (
       <div>
         { this.state.showDetails===true ? (
-        <div className="row no-gutters justify-content-center">
-          <div className="row no-gutters">
+        <div className="row mx-0 justify-content-center">
+          <div className="row mx-0">
             <div className="transactionDetail-wrapper col-12 col-md-6">
             <Icon
               className="close-details-icon"
@@ -245,7 +245,7 @@ class TransactionDetail extends Component {
               </div>
             </div>
           </div>
-          <div className="linechart-wrapper col col-md-10">
+          <div className="linechart-wrapper col col-md-10 px-3">
             <h2 className="heading">Total expenses this period</h2>
             <div className="TransactionOverviewChart-dropdown">
                         <select>
@@ -269,18 +269,7 @@ class TransactionDetail extends Component {
                       aria-controls="nav-home"
                       aria-selected="true"
                     >
-                      Home
-                    </a>
-                    <a
-                      className="nav-item nav-link"
-                      id="nav-profile-tab"
-                      data-toggle="tab"
-                      href="#nav-profile"
-                      role="tab"
-                      aria-controls="nav-profile"
-                      aria-selected="false"
-                    >
-                      Profile
+                      Spending
                     </a>
                   </div>
                 </nav>
@@ -416,14 +405,6 @@ class TransactionDetail extends Component {
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="nav-profile"
-                    role="tabpanel"
-                    aria-labelledby="nav-profile-tab"
-                  >
-                    
                   </div>
                 </div>
               </div>
