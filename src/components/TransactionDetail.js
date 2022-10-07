@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Icon from "@mdi/react";
 import "./../style/Base.css";
 import "./../App.css";
-import { mdiCarTireAlert, mdiArrowLeft } from "@mdi/js";
+import { mdiCarTireAlert, mdiArrowLeft, mdiBank, mdiCalendarMonthOutline, mdiUnfoldMoreVertical, mdiCogOutline, mdiChat, mdiUnfoldLessVertical  } from "@mdi/js";
 import LineCharts from "./LineCharts";
 
 
@@ -25,15 +25,18 @@ class TransactionDetail extends Component {
     return (
       <div>
         { this.state.showDetails===true ? (
-        <div className="row mx-0 justify-content-center">
-          <div className="row mx-0">
-            <div className="transactionDetail-wrapper col-12 col-md-6">
-            <Icon
+        <div className="">
+          <div className="">
+          <div className="icon-header">
+              <Icon
               className="close-details-icon"
               path={mdiArrowLeft}
               onClick={()=>this.props.changeShowDetails(false)}
-              size={2}
+              size={3}
               color="#dcdcdc"/>
+              </div>
+            <div className="transactionDetail-wrapper">
+            
               <div className="overlay-content-details">
                 <div className="receipt--info">
                   <div className="receipt-date">
@@ -75,7 +78,7 @@ class TransactionDetail extends Component {
                                     <div className="SelectOptionPlaceholder">
                                       <span className="SelectOptionPlaceholder-icon">
                                         <Icon
-                                          path={mdiCarTireAlert}
+                                          path={mdiBank}
                                           size={1}
                                           horizontal
                                           vertical
@@ -126,7 +129,7 @@ class TransactionDetail extends Component {
                       <button className="transactionActionList-btn" type="button">
                         <span className="Button-label">
                           <Icon
-                            path={mdiCarTireAlert}
+                            path={mdiBank}
                             size={1.5}
                             horizontal
                             vertical
@@ -141,7 +144,7 @@ class TransactionDetail extends Component {
                       <button className="transactionActionList-btn" type="button">
                         <span className="Button-label">
                           <Icon
-                            path={mdiCarTireAlert}
+                            path={mdiCalendarMonthOutline}
                             size={1.5}
                             horizontal
                             vertical
@@ -156,7 +159,7 @@ class TransactionDetail extends Component {
                       <button className="transactionActionList-btn" type="button">
                         <span className="Button-label">
                           <Icon
-                            path={mdiCarTireAlert}
+                            path={mdiUnfoldMoreVertical}
                             size={1.5}
                             horizontal
                             vertical
@@ -171,7 +174,7 @@ class TransactionDetail extends Component {
                       <button className="transactionActionList-btn" type="button">
                         <span className="Button-label">
                           <Icon
-                            path={mdiCarTireAlert}
+                            path={mdiCogOutline }
                             size={1.5}
                             horizontal
                             vertical
@@ -186,7 +189,7 @@ class TransactionDetail extends Component {
                       <button className="transactionActionList-btn" type="button">
                         <span className="Button-label">
                           <Icon
-                            path={mdiCarTireAlert}
+                            path={ mdiChat}
                             size={1.5}
                             horizontal
                             vertical
@@ -201,7 +204,7 @@ class TransactionDetail extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 mt-5">
+            <div className="">
               <div className="transactionOverviewCarbon mt-5">
                 <div className="content-left">
                   <h2 className="heading ">Carbon Footprint</h2>
@@ -245,7 +248,7 @@ class TransactionDetail extends Component {
               </div>
             </div>
           </div>
-          <div className="linechart-wrapper col col-md-10 px-3">
+          <div className="linechart-wrapper">
             <h2 className="heading">Total expenses this period</h2>
             <div className="TransactionOverviewChart-dropdown">
                         <select>
@@ -280,7 +283,7 @@ class TransactionDetail extends Component {
                     role="tabpanel"
                     aria-labelledby="nav-home-tab"
                   >
-                    <LineCharts spendingData={this.props.spendingData} />
+                    <LineCharts  spendingData={this.props.spendingData} />
                     <table className="TransactionChartTable">
                       <thead>
                         <tr>
@@ -309,8 +312,8 @@ class TransactionDetail extends Component {
                               
                             ></div>
                           </td>
-                          <td className="TransactionChartTable-name">
-                            <span className="TransactionChartTable-row-text">
+                          <td>
+                            <span className="TransactionChartTable-row-text TransactionChartTable-dot dot-color">
                               Public Transportation
                             </span>
                           </td>
@@ -362,7 +365,7 @@ class TransactionDetail extends Component {
                             ></div>
                           </td>
                           <td className="TransactionChartTable-name">
-                            <span className="TransactionChartTable-row-text">
+                            <span className="TransactionChartTable-row-text TransactionChartTable-dot">
                               Transport for London
                             </span>
                           </td>

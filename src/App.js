@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import "./App.css";
+import "./../src/style/Base.css";
 import { setAuthToken } from "./store/actions/auth-action";
 import { SpinningCircles } from "react-loading-icons";
 import AccountDropdown from './components/AccountDropdown';
@@ -16,6 +17,7 @@ import {
 import BillingTable from './components/BillingTable';
 import BillingFilter from './components/BillingFilter';
 import TransactionDetail from "./components/TransactionDetail";
+import { mdiMagnify  } from "@mdi/js";
 
 class App extends Component {
   constructor(props) {

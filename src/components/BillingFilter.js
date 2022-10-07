@@ -4,6 +4,8 @@ import React, { Component } from "react";
 import "./../style/Base.css";
 import "./../App.css";
 import Form from "react-bootstrap/Form";
+import Icon from "@mdi/react";
+import { mdiMagnify  } from "@mdi/js";
 
 class BillingFilter extends Component {
   render() {
@@ -11,8 +13,18 @@ class BillingFilter extends Component {
       <div className="billingFilter-wrapper">
         <Form className="billing-form-wrap">
           <div className="form-row">
-            <div className="form-group col-md-12">
+            <div className="search-icon-container form-group col-md-12">
               <Form.Control type="text" className="search-bar" placeholder="Search..." />
+              <span className="search-icon">
+              <Icon
+                                          path={mdiMagnify }
+                                          size={2}
+                                          horizontal
+                                          vertical
+                                          rotate={180}
+                                          color="#dddddd"
+                                        />           
+              </span>
             </div>
           </div>
           <div className="form-row">
