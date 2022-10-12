@@ -38,6 +38,7 @@ class BillingFilter extends Component {
               </Form.Select>
               <div className="checkboxLabel-wrap">
                 <Form.Check aria-label="option 1"  />
+                {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
                 <span className="checkbox-text">Only uncertain categorization</span>
               </div>
             </div>
@@ -76,7 +77,6 @@ class BillingFilter extends Component {
             <div className="form-group col-md-6">
               <label htmlFor="inputEmail4">Account</label>
               <div className="checkboxLabel-wrap">
-                {" "}
                 <span className="arrow-icon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                     <path
@@ -86,6 +86,7 @@ class BillingFilter extends Component {
                   </svg>
                 </span>
                 <Form.Check aria-label="option 1"  />
+                {/* <input type="checkbox" id="mycheck" onClick={()=>myFunction()}></input> */}
                 <span className="checkbox-text ">Current</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -130,6 +131,17 @@ class BillingFilter extends Component {
       </div>
     );
   }
+
 }
+function myFunction() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  if (checkBox.checked === true){
+    text.style.display = "block";
+  } else {
+     text.style.display = "none";
+  }
+}
+
 
 export default BillingFilter;
