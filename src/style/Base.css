@@ -1313,7 +1313,11 @@ height: 2rem !important;
   height: 442px;
   border: 0;
 }
-
+@media (min-width: 768px) {
+  .transactionActionList-list {
+    flex-wrap: nowrap !important;
+  }
+}
 /*  media start */
 @media (max-width: 768px) {
   .bill-table-form-wrap {
@@ -1453,7 +1457,7 @@ height: 2rem !important;
   }
 
   .transactionActionList-list {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   .transactionActionList-item {
@@ -1461,7 +1465,7 @@ height: 2rem !important;
   }
 
   .transactionActionList-item .Button-label {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .transactionOverviewCarbon {
@@ -1495,6 +1499,7 @@ height: 2rem !important;
   }
   .receipt--info {
     padding: 36px 0;
+    margin: 0 10px;
   }
  
 }
