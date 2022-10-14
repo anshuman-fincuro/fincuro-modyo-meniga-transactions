@@ -44,7 +44,7 @@ class TransactionDetail extends Component {
                   className="close-details-icon"
                   path={mdiArrowLeft}
                   onClick={() => this.props.changeShowDetails(false)}
-                  size={3}
+                  size={2}
                   color="#dcdcdc"
                 />
               </div>
@@ -91,7 +91,7 @@ class TransactionDetail extends Component {
                                         <span className="SelectOptionPlaceholder-icon">
                                           <Icon
                                             path={mdiBank}
-                                            size={1}
+                                            size={1.25}
                                             horizontal
                                             vertical
                                             rotate={180}
@@ -149,7 +149,7 @@ class TransactionDetail extends Component {
                           <span className="Button-label">
                             <Icon
                               path={mdiBank}
-                              size={1.5}
+                              size={1.25}
                               horizontal
                               vertical
                               rotate={180}
@@ -167,7 +167,7 @@ class TransactionDetail extends Component {
                           <span className="Button-label">
                             <Icon
                               path={mdiCalendarMonthOutline}
-                              size={1.5}
+                              size={1.25}
                               horizontal
                               vertical
                               rotate={180}
@@ -185,7 +185,7 @@ class TransactionDetail extends Component {
                           <span className="Button-label">
                             <Icon
                               path={mdiUnfoldMoreVertical}
-                              size={1.5}
+                              size={1.25}
                               horizontal
                               vertical
                               rotate={180}
@@ -203,7 +203,7 @@ class TransactionDetail extends Component {
                           <span className="Button-label">
                             <Icon
                               path={mdiCogOutline}
-                              size={1.5}
+                              size={1.25}
                               horizontal
                               vertical
                               rotate={180}
@@ -221,7 +221,7 @@ class TransactionDetail extends Component {
                           <span className="Button-label">
                             <Icon
                               path={mdiChat}
-                              size={1.5}
+                              size={1.25}
                               horizontal
                               vertical
                               rotate={180}

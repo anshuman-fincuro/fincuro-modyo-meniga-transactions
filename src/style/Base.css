@@ -7,6 +7,9 @@
   padding: 0px 20px;
 }
 
+#main-page.p-3 {
+padding: 0 !important;
+}
 .separter-line {
   height: 5px;
   background: rgb(233, 89, 73);
@@ -827,7 +830,7 @@ svg.close-details-icon {
 .overlay-content-details {
   margin: 0 auto;
   position: relative;
-  min-width: 816px;
+  min-width: 600px;
   z-index: 1;
 }
 
@@ -837,7 +840,7 @@ svg.close-details-icon {
   padding-top: 24px;
   background: #ffffff;
   box-sizing: border-box;
-  padding: 48px 0px;
+  padding: 20px 0px;
 }
 
 .receipt-date {
@@ -859,20 +862,26 @@ svg.close-details-icon {
 .icon-header {
   background-color: #4b5e68;
   padding: 14px 20px;
-  position: fixed;
+  position: relative;
   top: 0;
   z-index: 1;
   left: 0;
   width: 100%;
 }
 
+.icon-header svg{
+width: 2rem !important;
+height: 2rem !important;
+}
+
 .transactionDetail-wrapper {
   background-color: #4b5e68;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+  padding-bottom: 20px;
 }
 
 .receipt-date-year {
@@ -899,7 +908,7 @@ svg.close-details-icon {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 48px 0px;
+  padding: 48px 0px 10px;
 }
 
 .SelectPlaceholder-text {
@@ -970,11 +979,11 @@ svg.close-details-icon {
   align-items: center;
   justify-content: space-between;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .transactionActionList-item .Button-label svg {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .receipt--info:before {
@@ -1166,7 +1175,7 @@ svg.close-details-icon {
 
 .icon-header {
   background-color: #4b5e68;
-  padding: 14px 20px;
+  padding: 10px 20px;
 }
 
 .TransactionChartTable-row:hover {
@@ -1430,9 +1439,12 @@ svg.close-details-icon {
     top: 0;
     margin-top: 20px;
   }
-
+  .transactionActionList-item .Button-label svg {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
   .receipt-content {
-    padding: 60px 0px 0px;
+    padding: 100px 0px 0px;
   }
 
   .transactionActionList-list {
@@ -1473,4 +1485,11 @@ svg.close-details-icon {
   .map-wapper {
     margin: 12px 10px;
   }
+  #main-page {
+    border-radius: 0;
+  }
+  .receipt--info {
+    padding: 36px 0;
+  }
+ 
 }

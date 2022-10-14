@@ -5,20 +5,30 @@ import "./../style/Base.css";
 import "./../App.css";
 import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
-import { mdiMagnify  } from "@mdi/js";
+import { mdiCardsPlayingSpade, mdiMagnify  } from "@mdi/js";
 
 class BillingFilter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataChange: false,
+      activeCheckbox: this.props.activeCheckbox,
+      activeCheckboxSaving: this.props.activeCheckboxSaving,
+      activeCheckboxCurrent: this.props.activeCheckboxCurrent,
+    }
+  }
+  
   render() {
     return (
       <div className="billingFilter-wrapper">
         <Form className="billing-form-wrap">
           <div className="form-row">
             <div className="search-icon-container form-group col-md-12">
-              <Form.Control type="text" className="search-bar" placeholder="Search..." />
+              <Form.Control type="text" className="search-bar" placeholder="Search..."/>
               <span className="search-icon">
               <Icon
                                           path={mdiMagnify }
-                                          size={2}
+                                          size={1.5}
                                           horizontal
                                           vertical
                                           rotate={180}
@@ -85,9 +95,10 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1"  />
-                {/* <input type="checkbox" id="mycheck" onClick={()=>myFunction()}></input> */}
-                <span className="checkbox-text ">Current</span>
+      
+               
+                <input type="checkbox" id="mycheck" checked={(this.props.activeCheckboxCurrent) ? "true" : ""}></input>
+                <span className="checkbox-text ">credit</span>
               </div>
               <div className="checkboxLabel-wrap">
                 <span className="arrow-icon">
@@ -98,8 +109,9 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1"  />
-                <span className="checkbox-text">Credit</span>
+                
+                <input type="checkbox" aria-label="option 10" checked={(this.props.activeCheckbox) ? "true" : ""}/>
+                <span className="checkbox-text">Current</span>
               </div>
               <div className="checkboxLabel-wrap">
                 <span className="arrow-icon">
@@ -110,7 +122,8 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                <Form.Check aria-label="option 1"  />
+                {/* <Form.Check aria-label="option 1"  /> */}
+                <input type="checkbox" aria-label="option 10" checked={(this.props.activeCheckboxSaving) ? "true" : ""}/>
                 <span className="checkbox-text">Savings</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -132,16 +145,7 @@ class BillingFilter extends Component {
     );
   }
 
+  
 }
-function myFunction() {
-  var checkBox = document.getElementById("myCheck");
-  var text = document.getElementById("text");
-  if (checkBox.checked === true){
-    text.style.display = "block";
-  } else {
-     text.style.display = "none";
-  }
-}
-
 
 export default BillingFilter;

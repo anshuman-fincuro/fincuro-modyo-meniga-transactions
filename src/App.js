@@ -24,7 +24,10 @@ class App extends Component {
     super(props);
     this.state = {
       activeAccount: 0,
+      activeCheckbox: false,
       showDetails: false,
+      activeCheckboxCurrent:false,
+      activeCheckboxSaving: false,
     };
   }
 
@@ -54,7 +57,26 @@ class App extends Component {
   }
 
   onTrigger = (index) => {
+    if (this.props.activeCheckboxCurrent) {
+      return  this.setState({activeCheckboxCurrent: true});
+    }
+    else {
+      this.setState({activeCheckbox: true});
+    }
+    const items = 'itemCheck';
+    switch(items) {
+      case 'itemCheck':
+        this.setState({activeCheckbox: true});
+        break;
+        case 'activeCheckboxCurrent':
+        this.setState({activeCheckboxCurrent: true});
+        break;
+    }
     this.setState({activeAccount: index});
+    this.setState({activeCheckbox: true});
+    this.setState({activeCheckboxCurrent: true});
+    this.setState({activeCheckboxSaving: true});
+
   }
 
   render() {
@@ -89,7 +111,7 @@ class App extends Component {
               <BillingTable changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions}></BillingTable>
               </div>
               <div className='bill-tableFrom-right'>
-              <BillingFilter></BillingFilter>
+              <BillingFilter activeCheckbox={this.state.activeCheckbox} activeCheckboxCurrent={this.state.activeCheckboxCurrent} activeCheckboxSaving={this.state.activeCheckboxSaving}></BillingFilter>
               </div>
               </div> 
               </div>
@@ -106,6 +128,11 @@ class App extends Component {
   }
 }
 
+
+
+
+
+//
 const mapStateToProps = (state) => ({
   token: state.authReducer.token,
   accountsData: state.componentReducer.accountsData,

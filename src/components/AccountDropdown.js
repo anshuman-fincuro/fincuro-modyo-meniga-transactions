@@ -9,7 +9,8 @@ class AccountDropdown extends Component {
     super(props);
     this.state = {
       data: this.props.accountsData,
-      activeAccount: this.props.activeAccount
+      activeAccount: this.props.activeAccount,
+      dataChange: this.props.dataChange
     }
   }
   
@@ -19,10 +20,10 @@ class AccountDropdown extends Component {
       <div className="account-wrapper">
         <ul>
           {this.props.accountsData.map((x, i) => (
-            <li key={x.id} className={this.props.activeAccount===i ? 'active' : ''} onClick={()=>this.props.changeAccount(i)}>
+            <li key={x.id} className={this.props.activeAccount===i ? 'active' : ''} onClick={()=>this.props.changeAccount(i)} >
               <span className="tab-nav-item-link icon-1">
               <div className="accountMenuItem ">
-                <div className="amountWithLabel">
+                <div className="amountWithLabel" onChange={()=>this.props.dataChange}>
                   <span className="amountWithLabel-label">{x.accountCategory}</span>
                   <span
                     className="amountWithLabel-amount green-color">
