@@ -6,7 +6,9 @@
 .insights-bold-text {
   padding: 0px 20px;
 }
-
+#billingDiv {
+  padding: 1rem;
+}
 #main-page.p-3 {
 padding: 0 !important;
 }
@@ -799,7 +801,10 @@ progress {
     right: 26px;
 
 }
-
+.search-icon svg {
+width: 1.5rem !important;
+height: 1.5rem !important;
+}
 .bill-tableFrom-right
   .billing-form-wrap
   .form-group
