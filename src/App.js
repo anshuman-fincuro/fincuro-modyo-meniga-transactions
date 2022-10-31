@@ -111,7 +111,7 @@ class App extends Component {
               <BillingTable changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions}></BillingTable>
               </div>
               <div className='bill-tableFrom-right'>
-              <BillingFilter activeCheckbox={this.state.activeCheckbox} activeCheckboxCurrent={this.state.activeCheckboxCurrent} activeCheckboxSaving={this.state.activeCheckboxSaving}></BillingFilter>
+              <BillingFilter  activeAccount={this.state.activeAccount}></BillingFilter>
               </div>
               </div> 
               </div>
