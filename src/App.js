@@ -29,7 +29,7 @@ class App extends Component {
       AmountFilterType: false,
       activeCheckboxCurrent:false,
       activeCheckboxSaving: false,
-      amountFilterValue:0,
+      selectedTransaction: null,
     };
   }
 
@@ -54,8 +54,8 @@ class App extends Component {
   }
 
 
-  setShowDetails(value) {
-    this.setState({showDetails: value});
+  setShowDetails(value, item) {
+    this.setState({showDetails: value, selectedTransaction: item});    
   }
 
   setAmountFilterType(value){
@@ -129,7 +129,7 @@ this.setState({AmountFilterType: value});
           )}
         </div>
         ) : (
-        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails}></TransactionDetail>
+        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction}></TransactionDetail>
         )}
       </div>
     );
