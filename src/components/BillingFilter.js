@@ -6,7 +6,7 @@ import "./../App.css";
 import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
 import { mdiCardsPlayingSpade, mdiMagnify  } from "@mdi/js";
-
+import BillingTable from "./BillingTable";
 class BillingFilter extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +16,12 @@ class BillingFilter extends Component {
       activeCheckbox: this.props.activeCheckbox,
       activeCheckboxSaving: this.props.activeCheckboxSaving,
       activeCheckboxCurrent: this.props.activeCheckboxCurrent,
+      amountFilterValue:this.props.amountFilterValue
     }
   }
-  
+  filterbyAmount(value){
+  this.props.changetransactionDetails(true,value)
+  }
   render() {
     return (
       <div className="billingFilter-wrapper">
@@ -57,11 +60,13 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
             <label htmlFor="inputEmail4">Amount</label>
-              <Form.Select aria-label="Default select">
+              <Form.Select aria-label="Default select" onChange={e => {
+            this.filterbyAmount(e.target.value);
+            <BillingTable amountFilterValue={e.target.value}></BillingTable>
+          }}>
                 <option>Select type</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="1">Income</option>
+                <option value="2">Expenses</option>
               </Form.Select>
             </div>
           </div>

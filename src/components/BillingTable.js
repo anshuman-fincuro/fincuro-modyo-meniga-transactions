@@ -10,19 +10,20 @@ class BillingTable extends Component {
         super(props);
         this.state = {
           data: this.props.transactionData,
+          amountFilterValue:this.props.amountFilterValue,
         }
     }
-    
     render() {
         return (
             <div>
+                {console.log(this.amountFilterValue)}
                 <div className="billingTable-wrapper">
                     {this.props.transactionData.map((x, i) => (
                         <div key={i}>
                             <div className="billingTable-heading">{x.group}</div>
                             <div className="billingTable-container">
                                 {x.data.map((item, j) => (
-                                    <div onClick={()=>this.props.changeShowDetails(true)} key={j} className="billingTable-row">
+                                    <div onClick={()=>this.props.changeShowDetails(true) } key={j} className="billingTable-row">
                                         <div className="billingTable-left">
                                             <div className="billingTable-icon"><Icon path={mdiCardAccountDetails}
                                                 size={2}
