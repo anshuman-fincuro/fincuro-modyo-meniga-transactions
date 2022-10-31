@@ -28,6 +28,7 @@ class App extends Component {
       showDetails: false,
       activeCheckboxCurrent:false,
       activeCheckboxSaving: false,
+      selectedTransaction: null,
     };
   }
 
@@ -52,8 +53,8 @@ class App extends Component {
   }
 
 
-  setShowDetails(value) {
-    this.setState({showDetails: value});
+  setShowDetails(value, item) {
+    this.setState({showDetails: value, selectedTransaction: item});    
   }
 
   onTrigger = (index) => {
@@ -121,7 +122,7 @@ class App extends Component {
           )}
         </div>
         ) : (
-        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails}></TransactionDetail>
+        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction}></TransactionDetail>
         )}
       </div>
     );

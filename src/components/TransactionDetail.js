@@ -20,6 +20,7 @@ class TransactionDetail extends Component {
     super(props);
     this.state = {
       showDetails: this.props.showDetails,
+      selectedTransaction: this.props.selectedTransaction,
     };
   }
 
@@ -43,7 +44,7 @@ class TransactionDetail extends Component {
                 <Icon
                   className="close-details-icon"
                   path={mdiArrowLeft}
-                  onClick={() => this.props.changeShowDetails(false)}
+                  onClick={() => this.props.changeShowDetails(false,null)}
                   size={2}
                   color="#dcdcdc"
                 />
@@ -74,7 +75,7 @@ class TransactionDetail extends Component {
                     <div className="receipt-content">
                       <div className="transactionReceipt-text">
                         <h1 className="transactionReceipt-heading">
-                          Transport for London
+                        {this.state.selectedTransaction.text}
                         </h1>
                         <div className="transactionReceipt-category">
                           <div className="transactionCategoryContainer">
@@ -133,7 +134,7 @@ class TransactionDetail extends Component {
                         </span>
                         <span className="transactionReceipt-amount">
                           <span className="formatCurrency-symbol">£ </span>
-                          <span className="formatCurrency-value">-10.00</span>
+                          <span className="formatCurrency-value">{this.state.selectedTransaction.amount}</span>
                         </span>
                       </div>
                     </div>
