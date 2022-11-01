@@ -24,7 +24,7 @@ class BillingTable extends Component {
                             <div className="billingTable-heading">{x.group}</div>
                             <div className="billingTable-container">
                                 {x.data.map((item, j) => (
-                                    <div onClick={()=>this.props.changeShowDetails(true,item)} key={j} className="billingTable-row">
+                                    <div onClick={()=>this.props.changeShowDetails(true,item,x.group)} key={j} className="billingTable-row">
                                         <div className="billingTable-left">
                                             <div className="billingTable-icon"><Icon path={mdiCardAccountDetails}
                                                 size={2}

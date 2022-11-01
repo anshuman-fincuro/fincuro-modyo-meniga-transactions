@@ -21,6 +21,8 @@ class TransactionDetail extends Component {
     this.state = {
       showDetails: this.props.showDetails,
       selectedTransaction: this.props.selectedTransaction,
+      selectedTransactionGroup: this.props.selectedTransactionGroup,
+      
     };
   }
 
@@ -35,6 +37,8 @@ class TransactionDetail extends Component {
         ],
       },
     ];
+    
+     
     return (
       <div>
         {this.state.showDetails === true ? (
@@ -44,7 +48,7 @@ class TransactionDetail extends Component {
                 <Icon
                   className="close-details-icon"
                   path={mdiArrowLeft}
-                  onClick={() => this.props.changeShowDetails(false,null)}
+                  onClick={() => this.props.changeShowDetails(false,null,null)}
                   size={2}
                   color="#dcdcdc"
                 />
@@ -57,19 +61,19 @@ class TransactionDetail extends Component {
                         data-format="YYYY"
                         className="formattedDate receipt-date-year"
                       >
-                        2022
+                        {this.state.selectedTransaction.date.split('',4)}
                       </span>
                       <span
                         data-format="DD"
                         className="formattedDate receipt-date-day"
                       >
-                        25
+                       {this.state.selectedTransaction.date.split((/[-, T]/))[2]}
                       </span>
                       <span
                         data-format="MMM"
                         className="formattedDate receipt-date-month"
                       >
-                        Sep
+                       {this.state.selectedTransactionGroup.split('',3)}
                       </span>
                     </div>
                     <div className="receipt-content">

@@ -30,6 +30,7 @@ class App extends Component {
       activeCheckboxCurrent:false,
       activeCheckboxSaving: false,
       selectedTransaction: null,
+      selectedTransactionGroup: null,
     };
   }
 
@@ -54,8 +55,8 @@ class App extends Component {
   }
 
 
-  setShowDetails(value, item) {
-    this.setState({showDetails: value, selectedTransaction: item});    
+  setShowDetails(value, item, group) {
+    this.setState({showDetails: value, selectedTransaction: item, selectedTransactionGroup:group});    
   }
 
   setAmountFilterType(value){
@@ -110,7 +111,7 @@ this.setState({AmountFilterType: value});
           this.props.planningData ? (
             <div>
               <div id="billingDiv" className="toggleBilling">
-                <h2 className="mb-4">Account Summary</h2>
+                <h2 className="mb-4">Transactions</h2>
               <div className='account-top-bar'>
               <AccountDropdown changeAccount={this.onTrigger.bind(this)} accountsData={accountDropdownData} activeAccount={this.state.activeAccount}></AccountDropdown>
               </div>
@@ -129,7 +130,7 @@ this.setState({AmountFilterType: value});
           )}
         </div>
         ) : (
-        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction}></TransactionDetail>
+        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction} selectedTransactionGroup={this.state.selectedTransactionGroup}></TransactionDetail>
         )}
       </div>
     );
