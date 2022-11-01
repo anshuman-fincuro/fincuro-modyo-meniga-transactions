@@ -63,7 +63,7 @@ class BillingTable extends Component {
                                                 size={1}
                                                 horizontal
                                                 vertical
-                                                rotate={180}
+                                                rotate={0}
                                                 color="#b27301"/>
             Unfortunately, there are no transactions matching your filter
           </div>
