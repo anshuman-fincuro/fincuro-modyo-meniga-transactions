@@ -621,8 +621,8 @@ progress {
   border: 1px solid #FEB734;
   margin: auto;
   display: flex;
-  justify-content: flex-start;
-  font-size: larger;
+  justify-content: space-between;
+  font-size: medium;
 }
 .toggleBilling .billingTable-wrapper {
   display: block;
