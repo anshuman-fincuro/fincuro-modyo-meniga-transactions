@@ -11,14 +11,15 @@ class BillingTable extends Component {
         this.state = {
           data: this.props.transactionData,
           amountFilterValue:this.props.amountFilterValue,
-
         }
     }
     render() {
         return (
              <div>
+                  {this.props.transactionData.length > 0 ? (
                 <div className="billingTable-wrapper">
                     {this.props.transactionData.map((x, i) => (
+                        console.log(this.props.transactionData),
                         <div key={i}>
                             <div className="billingTable-heading">{x.group}</div>
                             <div className="billingTable-container">
@@ -56,7 +57,11 @@ class BillingTable extends Component {
                             </div>
                         </div>
                     ))};
-                </div>
+                </div> ) : (
+          <div className="alert">
+            Unfortunately, there are no transactions matching your filter
+          </div>
+        )}
             </div>
             
         );

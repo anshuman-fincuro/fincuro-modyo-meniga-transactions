@@ -614,7 +614,13 @@ progress {
   padding: 12px 12px;
   display: block;
 }
-
+.alert{
+  width: max-content;
+  height:50px;
+  background-color: #ffedcc;
+  border: 1px solid #FEB734;
+  margin: auto;
+}
 .toggleBilling .billingTable-wrapper {
   display: block;
 }
@@ -1502,4 +1508,7 @@ height: 2rem !important;
     margin: 0 10px;
   }
  
+
+
+
 }
