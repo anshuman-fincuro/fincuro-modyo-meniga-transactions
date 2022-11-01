@@ -10,10 +10,10 @@ class BillingTable extends Component {
         super(props);
         this.state = {
           data: this.props.transactionData,
-          
+          amountFilterValue:this.props.amountFilterValue,
+
         }
     }
-    
     render() {
         return (
              <div>

@@ -17,7 +17,7 @@ import {
 import BillingTable from './components/BillingTable';
 import BillingFilter from './components/BillingFilter';
 import TransactionDetail from "./components/TransactionDetail";
-import { mdiMagnify  } from "@mdi/js";
+import { mdiMagnify, mdiRhombusSplit  } from "@mdi/js";
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class App extends Component {
       activeAccount: 0,
       activeCheckbox: false,
       showDetails: false,
+      AmountFilterType: false,
       activeCheckboxCurrent:false,
       activeCheckboxSaving: false,
       selectedTransaction: null,
@@ -58,6 +59,12 @@ class App extends Component {
     this.setState({showDetails: value, selectedTransaction: item, selectedTransactionGroup:group});    
   }
 
+  setAmountFilterType(value){
+this.setState({AmountFilterType: value});
+  }
+  setAmountFilterValue(value){
+    this.setState({amountFilterValue: value});
+  }
   onTrigger = (index) => {
     if (this.props.activeCheckboxCurrent) {
       return  this.setState({activeCheckboxCurrent: true});
@@ -110,10 +117,10 @@ class App extends Component {
               </div>
               <div className='bill-table-form-wrap'>
                 <div className='bill-tableFrom-left'>
-              <BillingTable changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions}></BillingTable>
+              <BillingTable  changetransactionDetails={this.setAmountFilterType.bind(this)} amountFilterValue = {this.setAmountFilterValue.bind(this)} AmountFilterType={this.state.AmountFilterType} changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions}></BillingTable>
               </div>
               <div className='bill-tableFrom-right'>
-              <BillingFilter  activeAccount={this.state.activeAccount}></BillingFilter>
+              <BillingFilter changetransactionDetails={this.setAmountFilterType.bind(this)} amountFilterValue = {this.setAmountFilterValue.bind(this)}  activeAccount={this.state.activeAccount}></BillingFilter>
               </div>
               </div> 
               </div>
