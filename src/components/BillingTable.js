@@ -3,7 +3,7 @@ import Icon from '@mdi/react';
 import "./../style/Base.css";
 import "./../App.css";
 import { mdiCardAccountDetails} from '@mdi/js';
-
+import { mdiAlertCircle } from '@mdi/js';
 
 class BillingTable extends Component {
     constructor(props) {
@@ -59,6 +59,12 @@ class BillingTable extends Component {
                     ))};
                 </div> ) : (
           <div className="alert">
+            <Icon path={mdiAlertCircle}
+                                                size={1.5}
+                                                horizontal
+                                                vertical
+                                                rotate={180}
+                                                color="#b27301"/>
             Unfortunately, there are no transactions matching your filter
           </div>
         )}

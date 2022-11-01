@@ -9,7 +9,7 @@ export function getToDate(){
   let date = newDate.getDate();
   let month = newDate.getMonth() + 1;
   let year = newDate.getFullYear();
-  return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
+  return `${year}-${month<10?`0${month}`:`${month}`}-${date<10?`0${date}`:`${date}`}`
   }
 
   export function getFromDate(){
@@ -18,7 +18,7 @@ export function getToDate(){
     let date = newDate.getDate();
     let month = newDate.getMonth() -2;
     let year = newDate.getFullYear();
-    return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
+    return `${year}-${month<10?`0${month}`:`${month}`}-${date<10?`0${date}`:`${date}`}`
     }
 export const setAccountsData = (token) => {
   return (dispatch) => {

@@ -620,6 +620,9 @@ progress {
   background-color: #ffedcc;
   border: 1px solid #FEB734;
   margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  font-size: larger;
 }
 .toggleBilling .billingTable-wrapper {
   display: block;
