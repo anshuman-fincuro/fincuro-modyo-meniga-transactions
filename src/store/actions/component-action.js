@@ -3,6 +3,23 @@ import TYPES from '../types';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
+export function getToDate(){
+
+  let newDate = new Date()
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();
+  return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
+  }
+
+  export function getFromDate(){
+
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() -2;
+    let year = newDate.getFullYear();
+    return `${year}-${month<10?`0${month}`:`${month}`}-${date}`
+    }
 export const setAccountsData = (token) => {
   return (dispatch) => {
     axios
@@ -49,9 +66,10 @@ export const setPlanningData = (token) => {
 };
 
 export const setSpendingData = (token) => {
+  console.log(getFromDate())
   return (dispatch) => {
     axios
-      .get(`${API_URL}/transactions?token=Bearer ${token}&periodFrom=2022-08-01&periodTo=11-01-2022`)
+      .get(`${API_URL}/transactions?token=Bearer ${token}&periodFrom=${getFromDate()}&periodTo=${getToDate()}`)
       .then((response) => {
         if (response.status === 200) {
           dispatch({
