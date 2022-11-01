@@ -60,7 +60,7 @@ class BillingTable extends Component {
                 </div> ) : (
           <div className="alert">
             <Icon path={mdiAlertCircle}
-                                                size={1.5}
+                                                size={1}
                                                 horizontal
                                                 vertical
                                                 rotate={180}
