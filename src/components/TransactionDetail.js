@@ -22,7 +22,7 @@ class TransactionDetail extends Component {
       showDetails: this.props.showDetails,
       selectedTransaction: this.props.selectedTransaction,
       selectedTransactionGroup: this.props.selectedTransactionGroup,
-      
+      categoriesData: this.props.categorydata,
     };
   }
 
@@ -105,21 +105,13 @@ class TransactionDetail extends Component {
                                         </span>
                                         <span className="billingTable-right-dropdown transaction-detail-dropdown">
                                           <select>
-                                            <option value="fruit">
-                                              Public Transportation
-                                            </option>
-                                            <option value="vegetable">
-                                              Last year
-                                            </option>
-                                            <option value="meat">
-                                              Last 1 year
-                                            </option>
-                                            <option value="vegetable">
-                                              Last 3 year
-                                            </option>
-                                            <option value="meat">
-                                              Last 6 year
-                                            </option>
+                                          {(this.state.selectedTransaction.detectedCategories.map((categId) => (
+            this.props.categorydata.filter(detectid => detectid.id === categId.categoryId)                                               
+            ))).map((categ) => (
+                <option value="">{categ[0].name}</option>
+          
+ )) }
+ <option handleChange={this.handleChange}>Show All Categories</option>
                                           </select>
                                         </span>
                                       </div>

@@ -44,6 +44,7 @@ export const setCategoriesData = (token) => {
           dispatch({
             type: TYPES.COMPONENT.ON_CATEGORIES_SUCCESS,
             payload: { categoriesData: response.data.data },
+            
           });
         }
       });

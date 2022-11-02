@@ -89,6 +89,8 @@ this.setState({AmountFilterType: value});
   }
 
   render() {
+    var categorydata = this.props.categoriesData
+    console.log(categorydata);
     var accountDropdownData = this.props.accountsData ?
       this.props.accountsData.filter((acc) => acc.accountCategory!=="Wallet") : [];
     var transactionData = this.getTransactionData(accountDropdownData);
@@ -117,7 +119,7 @@ this.setState({AmountFilterType: value});
               </div>
               <div className='bill-table-form-wrap'>
                 <div className='bill-tableFrom-left'>
-              <BillingTable  changetransactionDetails={this.setAmountFilterType.bind(this)} amountFilterValue = {this.setAmountFilterValue.bind(this)} AmountFilterType={this.state.AmountFilterType} changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions}></BillingTable>
+              <BillingTable  changetransactionDetails={this.setAmountFilterType.bind(this)} amountFilterValue = {this.setAmountFilterValue.bind(this)} AmountFilterType={this.state.AmountFilterType} changeShowDetails={this.setShowDetails.bind(this)} transactionData={groupedTransactions} categorydata = {categorydata}></BillingTable>
               </div>
               <div className='bill-tableFrom-right'>
               <BillingFilter changetransactionDetails={this.setAmountFilterType.bind(this)} amountFilterValue = {this.setAmountFilterValue.bind(this)}  activeAccount={this.state.activeAccount}></BillingFilter>
@@ -130,7 +132,7 @@ this.setState({AmountFilterType: value});
           )}
         </div>
         ) : (
-        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction} selectedTransactionGroup={this.state.selectedTransactionGroup}></TransactionDetail>
+        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction} selectedTransactionGroup={this.state.selectedTransactionGroup} categorydata = {categorydata}></TransactionDetail>
         )}
       </div>
     );

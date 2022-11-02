@@ -11,20 +11,34 @@ class BillingTable extends Component {
         this.state = {
           data: this.props.transactionData,
           amountFilterValue:this.props.amountFilterValue,
+          categoriesData: this.props.categorydata,
+          showCategories: 0,
         }
+        this.handleChange = this.handleChange.bind(this) 
     }
+
+    async componentDidMount() {
+        await this.props.setCategoryFilter(this.props.token);
+      }
+     
+    handleChange(e, transactionID){
+       console.log({selectValue:e.target.value})
+       if(e.target.value === "Show All Categories"){
+        console.log("value set to true")
+        this.setState({showCategories: transactionID})
+       }
+      }
     render() {
-        return (
-             <div>
+        return (           
+            <div>
                   {this.props.transactionData.length > 0 ? (
                 <div className="billingTable-wrapper">
                     {this.props.transactionData.map((x, i) => (
-                        console.log(this.props.transactionData),
                         <div key={i}>
                             <div className="billingTable-heading">{x.group}</div>
                             <div className="billingTable-container">
                                 {x.data.map((item, j) => (
-                                    <div onClick={()=>this.props.changeShowDetails(true,item,x.group)} key={j} className="billingTable-row">
+                                    <div className="billingTable-row" onClick={()=>this.props.changeShowDetails(true,item,x.group)} key={j}>
                                         <div className="billingTable-left">
                                             <div className="billingTable-icon"><Icon path={mdiCardAccountDetails}
                                                 size={2}
@@ -37,15 +51,18 @@ class BillingTable extends Component {
                                         </div>
                                         <div className="billingTable-right">
                                             <div className="billingTable-right-text-wrapper">
-                                                <div className="billingTable-right-text">{item.text}</div>
-                                    
+                                                <div className="billingTable-right-text">{item.text}</div>           
                                                 <div className="billingTable-right-dropdown">
-                                                    <select>
-                                                        <option value="fruit">Parking</option>
-                                                        <option value="vegetable">Last year</option>
-                                                        <option value="meat">Last 1 year</option>
-                                                        <option value="vegetable">Last 3 year</option>
-                                                        <option value="meat">Last 6 year</option>
+                                                    
+                                                <select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }} value={this.state.selectValue} >
+                                                    {(item.detectedCategories.map((categId) => (
+            this.props.categorydata.filter(detectid => detectid.id === categId.categoryId)                                               
+            ))).map((categ) => (
+                <option value={categ[0].name}>{categ[0].name}</option>
+          
+ )) }
+ <option>Show All Categories</option>
+
                                                     </select>
                                                 </div>
                     
