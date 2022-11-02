@@ -98,7 +98,7 @@ this.setState({AmountFilterType: value});
       (r[m])? r[m].data.push(o) : r[m] = {group: months[parseInt(m)], data: [o]};
       return r;
     }, {});
-    var groupedTransactions = Object.keys(groups).map((k) => {return groups[k]; });
+    var groupedTransactions = Object.keys(groups).sort().reverse().map((k) => {return groups[k]; });
     return (
       <div>
         {this.state.showDetails===false ? (
