@@ -1,4 +1,4 @@
-import TYPES from '../types';
+import TYPES from "../types";
 
 // Initial State
 const initialState = {
@@ -7,6 +7,13 @@ const initialState = {
   merchantData: [],
   planningData: [],
   spendingData: [],
+  categoryFilterData: [],
+};
+
+const compare = (a, b) => {
+  let x = a.name.toLowerCase(),
+    y = b.name.toLowerCase();
+  return x == y ? 0 : x > y ? 1 : -1;
 };
 
 const componentReducer = (state = initialState, action) => {
@@ -34,6 +41,17 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         spendingData: action.payload.spendingData,
+      };
+    case TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS:
+      const payload = action.payload.catFilterData;
+      const filteredData =
+        payload &&
+        payload
+          .filter((i) => i.children && i.children.length > 0)
+          .sort(compare);
+      return {
+        ...state,
+        categoryFilterData: filteredData,
       };
     default:
       return {

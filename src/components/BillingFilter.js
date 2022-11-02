@@ -7,6 +7,8 @@ import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
 import { mdiCardsPlayingSpade, mdiMagnify  } from "@mdi/js";
 import BillingTable from "./BillingTable";
+import CategoriesDropdown from "./CategoriesDropdown";
+
 class BillingFilter extends Component {
   constructor(props) {
     super(props);
@@ -43,13 +45,7 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-            <label htmlFor="inputEmail4">Category</label>
-              <Form.Select aria-label="Default select">
-                <option>Select categories</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+              <CategoriesDropdown></CategoriesDropdown>
               <div className="checkboxLabel-wrap">
                 <Form.Check aria-label="option 1"  />
                 {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}

@@ -93,3 +93,16 @@ export const setMerchantData = (token) => {
     });
   };
 };
+
+export const setCategoryFilterData = (token) => {
+  return (dispatch) => {
+    axios.get(`${API_URL}/categories?token=Bearer ${token}`).then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS,
+          payload: { catFilterData: response.data.data },
+        });
+      }
+    });
+  };
+};
