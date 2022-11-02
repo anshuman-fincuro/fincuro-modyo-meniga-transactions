@@ -60,7 +60,7 @@ class LineCharts extends Component {
   render() {
     return (
       <div className="mt-5 col-12">
-        <ResponsiveContainer width="70%" height={300}>
+        <ResponsiveContainer width="98%" height={250}>
           <LineChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <XAxis dataKey="name" padding={{ left: 50, right: 50 }} />
             <YAxis />
