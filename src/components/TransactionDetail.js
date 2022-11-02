@@ -239,6 +239,7 @@ class TransactionDetail extends Component {
                     </div>
                   </div>
                 </div>
+                
               </div>
               <div className="">
                 <div className="transactionOverviewCarbon mt-5">
@@ -258,7 +259,7 @@ class TransactionDetail extends Component {
                   <div className="transactionOverviewChart-list">
                     <div className="transactionOverviewChart-list-item">
                       <div className="transactionOverviewChart-text">
-                        Transport for London
+                      {this.state.selectedTransaction.text}
                       </div>
                       <div className="transactionOverviewChart-amount">
                         £ -180.00
@@ -393,7 +394,7 @@ class TransactionDetail extends Component {
                             </td>
                             <td className="TransactionChartTable-name">
                               <span className="TransactionChartTable-row-text TransactionChartTable-dot">
-                                Transport for London
+                              {this.state.selectedTransaction.text}
                               </span>
                             </td>
                             <td className="TransactionChartTable-text">

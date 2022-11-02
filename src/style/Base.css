@@ -19,7 +19,6 @@ padding: 0 !important;
   margin-left: 20px;
   margin-top: 10px;
 }
-
 .inside-left-description {
   display: flex;
   flex-direction: row;
@@ -30,7 +29,7 @@ padding: 0 !important;
   width: 400px;
   padding-top: 30px;
 }
-
+ 
 /* .wrapper {
     display: flex;
     flex-direction: column;
@@ -935,6 +934,7 @@ height: 2rem !important;
   padding-bottom: 12px;
   color: #4d4d4d;
   font-weight: bold;
+  text-align: center;
 }
 
 .transaction-detail-dropdown select {
