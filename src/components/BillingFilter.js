@@ -5,9 +5,13 @@ import "./../style/Base.css";
 import "./../App.css";
 import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
-import { mdiCardsPlayingSpade, mdiMagnify  } from "@mdi/js";
+import { mdiCardsPlayingSpade, mdiMagnify } from "@mdi/js";
 import BillingTable from "./BillingTable";
 import CategoriesDropdown from "./CategoriesDropdown";
+import DateDropdown from './DateDropdown';
+
+
+
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -18,11 +22,11 @@ class BillingFilter extends Component {
       activeCheckbox: this.props.activeCheckbox,
       activeCheckboxSaving: this.props.activeCheckboxSaving,
       activeCheckboxCurrent: this.props.activeCheckboxCurrent,
-      amountFilterValue:this.props.amountFilterValue
-    }
+      amountFilterValue: this.props.amountFilterValue,
+    };
   }
-  filterbyAmount(value){
-  this.props.changetransactionDetails(true,value)
+  filterbyAmount(value) {
+    this.props.changetransactionDetails(true, value);
   }
   render() {
     return (
@@ -30,16 +34,20 @@ class BillingFilter extends Component {
         <Form className="billing-form-wrap">
           <div className="form-row">
             <div className="search-icon-container form-group col-md-12">
-              <Form.Control type="text" className="search-bar" placeholder="Search..."/>
+              <Form.Control
+                type="text"
+                className="search-bar"
+                placeholder="Search..."
+              />
               <span className="search-icon">
-              <Icon
-                                          path={mdiMagnify }
-                                          size={1.5}
-                                          horizontal
-                                          vertical
-                                          rotate={180}
-                                          color="#dddddd"
-                                        />           
+                <Icon
+                  path={mdiMagnify}
+                  size={1.5}
+                  horizontal
+                  vertical
+                  rotate={180}
+                  color="#dddddd"
+                />
               </span>
             </div>
           </div>
@@ -47,19 +55,26 @@ class BillingFilter extends Component {
             <div className="form-group col-md-12">
               <CategoriesDropdown></CategoriesDropdown>
               <div className="checkboxLabel-wrap">
-                <Form.Check aria-label="option 1"  />
+                <Form.Check aria-label="option 1" />
                 {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
-                <span className="checkbox-text">Only uncertain categorization</span>
+                <span className="checkbox-text">
+                  Only uncertain categorization
+                </span>
               </div>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-            <label htmlFor="inputEmail4">Amount</label>
-              <Form.Select aria-label="Default select" onChange={e => {
-            this.filterbyAmount(e.target.value);
-            <BillingTable amountFilterValue={e.target.value}></BillingTable>
-          }}>
+              <label htmlFor="inputEmail4">Amount</label>
+              <Form.Select
+                aria-label="Default select"
+                onChange={(e) => {
+                  this.filterbyAmount(e.target.value);
+                  <BillingTable
+                    amountFilterValue={e.target.value}
+                  ></BillingTable>;
+                }}
+              >
                 <option>Select type</option>
                 <option value="1">Income</option>
                 <option value="2">Expenses</option>
@@ -76,13 +91,7 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-            <label htmlFor="inputEmail4">Date</label>
-              <Form.Select aria-label="Default select example">
-                <option>Select period</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </Form.Select>
+              <DateDropdown></DateDropdown>
             </div>
           </div>
           <div className="form-row">
@@ -97,9 +106,12 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-      
-               
-                <input type="checkbox" id="mycheck" checked={(this.props.activeAccount === 0) ? "active" : ""}></input>
+
+                <input
+                  type="checkbox"
+                  id="mycheck"
+                  checked={this.props.activeAccount === 0 ? "active" : ""}
+                ></input>
                 <span className="checkbox-text ">credit</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -111,8 +123,12 @@ class BillingFilter extends Component {
                     />
                   </svg>
                 </span>
-                
-                <input type="checkbox" aria-label="option 10"checked={(this.props.activeAccount === 1) ? "active" : ""} />
+
+                <input
+                  type="checkbox"
+                  aria-label="option 10"
+                  checked={this.props.activeAccount === 1 ? "active" : ""}
+                />
                 <span className="checkbox-text">Current</span>
               </div>
               <div className="checkboxLabel-wrap">
@@ -125,7 +141,11 @@ class BillingFilter extends Component {
                   </svg>
                 </span>
                 {/* <Form.Check aria-label="option 1"  /> */}
-                <input type="checkbox" aria-label="option 10" checked={(this.props.activeAccount === 2) ? "active" : ""} />
+                <input
+                  type="checkbox"
+                  aria-label="option 10"
+                  checked={this.props.activeAccount === 2 ? "active" : ""}
+                />
                 <span className="checkbox-text">Savings</span>
               </div>
             </div>
@@ -134,8 +154,6 @@ class BillingFilter extends Component {
       </div>
     );
   }
-
-  
 }
 
 export default BillingFilter;
