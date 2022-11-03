@@ -90,9 +90,9 @@ class BillingFilter extends Component {
             </div>
           </div>
           <div className="form-row">
-            <div className="form-group col-md-12">
+            
               <DateDropdown></DateDropdown>
-            </div>
+    
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">

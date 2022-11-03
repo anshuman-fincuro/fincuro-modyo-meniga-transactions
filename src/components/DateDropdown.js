@@ -95,18 +95,26 @@ class DateDropdown extends Component {
     const ranges = this.state.dateDropDown;
     return (
       <>
-        <label htmlFor="inputEmail4">Date</label>
-        <Form.Select aria-label="Default select example">
-          <option>Select period</option>
-          {ranges &&
-            ranges.map((range, i) => (
-              <>
-                <option key={i} value={range.value}>
-                  {range.label}
-                </option>
-              </>
-            ))}
-        </Form.Select>
+        <div className="form-group col-md-12">
+          <label htmlFor="inputEmail4">Date</label>
+          <Form.Select aria-label="Default select example">
+            <option>Select period</option>
+            {ranges &&
+              ranges.map((range, i) => (
+                <>
+                  <option key={i} value={range.value}>
+                    {range.label}
+                  </option>
+                </>
+              ))}
+          </Form.Select>
+        </div>
+        <div className="form-group col-md-6 col-sm-12">
+          <Form.Control type="text" placeholder="From" />
+        </div>
+        <div className="form-group col-md-6 col-sm-12">
+          <Form.Control type="text" placeholder="To" />
+        </div>
       </>
     );
   }
