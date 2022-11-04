@@ -56,7 +56,9 @@ class LineCharts extends Component {
         })
       }
     }
+
   }
+
 
   render() {
     return (

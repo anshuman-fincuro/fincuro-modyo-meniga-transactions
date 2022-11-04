@@ -330,7 +330,7 @@ class TransactionDetail extends Component {
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
                     >
-                      <LineCharts spendingData={this.state.spendingData} />
+                      <LineCharts spendingData={this.props.spendingData} />
                       <table className="TransactionChartTable">
                         <thead>
                           <tr>
