@@ -90,7 +90,6 @@ this.setState({AmountFilterType: value});
 
   render() {
     var categorydata = this.props.categoriesData
-    console.log(categorydata);
     var accountDropdownData = this.props.accountsData ?
       this.props.accountsData.filter((acc) => acc.accountCategory!=="Wallet") : [];
     var transactionData = this.getTransactionData(accountDropdownData);

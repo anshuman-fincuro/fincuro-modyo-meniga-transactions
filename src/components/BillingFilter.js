@@ -9,6 +9,7 @@ import { mdiCardsPlayingSpade, mdiMagnify  } from "@mdi/js";
 import BillingTable from "./BillingTable";
 import CategoriesDropdown from "./CategoriesDropdown";
 
+
 class BillingFilter extends Component {
   constructor(props) {
     super(props);

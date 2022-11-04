@@ -4,7 +4,7 @@ import "./../style/Base.css";
 import "./../App.css";
 import { mdiCardAccountDetails} from '@mdi/js';
 import { mdiAlertCircle } from '@mdi/js';
-
+import { connect } from "react-redux";
 class BillingTable extends Component {
     constructor(props) {
         super(props);
@@ -17,10 +17,6 @@ class BillingTable extends Component {
         this.handleChange = this.handleChange.bind(this) 
     }
 
-    async componentDidMount() {
-        await this.props.setCategoryFilter(this.props.token);
-      }
-     
     handleChange(e, transactionID){
        console.log({selectValue:e.target.value})
        if(e.target.value === "Show All Categories"){
@@ -28,9 +24,12 @@ class BillingTable extends Component {
         this.setState({showCategories: transactionID})
        }
       }
+ 
     render() {
         return (           
             <div>
+                {console.log(this.props.categoryFilterData)}
+    
                   {this.props.transactionData.length > 0 ? (
                 <div className="billingTable-wrapper">
                     {this.props.transactionData.map((x, i) => (
@@ -54,7 +53,19 @@ class BillingTable extends Component {
                                                 <div className="billingTable-right-text">{item.text}</div>           
                                                 <div className="billingTable-right-dropdown">
                                                     
-                                                <select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }} value={this.state.selectValue} >
+                                                  {this.state.showCategories === item.id ? 
+                                                  ( <select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }}  >
+                                                  {this.props.categoryFilterData.map((allCategory, i) => (              
+                <optgroup label={allCategory.name} onClick={(event) => event.stopPropagation()}> 
+                {allCategory.children.map((subCategory) => (<option value={subCategory.name}>{subCategory.name}</option>))}
+                
+                 </optgroup>
+            ))}      
+                  
+                                                    </select>
+                                                
+                                                    ) : (<select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }} value={this.state.selectValue} onChange={(e) => {
+                                                        this.handleChange(e, item.id)}}>
                                                     {(item.detectedCategories.map((categId) => (
             this.props.categorydata.filter(detectid => detectid.id === categId.categoryId)                                               
             ))).map((categ) => (
@@ -63,7 +74,7 @@ class BillingTable extends Component {
  )) }
  <option>Show All Categories</option>
 
-                                                    </select>
+                                                    </select> )} 
                                                 </div>
                     
                                             </div>
@@ -91,5 +102,8 @@ class BillingTable extends Component {
     }
     
 }
-
-export default BillingTable;
+const mapStateToProps = (state) => ({
+    categoryFilterData: state.componentReducer.categoryFilterData,
+  });
+  
+export default connect(mapStateToProps) (BillingTable);
