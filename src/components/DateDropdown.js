@@ -1,12 +1,30 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import * as moment from "moment";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { mdiCalendarMonth } from "@mdi/js";
+import Icon from "@mdi/react";
+
+const CustomInput = React.forwardRef((props, ref) => {
+  console.log(props);
+  return (
+    <div ref={ref}>
+      <InputGroup>
+        <Form.Control type="text" placeholder={props.placeholder} readOnly />
+        <Icon path={mdiCalendarMonth} size={1.25} onClick={props.onClick} />
+      </InputGroup>
+    </div>
+  );
+});
 
 class DateDropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dateDropDown: [],
+      showDateRange: false,
     };
   }
 
@@ -91,30 +109,45 @@ class DateDropdown extends Component {
     return ranges;
   }
 
+
+  dateChange(event){
+    if(event.target.value === 'Custom'){
+      this.setState({ showDateRange: true });
+    }else{
+      this.setState({ showDateRange: false });
+    }
+  }
+
   render() {
-    const ranges = this.state.dateDropDown;
+    const { dateDropDown, showDateRange } = this.state;
     return (
       <>
         <div className="form-group col-md-12">
           <label htmlFor="inputEmail4">Date</label>
-          <Form.Select aria-label="Default select example">
+          <Form.Select aria-label="Default select example" onChange={this.dateChange.bind(this)}>
             <option>Select period</option>
-            {ranges &&
-              ranges.map((range, i) => (
-                <>
+            {dateDropDown &&
+              dateDropDown.map((range, i) => (
+                
                   <option key={i} value={range.value}>
                     {range.label}
                   </option>
-                </>
+                
               ))}
           </Form.Select>
         </div>
-        <div className="form-group col-md-6 col-sm-12">
-          <Form.Control type="text" placeholder="From" />
-        </div>
-        <div className="form-group col-md-6 col-sm-12">
-          <Form.Control type="text" placeholder="To" />
-        </div>
+        {showDateRange && (
+          <>
+            <div className="form-group col-md-6 col-sm-12">
+              {/* <Form.Control type="text" placeholder="From" /> */}
+              <DatePicker placeholderText="From" customInput={<CustomInput />} />
+            </div>
+            <div className="form-group col-md-6 col-sm-12">
+              {/* <Form.Control type="text" placeholder="To" /> */}
+              <DatePicker customInput={<CustomInput />} placeholderText="To" />
+            </div>
+          </>
+        )}
       </>
     );
   }
