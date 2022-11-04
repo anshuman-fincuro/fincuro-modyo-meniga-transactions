@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 class CategoriesDropdown extends Component {
   constructor(props) {
     super(props);
+ 
   }
 
   async componentDidMount() {

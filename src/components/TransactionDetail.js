@@ -24,8 +24,16 @@ class TransactionDetail extends Component {
       selectedTransactionGroup: this.props.selectedTransactionGroup,
       categoriesData: this.props.categorydata,
     };
+    this.handleChange = this.handleChange.bind(this) 
   }
 
+  handleChange(e, transactionID){
+     console.log({selectValue:e.target.value})
+     if(e.target.value === "Show All Categories"){
+      console.log("value set to true")
+      this.setState({showCategories: transactionID})
+     }
+    }
   render() {
     const data = [
       {
@@ -104,15 +112,28 @@ class TransactionDetail extends Component {
                                           />
                                         </span>
                                         <span className="billingTable-right-dropdown transaction-detail-dropdown">
-                                          <select>
-                                          {(this.state.selectedTransaction.detectedCategories.map((categId) => (
+                                        {this.state.showCategories === this.state.selectedTransaction.id ? 
+                                                  ( <select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }}  >
+                                                  {this.props.categoryFilterData.map((allCategory, i) => (              
+                <optgroup label={allCategory.name} onClick={(event) => event.stopPropagation()}> 
+                {allCategory.children.map((subCategory) => (<option value={subCategory.name}>{subCategory.name}</option>))}
+                
+                 </optgroup>
+            ))}      
+                  
+                                                    </select>
+                                                
+                                                    ) : (<select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }} value={this.state.selectValue} onChange={(e) => {
+                                                        this.handleChange(e, this.state.selectedTransaction.id)}}>
+                                                    {(this.state.selectedTransaction.detectedCategories.map((categId) => (
             this.props.categorydata.filter(detectid => detectid.id === categId.categoryId)                                               
             ))).map((categ) => (
-                <option value="">{categ[0].name}</option>
+                <option value={categ[0].name}>{categ[0].name}</option>
           
  )) }
- <option handleChange={this.handleChange}>Show All Categories</option>
-                                          </select>
+ <option>Show All Categories</option>
+
+                                                    </select> )} 
                                         </span>
                                       </div>
                                     </span>
@@ -449,6 +470,7 @@ const mapStateToProps = (state) => ({
   merchantData: state.componentReducer.merchantData,
   categoriesData: state.componentReducer.categoriesData,
   spendingData: state.componentReducer.spendingData,
+  categoryFilterData: state.componentReducer.categoryFilterData,
 });
 
-export default connect(mapStateToProps)(TransactionDetail);
+export default connect(mapStateToProps) (TransactionDetail);
