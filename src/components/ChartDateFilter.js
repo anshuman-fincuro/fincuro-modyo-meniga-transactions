@@ -1,26 +1,27 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import * as moment from "moment";
-
+import { connect } from "react-redux";
+import {setSpendingData} from "../store/actions/component-action";
 class ChartDateFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dateDropDown: [],
+      selectValue:{},
     };
     this.handleChange = this.handleChange.bind(this) 
 }
 
 handleChange(e){
-   console.log({selectValue:e.target.value})
+   this.props.setSpendingData(this.props.token,e.target.value)
   }
   componentDidMount() {
     this.setState({ dateDropDown: this.getdateRange() });
   }
-
+ 
   getdateRange() {
     const dates = [
-      "This month",
       "Last month",
       "Last 3 months",
       "Last 6 months",
@@ -99,8 +100,7 @@ handleChange(e){
     return (
       <>
         <div className="form-group col-md-12">
-          <label htmlFor="inputEmail4">Date</label>
-          <Form.Select aria-label="Default select example" value={this.state.selectValue} onChange={(e) => {
+          <Form.Select aria-label="Default select example" onChange={(e) => {
                                                         this.handleChange(e)}}>
             <option>Select period</option>
             {ranges &&
@@ -117,5 +117,13 @@ handleChange(e){
     );
   }
 }
-
-export default ChartDateFilter;
+const mapStateToProps = (state) => ({
+    token: state.authReducer.token,
+    
+  });
+const mapDispatchToProps = (dispatch,) => {
+    return {
+        setSpendingData: (token,value) => dispatch(setSpendingData(token,{chartDateRange:value})),
+    };
+  };
+  export default connect(mapStateToProps,mapDispatchToProps)(ChartDateFilter);

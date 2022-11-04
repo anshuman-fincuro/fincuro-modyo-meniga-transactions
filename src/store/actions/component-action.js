@@ -66,11 +66,17 @@ export const setPlanningData = (token) => {
   };
 };
 
-export const setSpendingData = (token) => {
-  console.log(getFromDate())
+export const setSpendingData = (token,filter={}) => {
+  console.log(filter)
+  let fromDate = getFromDate()
+  let toDate = getToDate()
+  if(filter.chartDateRange){
+    fromDate = filter.chartDateRange.split(',')[0]
+    toDate = filter.chartDateRange.split(',')[1]
+  }
   return (dispatch) => {
     axios
-      .get(`${API_URL}/transactions?token=Bearer ${token}&periodFrom=${getFromDate()}&periodTo=${getToDate()}`)
+      .get(`${API_URL}/transactions?token=Bearer ${token}&periodFrom=${fromDate}&periodTo=${toDate}`)
       .then((response) => {
         if (response.status === 200) {
           dispatch({

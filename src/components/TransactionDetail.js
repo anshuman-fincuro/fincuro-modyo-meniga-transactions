@@ -20,10 +20,12 @@ class TransactionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      spendingData: this.props.spendingData,
       showDetails: this.props.showDetails,
       selectedTransaction: this.props.selectedTransaction,
       selectedTransactionGroup: this.props.selectedTransactionGroup,
       categoriesData: this.props.categorydata,
+      
     };
     this.handleChange = this.handleChange.bind(this) 
   }
@@ -328,7 +330,7 @@ class TransactionDetail extends Component {
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
                     >
-                      <LineCharts spendingData={this.props.spendingData} />
+                      <LineCharts spendingData={this.state.spendingData} />
                       <table className="TransactionChartTable">
                         <thead>
                           <tr>

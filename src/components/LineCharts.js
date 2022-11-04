@@ -17,6 +17,7 @@ class LineCharts extends Component {
 
   async componentDidMount() {
     if(this.props.spendingData.length !== 0) {
+      console.log(this.props.spendingData.length)
       const dates = this.props.spendingData.map(x => x.originalDate);
       const groups = dates.reduce((acc, date) => {
         const yearWeek = `${moment(new Date(date)).year()}-${moment(new Date(date)).week()}`;

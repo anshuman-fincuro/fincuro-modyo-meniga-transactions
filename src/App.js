@@ -131,7 +131,7 @@ this.setState({AmountFilterType: value});
           )}
         </div>
         ) : (
-        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction} selectedTransactionGroup={this.state.selectedTransactionGroup} categorydata = {categorydata}></TransactionDetail>
+        <TransactionDetail changeShowDetails={this.setShowDetails.bind(this)} showDetails={this.state.showDetails} selectedTransaction={this.state.selectedTransaction} selectedTransactionGroup={this.state.selectedTransactionGroup} categorydata = {categorydata} spendingData = {this.state.spendingData}></TransactionDetail>
         )}
       </div>
     );
