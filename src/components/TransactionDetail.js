@@ -14,6 +14,7 @@ import {
   mdiUnfoldLessVertical,
 } from "@mdi/js";
 import LineCharts from "./LineCharts";
+import ChartDateFilter from "./ChartDateFilter";
 
 class TransactionDetail extends Component {
   constructor(props) {
@@ -301,13 +302,7 @@ class TransactionDetail extends Component {
             <div className="linechart-wrapper">
               <h2 className="heading">Total expenses this period</h2>
               <div className="TransactionOverviewChart-dropdown">
-                <select>
-                  <option value="fruit">Last 6 months</option>
-                  <option value="vegetable">Last year</option>
-                  <option value="meat">Last 1 year</option>
-                  <option value="vegetable">Last 3 year</option>
-                  <option value="meat">Last 6 year</option>
-                </select>
+              <ChartDateFilter></ChartDateFilter>
               </div>
               <div className="TransactionOverviewChart-tabs-wrapper">
                 <div>
