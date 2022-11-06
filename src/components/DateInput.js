@@ -38,7 +38,9 @@ function DateInput(props) {
   return (
     <div>
       <DatePicker
-        className="fincuro_calender"
+        wrapperClassName="fincuro_wrapper"
+        calendarClassName="fincuro_calender"
+        popperClassName="fincuro_popper"
         isClearable
         clearButtonClassName="fincuro_calender_clear"
         placeholderText={props.placeholder}

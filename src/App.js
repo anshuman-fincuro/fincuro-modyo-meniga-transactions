@@ -13,6 +13,7 @@ import {
   setMerchantData,
   setPlanningData,
   setSpendingData,
+  setSettingsData
 } from "./store/actions/component-action";
 import BillingTable from './components/BillingTable';
 import BillingFilter from './components/BillingFilter';
@@ -42,6 +43,7 @@ class App extends Component {
         this.props.setSpending(this.props.token),
         this.props.setPlanning(this.props.token),
         this.props.setMerchant(this.props.token),
+        this.props.setSettings(this.props.token),
       ]);
     }
   }
@@ -160,6 +162,7 @@ const mapDispatchToProps = (dispatch) => {
     setPlanning: (token) => dispatch(setPlanningData(token)),
     setSpending: (token) => dispatch(setSpendingData(token)),
     setMerchant: (token) => dispatch(setMerchantData(token)),
+    setSettings: (token) => dispatch(setSettingsData(token))
   };
 };
 

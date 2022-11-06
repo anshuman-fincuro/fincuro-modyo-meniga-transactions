@@ -1353,6 +1353,31 @@ button.react-datepicker__close-icon.fincuro_calender_clear::after{
 .filterClear{
   position: absolute;
 }
+
+
+.fincuro_calender .react-datepicker__current-month{
+  font-size: 1.25rem;
+}
+.fincuro_calender .react-datepicker__month{
+  margin: 1rem;
+  font-size: 1.125rem;
+}
+
+.fincuro_calender .react-datepicker__day, .fincuro_calender .react-datepicker__day-name{
+  margin: 0.5rem;
+} 
+
+.fincuro_calender .react-datepicker__day-names{
+  font-size: 1.125rem;
+}
+
+.fincuro_calender .react-datepicker__day.react-datepicker__day--outside-month{
+  color: #f45516;
+}
+
+.fincuro_calender .react-datepicker__day--selected, .fincuro_calender .react-datepicker__day--keyboard-selected{
+  background-color: #2b8000;
+}
 /***** #End - Writen by - Maantu Das ***/
 
 

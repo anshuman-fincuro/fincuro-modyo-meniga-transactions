@@ -139,3 +139,17 @@ export const setCategoryFilterData = (token) => {
     });
   };
 };
+
+export const setSettingsData = (token) => {
+  return (dispatch) => {
+    axios.get(`${API_URL}/public/settings?token=Bearer ${token}`).then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: TYPES.COMPONENT.ON_SETTINGS_SUCCESS,
+          payload: { settings: response.data.data },
+        });
+      }
+    });
+  };
+};
+
