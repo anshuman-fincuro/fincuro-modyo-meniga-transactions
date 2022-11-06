@@ -68,15 +68,41 @@ export const setPlanningData = (token) => {
 
 export const setSpendingData = (token,filter={}) => {
   console.log(filter)
+  let query = '';
   let fromDate = getFromDate()
   let toDate = getToDate()
-  if(filter.chartDateRange){
+  if(filter.chartDateRange && filter.chartDateRange != null){
     fromDate = filter.chartDateRange.split(',')[0]
     toDate = filter.chartDateRange.split(',')[1]
   }
+
+  if(filter.period){
+      query+= '&period='+filter.period;
+    if(filter.periodFrom)
+      query+= '&periodFrom='+filter.periodFrom;
+    if(filter.periodTo)
+      query+= '&periodTo='+filter.periodTo;
+  }else{
+    query+= `&periodFrom=${fromDate}&periodTo=${toDate}`;
+  }
+
+  if(filter.amountType){
+    query+= `&amountType=${filter.amountType}`;
+  }
+  if(filter.searchText){
+    query+= `&searchText=${filter.searchText}`;
+  }
+  if(filter.onlyUncertain){
+    query+= `&onlyUncertain=${filter.onlyUncertain}`;
+  }
+  if(filter.activeAccount){
+    const accountTypes = (filter.activeAccount == 0) ? 'Credit' :  (filter.activeAccount == 1) ? 'Current': 'Savings';
+    query+= `&accountTypes=${accountTypes}`;
+  }
+  
   return (dispatch) => {
     axios
-      .get(`${API_URL}/transactions?token=Bearer ${token}&periodFrom=${fromDate}&periodTo=${toDate}`)
+      .get(`${API_URL}/transactions?token=Bearer ${token}${query}`)
       .then((response) => {
         if (response.status === 200) {
           dispatch({

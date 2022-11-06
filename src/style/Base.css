@@ -1322,6 +1322,40 @@ height: 2rem !important;
   height: 442px;
   border: 0;
 }
+
+
+.calender_icon{
+  position: absolute;
+  right:4%;
+  top:20%;
+  z-index: 999;
+  cursor: pointer;
+}
+
+/***** Writen by - Maantu Das ***/
+.react-datepicker__input-container .input-group{
+  width: 100%;
+}
+button.react-datepicker__close-icon.fincuro_calender_clear{
+  z-index: 999;
+  font-size: 1.12rem;
+}
+button.react-datepicker__close-icon.fincuro_calender_clear::after{
+  color: #4d4d4d;
+  font-size: 24px;
+  background:none;
+}
+
+.filterWrapper{
+  position: relative;
+}
+
+.filterClear{
+  position: absolute;
+}
+/***** #End - Writen by - Maantu Das ***/
+
+
 @media (min-width: 768px) {
   .transactionActionList-list {
     flex-wrap: nowrap !important;

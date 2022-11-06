@@ -1,154 +1,143 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
+import { getdateRanges, getFromToDate } from "../utils";
+import DateInput from "./DateInput";
 import * as moment from "moment";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { mdiCalendarMonth } from "@mdi/js";
+import { mdiCalendarMonth, mdiClose } from "@mdi/js";
 import Icon from "@mdi/react";
-
-const CustomInput = React.forwardRef((props, ref) => {
-  console.log(props);
-  return (
-    <div ref={ref}>
-      <InputGroup>
-        <Form.Control type="text" placeholder={props.placeholder} readOnly />
-        <Icon path={mdiCalendarMonth} size={1.25} onClick={props.onClick} />
-      </InputGroup>
-    </div>
-  );
-});
-
+import Button from 'react-bootstrap/Button';
 class DateDropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dateDropDown: [],
       showDateRange: false,
+      period: null,
+      periodFrom: null,
+      periodTo: null,
     };
   }
 
-  componentDidMount() {
-    this.setState({ dateDropDown: this.getdateRange() });
-  }
-
-  getdateRange() {
-    const dates = [
-      "This month",
-      "Last month",
-      "Last 3 months",
-      "Last 6 months",
-      "Last 12 months",
-      "This year",
-      "Last year",
-      "Custom",
-    ];
-    const ranges = dates.map((item) => {
-      let startDate = "";
-      let endDate = "";
-      if (item === "This month") {
-        startDate = moment().startOf("month").format("YYYY-MM-DD");
-        endDate = moment().endOf("month").format("YYYY-MM-DD");
-      } else if (item === "Last month") {
-        startDate = moment()
-          .subtract(1, "months")
-          .startOf("month")
-          .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
-      } else if (item === "Last 3 months") {
-        startDate = moment()
-          .subtract(3, "months")
-          .startOf("month")
-          .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
-      } else if (item === "Last 6 months") {
-        startDate = moment()
-          .subtract(6, "months")
-          .startOf("month")
-          .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
-      } else if (item === "Last 12 months") {
-        startDate = moment()
-          .subtract(12, "months")
-          .startOf("month")
-          .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
-      } else if (item === "This year") {
-        startDate = moment().startOf("year").format("YYYY-MM-DD");
-        endDate = moment().endOf("month").format("YYYY-MM-DD");
-      } else if (item === "Last year") {
-        startDate = moment()
-          .subtract(1, "year")
-          .startOf("year")
-          .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "year")
-          .endOf("year")
-          .format("YYYY-MM-DD");
+  onDateRangeChange(event) {
+    if (event.target.value) {
+      if (event.target.value === "custom") {
+        this.setState(
+          {
+            showDateRange: true,
+            period: event.target.value,
+          }
+        );
       } else {
-        startDate = null;
-        endDate = null;
+        const { startDate, endDate } = getFromToDate(event.target.value);
+        this.setState(
+          {
+            showDateRange: false,
+            period: event.target.value,
+            periodFrom: startDate,
+            periodTo: endDate,
+          },
+          () => {
+            const data = {
+              period: this.state.period,
+              periodFrom: this.state.periodFrom,
+              periodTo: this.state.periodTo,
+            };
+            this.props.onChange(data);
+          }
+        );
       }
+    }else{
+      this.props.onChange(null);
+    }
 
-      let value = startDate && endDate ? `${startDate},${endDate}` : "Custom";
-
-      return { value: value, label: item };
-    });
-    return ranges;
   }
 
+  onFromDateChange(date) {
 
-  dateChange(event){
-    if(event.target.value === 'Custom'){
-      this.setState({ showDateRange: true });
-    }else{
-      this.setState({ showDateRange: false });
-    }
+      this.setState(
+        {
+          periodFrom: date,
+        },
+        () => {
+          const data = {
+            period: this.state.period,
+            periodFrom: this.state.periodFrom,
+            periodTo: this.state.periodTo
+          };
+          this.props.onChange(data);
+        }
+      );
+
+    
+  }
+
+  onToDateChange(date) {
+
+      this.setState(
+        {
+          periodTo: date,
+        },
+        () => {
+          const data = {
+            period: this.state.period,
+            periodFrom: this.state.periodFrom,
+            periodTo: this.state.periodTo
+          };
+          this.props.onChange(data);
+        }
+      );
+ 
   }
 
   render() {
     const { dateDropDown, showDateRange } = this.state;
     return (
-      <>
-        <div className="form-group col-md-12">
+      <div>
+        <div className="form-group col-md-12 filterWrapper">
           <label htmlFor="inputEmail4">Date</label>
-          <Form.Select aria-label="Default select example" onChange={this.dateChange.bind(this)}>
-            <option>Select period</option>
-            {dateDropDown &&
+          <Form.Select
+            aria-label="Default select example"
+            onChange={this.onDateRangeChange.bind(this)}
+          >
+            <option value="">Select period</option>
+            <option value="0">This month</option>
+            <option value="1">Last month</option>
+            <option value="3">Last 3 months</option>
+            <option value="6">Last 6 months</option>
+            <option value="12">Last 12 months</option>
+            <option value="thisYear">This year</option>
+            <option value="lastYear">Last year</option>
+            <option value="custom">Custom</option>
+            {/* {dateDropDown &&
               dateDropDown.map((range, i) => (
-                
-                  <option key={i} value={range.value}>
-                    {range.label}
-                  </option>
-                
-              ))}
+                <option key={i} value={range.value}>
+                  {range.label}
+                </option>
+              ))} */}
           </Form.Select>
+    
+        {/* <Button variant="outline-light" className="filterClear">
+          Clear  <Icon path={mdiClose} size={1.25} />
+          </Button> */}
         </div>
         {showDateRange && (
           <>
             <div className="form-group col-md-6 col-sm-12">
-              {/* <Form.Control type="text" placeholder="From" /> */}
-              <DatePicker placeholderText="From" customInput={<CustomInput />} />
+              <DateInput
+                placeholder="From"
+                onDateChange={(date) => this.onFromDateChange(date)}
+              ></DateInput>
             </div>
             <div className="form-group col-md-6 col-sm-12">
-              {/* <Form.Control type="text" placeholder="To" /> */}
-              <DatePicker customInput={<CustomInput />} placeholderText="To" />
+              <DateInput
+                placeholder="To"
+                onDateChange={(date) => this.onToDateChange(date)}
+              ></DateInput>
             </div>
           </>
         )}
-      </>
+       
+      </div>
     );
   }
 }

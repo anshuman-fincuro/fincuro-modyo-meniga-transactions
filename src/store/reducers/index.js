@@ -6,7 +6,7 @@ import componentReducer from './component-reducer';
 // Redux: Root Reducer
 const rootReducer = combineReducers({
   authReducer,
-  componentReducer,
+  componentReducer
 });
 
 // Exports
