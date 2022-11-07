@@ -5,6 +5,7 @@ import "./../App.css";
 import { mdiCardAccountDetails} from '@mdi/js';
 import { mdiAlertCircle } from '@mdi/js';
 import { connect } from "react-redux";
+import CustomDropdown from "./shared/CustomDropdown";
 class BillingTable extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,8 @@ class BillingTable extends Component {
           categoriesData: this.props.categorydata,
           showCategories: 0,
         }
-        this.handleChange = this.handleChange.bind(this) 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     handleChange(e, transactionID){
@@ -24,11 +26,14 @@ class BillingTable extends Component {
         this.setState({showCategories: transactionID})
        }
       }
- 
+      handleInputChange(value) {
+        console.log('Custom Selected Drop Val', value);
+      }
     render() {
         return (           
             <div>
-                {console.log(this.props.categoryFilterData)}
+                {console.log("billing table category", this.props.categoryFilterData)}
+                {console.log("this.props.transactionData", this.props.transactionData)}
     
                   {this.props.transactionData.length > 0 ? (
                 <div className="billingTable-wrapper">
@@ -50,8 +55,16 @@ class BillingTable extends Component {
                                         </div>
                                         <div className="billingTable-right">
                                             <div className="billingTable-right-text-wrapper">
-                                                <div className="billingTable-right-text">{item.text}</div>           
+                                                <div className="billingTable-right-text">{item.text}</div>   
                                                 <div className="billingTable-right-dropdown">
+                                                   <CustomDropdown 
+                                                   items={this.props.categoryFilterData} 
+                                                   handleSelection={(value)=>{
+                                                       this.handleInputChange(value)
+                                                   }}
+                                                   />
+                                                </div>    
+                                                {/* <div className="billingTable-right-dropdown">
                                                     
                                                   {this.state.showCategories === item.id ? 
                                                   ( <select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }}  >
@@ -75,7 +88,7 @@ class BillingTable extends Component {
  <option>Show All Categories</option>
 
                                                     </select> )} 
-                                                </div>
+                                                </div> */}
                     
                                             </div>
                                             <div className="billingTable-TransactionAmount text-color-red">£ {item.amount}</div>

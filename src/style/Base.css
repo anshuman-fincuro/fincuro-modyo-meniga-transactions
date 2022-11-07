@@ -592,7 +592,7 @@ progress {
 }
 
 .toggleBilling .account-wrapper ul li.active {
-  background-color: #1c242c;
+  background-color: #4B5E68;
 }
 
 .toggleBilling .account-wrapper ul li.active .green-color {
@@ -708,7 +708,7 @@ progress {
 
 .billingTable-right-text-wrapper {
   padding: 12px 14px;
-  z-index: 10;
+  /* z-index: 10; */
 }
 
 .billingTable-icon {
