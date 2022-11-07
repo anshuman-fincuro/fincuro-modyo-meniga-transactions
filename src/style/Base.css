@@ -1322,6 +1322,65 @@ height: 2rem !important;
   height: 442px;
   border: 0;
 }
+
+
+.calender_icon{
+  position: absolute;
+  right:4%;
+  top:20%;
+  z-index: 999;
+  cursor: pointer;
+}
+
+/***** Writen by - Maantu Das ***/
+.react-datepicker__input-container .input-group{
+  width: 100%;
+}
+button.react-datepicker__close-icon.fincuro_calender_clear{
+  z-index: 999;
+  font-size: 1.12rem;
+}
+button.react-datepicker__close-icon.fincuro_calender_clear::after{
+  color: #4d4d4d;
+  font-size: 24px;
+  background:none;
+}
+
+.filterWrapper{
+  position: relative;
+}
+
+.filterClear{
+  position: absolute;
+}
+
+
+.fincuro_calender .react-datepicker__current-month{
+  font-size: 1.25rem;
+}
+.fincuro_calender .react-datepicker__month{
+  margin: 1rem;
+  font-size: 1.125rem;
+}
+
+.fincuro_calender .react-datepicker__day, .fincuro_calender .react-datepicker__day-name{
+  margin: 0.5rem;
+} 
+
+.fincuro_calender .react-datepicker__day-names{
+  font-size: 1.125rem;
+}
+
+.fincuro_calender .react-datepicker__day.react-datepicker__day--outside-month{
+  color: #f45516;
+}
+
+.fincuro_calender .react-datepicker__day--selected, .fincuro_calender .react-datepicker__day--keyboard-selected{
+  background-color: #2b8000;
+}
+/***** #End - Writen by - Maantu Das ***/
+
+
 @media (min-width: 768px) {
   .transactionActionList-list {
     flex-wrap: nowrap !important;

@@ -8,6 +8,7 @@ const initialState = {
   planningData: [],
   spendingData: [],
   categoryFilterData: [],
+  settings: {}
 };
 
 const compare = (a, b) => {
@@ -53,6 +54,12 @@ const componentReducer = (state = initialState, action) => {
         ...state,
         categoryFilterData: filteredData,
       };
+
+    case TYPES.COMPONENT.ON_SETTINGS_SUCCESS:
+        return {
+          ...state,
+          settings: action.payload.settings,
+        };
     default:
       return {
         ...state,

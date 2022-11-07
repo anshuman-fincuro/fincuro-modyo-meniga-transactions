@@ -8,11 +8,9 @@ import Icon from "@mdi/react";
 import { mdiCardsPlayingSpade, mdiMagnify } from "@mdi/js";
 import BillingTable from "./BillingTable";
 import CategoriesDropdown from "./CategoriesDropdown";
-import DateDropdown from './DateDropdown';
-
-
-
-
+import DateDropdown from "./DateDropdown";
+import { connect } from "react-redux";
+import { setSpendingData } from "../store/actions/component-action";
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -24,11 +22,62 @@ class BillingFilter extends Component {
       activeCheckboxSaving: this.props.activeCheckboxSaving,
       activeCheckboxCurrent: this.props.activeCheckboxCurrent,
       amountFilterValue: this.props.amountFilterValue,
+      period: null,
+      periodFrom: null,
+      periodTo: null,
+      amountType: null,
+      amountFrom: null,
+      amountTo: null,
+      onlyUncertain: false,
+      categoryIds: [],
+      searchText: null,
     };
   }
-  filterbyAmount(value) {
-    this.props.changetransactionDetails(true, value);
+
+  componentDidUpdate(prevProps) {
+    console.log("prevProps", prevProps)
+    if(prevProps.activeAccount !== this.props.activeAccount)
+    this.setState({activeAccount: this.props.activeAccount},()=>{
+      this.props.setSpendingData(this.props.token, this.state);
+    });
   }
+  filterbyAmount(value) {
+    //this.props.changetransactionDetails(true, value);
+    this.setState({amountType: value},()=>{
+      this.props.setSpendingData(this.props.token, this.state);
+    });
+  }
+
+  dateOnChange(e) {
+    console.log(e)
+    let dateFilter = {};
+    if (e) {
+      dateFilter = { dateFilter: e };
+      this.setState({...e},()=>{
+        this.props.setSpendingData(this.props.token, this.state);
+      });
+    }else{
+      this.setState({ period: null, periodFrom: null, amountTo: null },()=>{
+        this.props.setSpendingData(this.props.token, this.state);
+      });
+    }
+  }
+
+  onTextChange(e) {
+    if (e.target.value){
+      this.setState({searchText: e.target.value},()=>{
+        this.props.setSpendingData(this.props.token, this.state);
+      });
+    }
+  }
+
+  uncertainHandleChange(event){
+    const flag = event.target.value == 'on' ? true: false;
+    this.setState({onlyUncertain: flag},()=>{
+      this.props.setSpendingData(this.props.token, this.state);
+    });
+  }
+
   render() {
     return (
       <div className="billingFilter-wrapper">
@@ -39,6 +88,8 @@ class BillingFilter extends Component {
                 type="text"
                 className="search-bar"
                 placeholder="Search..."
+                value={this.state.searchText}
+                onChange={this.onTextChange.bind(this)}
               />
               <span className="search-icon">
                 <Icon
@@ -56,7 +107,7 @@ class BillingFilter extends Component {
             <div className="form-group col-md-12">
               <CategoriesDropdown></CategoriesDropdown>
               <div className="checkboxLabel-wrap">
-                <Form.Check aria-label="option 1" />
+                <Form.Check aria-label="option 1" onChange={this.uncertainHandleChange.bind(this)} />
                 {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
                 <span className="checkbox-text">
                   Only uncertain categorization
@@ -77,8 +128,9 @@ class BillingFilter extends Component {
                 }}
               >
                 <option>Select type</option>
+                <option value="0">Expenses
+                </option>
                 <option value="1">Income</option>
-                <option value="2">Expenses</option>
               </Form.Select>
             </div>
           </div>
@@ -91,9 +143,9 @@ class BillingFilter extends Component {
             </div>
           </div>
           <div className="form-row">
-            
-              <DateDropdown></DateDropdown>
-    
+            <DateDropdown
+              onChange={(date) => this.dateOnChange(date)}
+            ></DateDropdown>
           </div>
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -157,4 +209,12 @@ class BillingFilter extends Component {
   }
 }
 
-export default BillingFilter;
+const mapStateToProps = (state) => ({
+  token: state.authReducer.token,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSpendingData: (token, value) => dispatch(setSpendingData(token, value))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BillingFilter);
