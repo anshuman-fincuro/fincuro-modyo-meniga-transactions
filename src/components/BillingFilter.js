@@ -128,8 +128,9 @@ class BillingFilter extends Component {
                 }}
               >
                 <option>Select type</option>
-                <option value="0">Income</option>
-                <option value="1">Expenses</option>
+                <option value="0">Expenses
+                </option>
+                <option value="1">Income</option>
               </Form.Select>
             </div>
           </div>
