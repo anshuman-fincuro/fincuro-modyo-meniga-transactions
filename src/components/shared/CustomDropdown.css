@@ -1,0 +1,76 @@
+.custom-dropdown-wrapper .dropdown-menu {
+    width: 240px;
+    padding: 0.75rem 0.25rem;
+}
+
+.custom-dropdown-wrapper .dropdown-toggle,
+.custom-dropdown-wrapper .dropdown-toggle:focus,
+.custom-dropdown-wrapper .dropdown-toggle:focus:active {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    color: #566b76;
+    font-size: 12px;
+    text-decoration: underline;
+    outline: none;
+    font-weight: 500;
+}
+.custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item {
+    padding: 10px 12px;
+    color: #566b76;
+    font-size: 12px;
+    border-bottom: 1px solid #e6e6e6;
+    font-weight: 500;
+}
+.custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item:hover{
+    background-color:#F4F4F0;
+    text-decoration: none;
+}
+.custom-dropdown-wrapper .search-filter {
+    position: relative;
+}
+.custom-dropdown-wrapper .search-filter input[type=search]:focus,
+.custom-dropdown-wrapper input[type=search] {
+    padding: 0 3rem 0px 12px;
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    width: 100%;
+    min-height: 36px;
+    border-bottom: 1px solid #e6e6e6;
+    position: relative;
+}
+.search-filter svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 0.5rem;
+}
+.dropdown-menu-wrapper {
+    max-height: 240px;
+    overflow-y: auto;
+}
+.dropdown-menu-wrapper .accordion-body {
+    padding: 0;
+}
+.dropdown-menu-wrapper .accordion-item,
+.dropdown-menu-wrapper .accordion-item button:focus {
+    box-shadow: none;
+    border: 0;
+    min-height: 36px;
+    background-color: transparent;
+}
+.dropdown-menu-wrapper .accordion-header,
+.dropdown-menu-wrapper .accordion .accordion-item:last-child .accordion-header button[aria-expanded="true"] {    
+    border-bottom: 1px solid #e6e6e6;
+    min-height: 36px;
+}
+.dropdown-menu-wrapper .accordion-header button{
+    color: #566b76;
+    font-size: 12px;
+}
+/* .dropdown-menu-wrapper .accordion .accordion-header:last-child, */
+.dropdown-menu-wrapper .accordion .accordion-item:last-child .accordion-header {
+    border: none;
+}
