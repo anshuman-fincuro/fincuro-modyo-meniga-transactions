@@ -1,5 +1,5 @@
 .custom-dropdown-wrapper .dropdown-menu {
-    width: 240px;
+    width: max-content;
     padding: 0.75rem 0.25rem;
 }
 
@@ -15,12 +15,16 @@
     outline: none;
     font-weight: 500;
 }
-.custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item {
+.custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item,
+.custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item-text {
     padding: 10px 12px;
     color: #566b76;
     font-size: 12px;
     border-bottom: 1px solid #e6e6e6;
     font-weight: 500;
+}
+.custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item-text {
+    border-bottom: 0;
 }
 .custom-dropdown-wrapper .dropdown-menu-wrapper .dropdown-item:hover{
     background-color:#F4F4F0;
