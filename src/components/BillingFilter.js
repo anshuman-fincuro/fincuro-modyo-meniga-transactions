@@ -105,7 +105,9 @@ class BillingFilter extends Component {
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
-              <CategoriesDropdown></CategoriesDropdown>
+              <CategoriesDropdown
+              placeholder="Select categories"
+              ></CategoriesDropdown>
               <div className="checkboxLabel-wrap">
                 <Form.Check aria-label="option 1" onChange={this.uncertainHandleChange.bind(this)} />
                 {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
