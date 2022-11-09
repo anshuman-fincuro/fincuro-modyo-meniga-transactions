@@ -58,24 +58,36 @@ class CategoriesDropdown extends Component {
 
   childCatClick(event, parentCatId, childCatId) {
     event.stopPropagation();
-    const cat = this.props.categoryFilterData.find(
-      (item) => item.id == parentCatId
-    );
-    if (cat && cat.children && cat.children.length > 0) {
-      const childCat = cat.children.find((item) => item.id == childCatId);
-      if (childCat) {
-        if (!this.state.selectedCategories.includes(childCat.id)) {
-          this.setState(
-            (prevstate) => ({
-              selectedCategories: [
-                ...prevstate.selectedCategories,
-                childCat.id,
-              ],
-            }),
-            () => {
-              this.props.onChange(this.state.selectedCategories);
-            }
-          );
+    if (!event.target.checked) {
+      let array = [...this.state.selectedCategories];
+      let index = array.indexOf(childCatId);
+      if (index > -1) {
+        array.splice(index, 1);
+        this.setState({selectedCategories: [...array]}, ()=>{
+          this.props.onChange(this.state.selectedCategories);
+        });
+      }
+
+    } else {
+      const cat = this.props.categoryFilterData.find(
+        (item) => item.id == parentCatId
+      );
+      if (cat && cat.children && cat.children.length > 0) {
+        const childCat = cat.children.find((item) => item.id == childCatId);
+        if (childCat) {
+          if (!this.state.selectedCategories.includes(childCat.id)) {
+            this.setState(
+              (prevstate) => ({
+                selectedCategories: [
+                  ...prevstate.selectedCategories,
+                  childCat.id,
+                ],
+              }),
+              () => {
+                this.props.onChange(this.state.selectedCategories);
+              }
+            );
+          }
         }
       }
     }
@@ -128,19 +140,27 @@ class CategoriesDropdown extends Component {
                                 </Accordion.Header>
                                 <Accordion.Body>
                                   {categ.children.map((children) => (
-                                    <Dropdown.Item
+                                    <div
+                                      eventKey={`${categ.id}`}
+                                      className="checkboxWrapper"
                                       key={children.id}
-                                      eventKey={children.name}
-                                      onClick={(event) =>
-                                        this.childCatClick(
-                                          event,
-                                          categ.id,
-                                          children.id
-                                        )
-                                      }
                                     >
-                                      {children.name}
-                                    </Dropdown.Item>
+                                      <Form.Check
+                                        onChange={(event) =>
+                                          this.childCatClick(
+                                            event,
+                                            categ.id,
+                                            children.id
+                                          )
+                                        }
+                                        className="Checkbox-text"
+                                        type="checkbox"
+                                        id={`default-${children.name}`}
+                                        label={children.name}
+                                        checked={this.state.selectedCategories.includes(children.id)}
+                                      />
+                                    </div>
+                                    
                                   ))}
                                 </Accordion.Body>
                               </Accordion.Item>

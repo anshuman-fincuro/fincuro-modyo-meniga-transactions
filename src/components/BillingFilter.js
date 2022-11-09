@@ -33,60 +33,57 @@ class BillingFilter extends Component {
       searchText: null,
     };
 
-    this.categoryChange =  this.categoryChange.bind(this);
+    this.categoryChange = this.categoryChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    console.log("prevProps", prevProps)
-    if(prevProps.activeAccount !== this.props.activeAccount)
-    this.setState({activeAccount: this.props.activeAccount},()=>{
-      this.props.setSpendingData(this.props.token, this.state);
-    });
+    console.log("prevProps", prevProps);
+    if (prevProps.activeAccount !== this.props.activeAccount)
+      this.setState({ activeAccount: this.props.activeAccount }, () => {
+        this.props.setSpendingData(this.props.token, this.state);
+      });
   }
   filterbyAmount(value) {
     //this.props.changetransactionDetails(true, value);
-    this.setState({amountType: value},()=>{
+    this.setState({ amountType: value }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
   dateOnChange(e) {
-    console.log(e)
+    console.log(e);
     let dateFilter = {};
     if (e) {
       dateFilter = { dateFilter: e };
-      this.setState({...e},()=>{
+      this.setState({ ...e }, () => {
         this.props.setSpendingData(this.props.token, this.state);
       });
-    }else{
-      this.setState({ period: null, periodFrom: null, amountTo: null },()=>{
+    } else {
+      this.setState({ period: null, periodFrom: null, amountTo: null }, () => {
         this.props.setSpendingData(this.props.token, this.state);
       });
     }
   }
 
   onTextChange(e) {
-    if (e.target.value){
-      this.setState({searchText: e.target.value},()=>{
+    if (e.target.value) {
+      this.setState({ searchText: e.target.value }, () => {
         this.props.setSpendingData(this.props.token, this.state);
       });
     }
   }
 
-  uncertainHandleChange(event){
-    const flag = event.target.value == 'on' ? true: false;
-    this.setState({onlyUncertain: flag},()=>{
+  uncertainHandleChange(event) {
+    const flag = event.target.value == "on" ? true : false;
+    this.setState({ onlyUncertain: flag }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
-
-  categoryChange(cats){
-    if(cats && cats.length > 0){
-      this.setState({categoryIds: cats.join(',') }, ()=>{
-        this.props.setSpendingData(this.props.token, this.state);
-      });
-    } 
+  categoryChange(cats) {
+    this.setState({ categoryIds: cats.join(",") }, () => {
+      this.props.setSpendingData(this.props.token, this.state);
+    });
   }
 
   render() {
@@ -117,11 +114,14 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
               <CategoriesDropdown
-                  placeholder="Select categories"
-                  onChange={(value)=> this.categoryChange(value)}
+                placeholder="Select categories"
+                onChange={(value) => this.categoryChange(value)}
               ></CategoriesDropdown>
               <div className="checkboxLabel-wrap">
-                <Form.Check aria-label="option 1" onChange={this.uncertainHandleChange.bind(this)} />
+                <Form.Check
+                  aria-label="option 1"
+                  onChange={this.uncertainHandleChange.bind(this)}
+                />
                 {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
                 <span className="checkbox-text">
                   Only uncertain categorization
@@ -142,8 +142,7 @@ class BillingFilter extends Component {
                 }}
               >
                 <option>Select type</option>
-                <option value="0">Expenses
-                </option>
+                <option value="0">Expenses</option>
                 <option value="1">Income</option>
               </Form.Select>
             </div>
@@ -228,7 +227,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => {
   return {
-    setSpendingData: (token, value) => dispatch(setSpendingData(token, value))
+    setSpendingData: (token, value) => dispatch(setSpendingData(token, value)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BillingFilter);

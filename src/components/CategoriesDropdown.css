@@ -61,3 +61,25 @@
     font-weight: 500;
     text-decoration: none;
 }
+
+.checkboxWrapper{
+    padding: 10px 15px;
+    color: #566b76;
+    font-size: 12px;
+    border-bottom: 1px solid #e6e6e6;
+    font-weight: 500;
+}
+
+.checkboxWrapper .Checkbox-text{
+    display: flex;
+    align-items: center;
+}
+.checkboxWrapper label{
+    margin : 0;
+    font-size:12px;
+  }
+  
+  .checkboxWrapper input[type="checkbox"]{
+    margin-right: 10px;
+  
+  }
