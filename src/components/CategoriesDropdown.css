@@ -38,7 +38,9 @@
     box-sizing: border-box;
     border: 1px solid #b3b3b3;
     border-radius: 0 0 3px 3px;
+    background: white;
 }
+
 
 .select-options{
     max-height: 240px;
@@ -62,7 +64,9 @@
     text-decoration: none;
 }
 
-.checkboxWrapper{
+
+
+.checkboxWrapper, .accordianHeader{
     padding: 10px 15px;
     color: #566b76;
     font-size: 12px;
@@ -70,16 +74,30 @@
     font-weight: 500;
 }
 
-.checkboxWrapper .Checkbox-text{
+.accordianHeader{
+    display: flex;
+    align-items: center;
+}
+
+.accordianHeader .accordianToggle{
+    margin-left: auto;
+}
+
+
+.checkboxWrapper .Checkbox-text, .accordianHeader .Checkbox-text{
     display: flex;
     align-items: center;
 }
 .checkboxWrapper label{
     margin : 0;
+    font-size:10px;
+  }
+
+  .accordianHeaderCheckbox label{
+    margin : 0;
     font-size:12px;
   }
   
-  .checkboxWrapper input[type="checkbox"]{
+  .checkboxWrapper input[type="checkbox"], .accordianHeaderCheckbox input[type="checkbox"]{
     margin-right: 10px;
-  
   }

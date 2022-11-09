@@ -2,8 +2,37 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import { setCategoryFilterData } from "../store/actions/component-action";
 import { connect } from "react-redux";
-import { Dropdown, Accordion, DropdownButton } from "react-bootstrap";
+import { Dropdown, Accordion, useAccordionButton } from "react-bootstrap";
 import "./CategoriesDropdown.css";
+import { mdiChevronDown, mdiChevronUp } from "@mdi/js";
+import Icon from "@mdi/react";
+
+function CustomToggle({ children, eventKey }) {
+  const [open, setOpen] = React.useState(false);
+  const decoratedOnClick = useAccordionButton(eventKey, (e) => {
+    setOpen(!open);
+  });
+
+  return (
+    <>
+      {open ? (
+        <Icon
+          path={mdiChevronUp}
+          size={1.5}
+          color="#000000"
+          onClick={decoratedOnClick}
+        />
+      ) : (
+        <Icon
+          path={mdiChevronDown}
+          size={1.5}
+          color="#000000"
+          onClick={decoratedOnClick}
+        />
+      )}
+    </>
+  );
+}
 
 class CategoriesDropdown extends Component {
   constructor(props) {
@@ -46,14 +75,26 @@ class CategoriesDropdown extends Component {
     event.stopPropagation();
     const cat = this.props.categoryFilterData.find((item) => item.id == catId);
     const childIds = cat.children.map((child) => child.id);
-    this.setState(
-      (prevstate) => ({
-        selectedCategories: [...prevstate.selectedCategories, ...childIds],
-      }),
-      () => {
+    if (!event.target.checked) {
+      let newArr = this.state.selectedCategories.filter(
+        (id) => !childIds.includes(id)
+      );
+      this.setState({ selectedCategories: [...newArr] }, () => {
         this.props.onChange(this.state.selectedCategories);
+      });
+    } else {
+      const categories = this.state.selectedCategories;
+      let arr = [];
+      if (childIds.some((id) => categories.includes(id))) {
+        let newArr = categories.filter((id) => !childIds.includes(id));
+        arr = [...newArr, ...childIds];
+      } else {
+        arr = [...categories, ...childIds];
       }
-    );
+      this.setState({ selectedCategories: [...arr] }, () => {
+        this.props.onChange(this.state.selectedCategories);
+      });
+    }
   }
 
   childCatClick(event, parentCatId, childCatId) {
@@ -63,11 +104,10 @@ class CategoriesDropdown extends Component {
       let index = array.indexOf(childCatId);
       if (index > -1) {
         array.splice(index, 1);
-        this.setState({selectedCategories: [...array]}, ()=>{
+        this.setState({ selectedCategories: [...array] }, () => {
           this.props.onChange(this.state.selectedCategories);
         });
       }
-
     } else {
       const cat = this.props.categoryFilterData.find(
         (item) => item.id == parentCatId
@@ -98,16 +138,6 @@ class CategoriesDropdown extends Component {
     return (
       <>
         <label htmlFor="inputEmail4">Category</label>
-        {/* <Form.Select aria-label="Default select">
-          <option>Select categories</option>
-          {categoryFilterData &&
-            categoryFilterData.map((cat, i) => (
-              <>
-                <option key={i} value={cat.name}>{cat.name}</option>
-              </>
-            ))}
-        </Form.Select> */}
-
         <div className="custom-select-dropdown">
           <div className="select-wrapper" ref={this.wrapper}>
             <div className="select-placeholder" onClick={this.selectClick}>
@@ -119,26 +149,37 @@ class CategoriesDropdown extends Component {
               <div className="select-list">
                 <div className="select-container">
                   <div className="search">
-                    <input type="text" placeholder="search" />
+                    <input type="text" placeholder="Search" />
                   </div>
                   <div className="select-options">
                     <Dropdown>
                       {categoryFilterData &&
-                        categoryFilterData.map((categ) => {
+                        categoryFilterData.map((categ, index) => {
                           return categ.children && categ.children.length > 0 ? (
                             <Accordion>
-                              <Accordion.Item
-                                key={categ.id}
-                                eventKey={categ.id}
-                              >
-                                <Accordion.Header
-                                  onClick={(event) =>
-                                    this.parentCatClick(event, categ.id)
-                                  }
-                                >
-                                  {categ.name}
-                                </Accordion.Header>
-                                <Accordion.Body>
+                              <div className="accordianHeader">
+                                <div className="accordianHeaderCheckbox">
+                                  <Form.Check
+                                    type="checkbox"
+                                    id={`default-${categ.name}`}
+                                    label={categ.name}
+                                    className="Checkbox-text"
+                                    onChange={(event) =>
+                                      this.parentCatClick(event, categ.id)
+                                    }
+                                    checked={categ.children.every((item) =>
+                                      this.state.selectedCategories.includes(
+                                        item.id
+                                      )
+                                    )}
+                                  />
+                                </div>
+                                <div className="accordianToggle">
+                                  <CustomToggle eventKey={index}></CustomToggle>
+                                </div>
+                              </div>
+                              <Accordion.Collapse eventKey={index}>
+                                <div className="collapsableContent">
                                   {categ.children.map((children) => (
                                     <div
                                       eventKey={`${categ.id}`}
@@ -157,13 +198,14 @@ class CategoriesDropdown extends Component {
                                         type="checkbox"
                                         id={`default-${children.name}`}
                                         label={children.name}
-                                        checked={this.state.selectedCategories.includes(children.id)}
+                                        checked={this.state.selectedCategories.includes(
+                                          children.id
+                                        )}
                                       />
                                     </div>
-                                    
                                   ))}
-                                </Accordion.Body>
-                              </Accordion.Item>
+                                </div>
+                              </Accordion.Collapse>
                             </Accordion>
                           ) : (
                             <Dropdown.Item key={categ.id} eventKey={categ.name}>
