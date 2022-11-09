@@ -16,23 +16,21 @@ class BillingTable extends Component {
       showCategories: 0,
       categoryFilterData: this.props.categoryFilterData,
     };
-    // this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.defaultDropdownSelect = this.defaultDropdownSelect.bind(this);
   }
-
-  // handleChange(e, transactionID) {
-  //   console.log({ selectValue: e.target.value });
-  //   if (e.target.value === "Show All Categories") {
-  //     console.log("value set to true");
-  //     this.setState({ showCategories: transactionID });
-  //   }
-  // }
   handleInputChange(value) {
     console.log('Custom Selected Drop Val', value);
     if (value === "Show All Categories") {
       console.log("value set to true");
       this.setState({ showCategories: value });
     }
+  }
+  defaultDropdownSelect(val) {
+    let defaultSelectVal = this.state.categoriesData.filter(
+      data => (data.id === val)
+    );
+    return defaultSelectVal[0].name;
   }
 
   render() {
@@ -76,61 +74,14 @@ class BillingTable extends Component {
                           </div>
                           <div className="billingTable-right-dropdown">
                           <CustomDropdown 
-                            items={this.state.categoryFilterData} 
+                            items={this.state.categoryFilterData}
                             detectedCategories={item.detectedCategories}
+                            defaultSelect={this.defaultDropdownSelect(item.categoryId)}
                             handleSelection={(value)=>{
                                 this.handleInputChange(value)
                             }}                            
                             categorydata={this.props.categorydata}
-                            />
-                            {/* {this.state.showCategories === item.id ? (
-                              <select
-                                onClick={(event) => event.stopPropagation()}
-                                style={{ zIndex: "10" }}
-                              >
-                                {this.props.categoryFilterData.map(
-                                  (allCategory, i) => (
-                                    <optgroup
-                                      label={allCategory.name}
-                                      onClick={(event) =>
-                                        event.stopPropagation()
-                                      }
-                                    >
-                                      {allCategory.children.map(
-                                        (subCategory) => (
-                                          <option value={subCategory.name}>
-                                            {subCategory.name}
-                                          </option>
-                                        )
-                                      )}
-                                    </optgroup>
-                                  )
-                                )}
-                              </select>
-                            ) : (
-                              <select
-                                onClick={(event) => event.stopPropagation()}
-                                style={{ zIndex: "10" }}
-                                value={this.state.selectValue}
-                                onChange={(e) => {
-                                  this.handleChange(e, item.id);
-                                }}
-                              >
-                                {item.detectedCategories
-                                  .map((categId) =>
-                                    this.props.categorydata.filter(
-                                      (detectid) =>
-                                        detectid.id === categId.categoryId
-                                    )
-                                  )
-                                  .map((categ) => (
-                                    <option value={categ[0].name}>
-                                      {categ[0].name}
-                                    </option>
-                                  ))}
-                                <option>Show All Categories</option>
-                              </select>
-                            )} */}
+                            />                           
                           </div>
                         </div>
                         <div className="billingTable-TransactionAmount text-color-red">
