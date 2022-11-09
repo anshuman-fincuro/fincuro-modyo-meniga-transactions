@@ -10,10 +10,13 @@ class CategoriesDropdown extends Component {
     super(props);
     this.state = {
       isOpen: false,
+      selectedCategories: [],
     };
     this.wrapper = React.createRef();
     this.selectClick = this.selectClick.bind(this);
     this.outsideClick = this.outsideClick.bind(this);
+    this.parentCatClick = this.parentCatClick.bind(this);
+    this.childCatClick = this.childCatClick.bind(this);
   }
 
   async componentDidMount() {
@@ -21,8 +24,8 @@ class CategoriesDropdown extends Component {
     await this.props.setCategoryFilter(this.props.token);
   }
 
-  componentWillUnmount(){
-    document.removeEventListener("mousedown",this.outsideClick);
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.outsideClick);
   }
 
   selectClick() {
@@ -36,6 +39,45 @@ class CategoriesDropdown extends Component {
       !this.wrapper.current.contains(event.target)
     ) {
       this.setState({ isOpen: false });
+    }
+  }
+
+  parentCatClick(event, catId) {
+    event.stopPropagation();
+    const cat = this.props.categoryFilterData.find((item) => item.id == catId);
+    const childIds = cat.children.map((child) => child.id);
+    this.setState(
+      (prevstate) => ({
+        selectedCategories: [...prevstate.selectedCategories, ...childIds],
+      }),
+      () => {
+        this.props.onChange(this.state.selectedCategories);
+      }
+    );
+  }
+
+  childCatClick(event, parentCatId, childCatId) {
+    event.stopPropagation();
+    const cat = this.props.categoryFilterData.find(
+      (item) => item.id == parentCatId
+    );
+    if (cat && cat.children && cat.children.length > 0) {
+      const childCat = cat.children.find((item) => item.id == childCatId);
+      if (childCat) {
+        if (!this.state.selectedCategories.includes(childCat.id)) {
+          this.setState(
+            (prevstate) => ({
+              selectedCategories: [
+                ...prevstate.selectedCategories,
+                childCat.id,
+              ],
+            }),
+            () => {
+              this.props.onChange(this.state.selectedCategories);
+            }
+          );
+        }
+      }
     }
   }
 
@@ -77,7 +119,11 @@ class CategoriesDropdown extends Component {
                                 key={categ.id}
                                 eventKey={categ.id}
                               >
-                                <Accordion.Header>
+                                <Accordion.Header
+                                  onClick={(event) =>
+                                    this.parentCatClick(event, categ.id)
+                                  }
+                                >
                                   {categ.name}
                                 </Accordion.Header>
                                 <Accordion.Body>
@@ -85,6 +131,13 @@ class CategoriesDropdown extends Component {
                                     <Dropdown.Item
                                       key={children.id}
                                       eventKey={children.name}
+                                      onClick={(event) =>
+                                        this.childCatClick(
+                                          event,
+                                          categ.id,
+                                          children.id
+                                        )
+                                      }
                                     >
                                       {children.name}
                                     </Dropdown.Item>
