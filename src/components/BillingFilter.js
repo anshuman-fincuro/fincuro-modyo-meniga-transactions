@@ -29,9 +29,11 @@ class BillingFilter extends Component {
       amountFrom: null,
       amountTo: null,
       onlyUncertain: false,
-      categoryIds: [],
+      categoryIds: null,
       searchText: null,
     };
+
+    this.categoryChange =  this.categoryChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -78,6 +80,15 @@ class BillingFilter extends Component {
     });
   }
 
+
+  categoryChange(cats){
+    if(cats && cats.length > 0){
+      this.setState({categoryIds: cats.join(',') }, ()=>{
+        this.props.setSpendingData(this.props.token, this.state);
+      });
+    } 
+  }
+
   render() {
     return (
       <div className="billingFilter-wrapper">
@@ -106,7 +117,8 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
               <CategoriesDropdown
-              placeholder="Select categories"
+                  placeholder="Select categories"
+                  onChange={(value)=> this.categoryChange(value)}
               ></CategoriesDropdown>
               <div className="checkboxLabel-wrap">
                 <Form.Check aria-label="option 1" onChange={this.uncertainHandleChange.bind(this)} />

@@ -100,6 +100,10 @@ export const setSpendingData = (token,filter={}) => {
     query+= `&accountTypes=${accountTypes}`;
   }
   
+  if(filter.categoryIds){
+    query+= `&categoryIds=${filter.categoryIds}`;
+  }
+
   return (dispatch) => {
     axios
       .get(`${API_URL}/transactions?token=Bearer ${token}${query}`)
