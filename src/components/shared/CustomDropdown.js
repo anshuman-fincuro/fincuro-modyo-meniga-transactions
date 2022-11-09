@@ -3,8 +3,8 @@ import { Dropdown, Accordion } from 'react-bootstrap';
 import './CustomDropdown.css';
 
 const CustomDropdown = (props) => {
-    const { items, handleSelection, detectedCategories } = props;
-    const [selectedValue, setSelectedValue] = useState('');
+    const { items, handleSelection, detectedCategories, defaultSelect } = props;
+    const [selectedValue, setSelectedValue] = useState(defaultSelect);
     const [showAllCategorie, setShowAllCategories] = useState('');
     const [show, setShow] = useState();
 
@@ -17,11 +17,12 @@ const CustomDropdown = (props) => {
         console.log('showAllCategorie', val);
     }
     useEffect(() => {
-        if(!show) {
+        if (!show) {
             setShowAllCategories('');
-            console.log('show',show)
         }
-    }, [show])
+        
+    console.log('items',props.items)
+    }, [show]);
     return (
         <div className="custom-dropdown-wrapper">
             <Dropdown show={show}
@@ -32,7 +33,6 @@ const CustomDropdown = (props) => {
                 <Dropdown.Toggle>
                     {selectedValue}
                 </Dropdown.Toggle>
-                {/* <Dropdown.Menu className={selectedValue === "Show All Categories"?'show':''}> */}
                 <Dropdown.Menu>
                     <div className="dropdown-menu-wrapper">
                         <div className="search-filter">
