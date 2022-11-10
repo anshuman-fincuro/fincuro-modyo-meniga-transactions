@@ -17,14 +17,18 @@
     display: block;
 }
 
-.select-placeholder:after{
+.select-placeholder .selectCloseIcon{
+    /*display: inline-block;*/
+    float: right;
+}
+/* .select-placeholder:after{
     content: "\EA4F";
     display: inline-block;
     position: absolute;
     right: 12px;
     top: 0px;
     font-size: 14px;
-}
+} */
 
 .select-list{
     position: relative;
@@ -100,4 +104,23 @@
   
   .checkboxWrapper input[type="checkbox"], .accordianHeaderCheckbox input[type="checkbox"]{
     margin-right: 10px;
+  }
+
+  .selected__category__list{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .selected__category__list .selected__category__name{
+    margin: 6px 6px 0 0;
+    line-height: 30px;
+    max-width: calc(100% - 8px);
+    display: inline-block;
+  }
+
+  .category__remove_button .button-label{
+    font-size: 12px;
+    margin-right: 12px;
   }

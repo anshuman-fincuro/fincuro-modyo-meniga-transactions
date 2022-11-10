@@ -4,10 +4,11 @@ import { setCategoryFilterData } from "../store/actions/component-action";
 import { connect } from "react-redux";
 import { Dropdown, Accordion, useAccordionButton } from "react-bootstrap";
 import "./CategoriesDropdown.css";
-import { mdiChevronDown, mdiChevronUp } from "@mdi/js";
+import { mdiChevronDown, mdiChevronUp, mdiClose } from "@mdi/js";
 import Icon from "@mdi/react";
+import Button from "react-bootstrap/Button";
 
-function CustomToggle({ children, eventKey }) {
+function CustomToggle({eventKey }) {
   const [open, setOpen] = React.useState(false);
   const decoratedOnClick = useAccordionButton(eventKey, (e) => {
     setOpen(!open);
@@ -40,17 +41,33 @@ class CategoriesDropdown extends Component {
     this.state = {
       isOpen: false,
       selectedCategories: [],
+      allChildCategories: [],
+      searchText: "",
+      search:  false
     };
     this.wrapper = React.createRef();
     this.selectClick = this.selectClick.bind(this);
     this.outsideClick = this.outsideClick.bind(this);
     this.parentCatClick = this.parentCatClick.bind(this);
     this.childCatClick = this.childCatClick.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
+    this.onInputchange = this.onInputchange.bind(this);
+    this.categoryChange = this.categoryChange.bind(this);
   }
 
   async componentDidMount() {
     document.addEventListener("mousedown", this.outsideClick);
     await this.props.setCategoryFilter(this.props.token);
+    let categories = this.props.categoryFilterData;
+    if (categories.length > 0) {
+      const allChildCats = categories.reduce((acc, item) => {
+        if (item.children && item.children.length > 0) {
+          acc = [...acc, ...item.children];
+        }
+        return acc;
+      }, []);
+      this.setState({ allChildCategories: allChildCats });
+    }
   }
 
   componentWillUnmount() {
@@ -97,17 +114,19 @@ class CategoriesDropdown extends Component {
     }
   }
 
+ 
   childCatClick(event, parentCatId, childCatId) {
     event.stopPropagation();
     if (!event.target.checked) {
-      let array = [...this.state.selectedCategories];
-      let index = array.indexOf(childCatId);
-      if (index > -1) {
-        array.splice(index, 1);
-        this.setState({ selectedCategories: [...array] }, () => {
-          this.props.onChange(this.state.selectedCategories);
-        });
-      }
+      // let array = [...this.state.selectedCategories];
+      // let index = array.indexOf(childCatId);
+      // if (index > -1) {
+      //   array.splice(index, 1);
+      //   this.setState({ selectedCategories: [...array] }, () => {
+      //     this.props.onChange(this.state.selectedCategories);
+      //   });
+      // }
+      this.removeCategory(childCatId);
     } else {
       const cat = this.props.categoryFilterData.find(
         (item) => item.id == parentCatId
@@ -133,8 +152,81 @@ class CategoriesDropdown extends Component {
     }
   }
 
+  removeCategory(id) {
+    let array = [...this.state.selectedCategories];
+    let index = array.indexOf(id);
+    if (index > -1) {
+      array.splice(index, 1);
+      this.setState({ selectedCategories: [...array] }, () => {
+        this.props.onChange(this.state.selectedCategories);
+      });
+    }
+  }
+
+  getCategoryName(id) {
+    const { allChildCategories } = this.state;
+    const findObj = allChildCategories.find((item) => item.id === id);
+    if (findObj && findObj.name) {
+      return findObj.name;
+    }
+  }
+
+  checkParent(category) {
+    if (category && category.children && category.children.length > 0) {
+      return category.children.every((item) =>
+        this.state.selectedCategories.includes(item.id)
+      );
+    }
+    return false;
+  }
+
+  checkParentIndeterminate(category) {
+    if (
+      category.children.every((item) =>
+        this.state.selectedCategories.includes(item.id)
+      )
+    ) {
+      return false;
+    } else if (
+      category.children.some((item) =>
+        this.state.selectedCategories.includes(item.id)
+      )
+    ) {
+      return true;
+    } else return false;
+  }
+
+  onInputchange(event) {
+    this.setState(
+      {
+        [event.target.name]: event.target.value,
+      },
+      () => {
+        if (this.state.searchText.length > 0) this.setState({ search: true });
+        else this.setState({ search: false });
+      }
+    );
+  }
+
+  categoryChange(event,id){
+      if(event.target.checked){
+        this.setState( (prevState) => ({ selectedCategories: [...prevState.selectedCategories, id] }), ()=>{
+          this.props.onChange(this.state.selectedCategories);
+        })
+      }else{
+        this.removeCategory(id);
+      }
+  }
+
   render() {
     const categoryFilterData = this.props.categoryFilterData;
+    const {
+      selectedCategories,
+      allChildCategories,
+      isOpen,
+      search,
+      searchText,
+    } = this.state;
     return (
       <>
         <label htmlFor="inputEmail4">Category</label>
@@ -144,34 +236,48 @@ class CategoriesDropdown extends Component {
               <span className="placeholder-text">
                 {this.props.placeholder ? this.props.placeholder : ""}
               </span>
+              <div className="selectCloseIcon">
+                {isOpen ? (
+                  <Icon path={mdiChevronUp} size={1.5} />
+                ) : (
+                  <Icon path={mdiChevronDown} size={1.5} />
+                )}
+              </div>
             </div>
-            {this.state.isOpen && (
+            {isOpen && (
               <div className="select-list">
                 <div className="select-container">
                   <div className="search">
-                    <input type="text" placeholder="Search" />
+                    <input
+                      type="text"
+                      name="searchText"
+                      placeholder="Search"
+                      value={this.state.searchText}
+                      onChange={this.onInputchange}
+                    />
                   </div>
-                  <div className="select-options">
-                    <Dropdown>
+                  {!search ? (
+                    <div className="select-options">
                       {categoryFilterData &&
                         categoryFilterData.map((categ, index) => {
                           return categ.children && categ.children.length > 0 ? (
-                            <Accordion>
+                            <Accordion key={index}>
                               <div className="accordianHeader">
                                 <div className="accordianHeaderCheckbox">
                                   <Form.Check
                                     type="checkbox"
                                     id={`default-${categ.name}`}
                                     label={categ.name}
-                                    className="Checkbox-text"
+                                    className={
+                                      "Checkbox-text " +
+                                      (this.checkParentIndeterminate(categ)
+                                        ? "indeterminate"
+                                        : "")
+                                    }
                                     onChange={(event) =>
                                       this.parentCatClick(event, categ.id)
                                     }
-                                    checked={categ.children.every((item) =>
-                                      this.state.selectedCategories.includes(
-                                        item.id
-                                      )
-                                    )}
+                                    checked={this.checkParent(categ)}
                                   />
                                 </div>
                                 <div className="accordianToggle">
@@ -198,7 +304,7 @@ class CategoriesDropdown extends Component {
                                         type="checkbox"
                                         id={`default-${children.name}`}
                                         label={children.name}
-                                        checked={this.state.selectedCategories.includes(
+                                        checked={selectedCategories.includes(
                                           children.id
                                         )}
                                       />
@@ -208,17 +314,60 @@ class CategoriesDropdown extends Component {
                               </Accordion.Collapse>
                             </Accordion>
                           ) : (
-                            <Dropdown.Item key={categ.id} eventKey={categ.name}>
-                              {categ.name}
-                            </Dropdown.Item>
+                            <Dropdown>
+                              <Dropdown.Item
+                                key={categ.id}
+                                eventKey={categ.name}
+                              >
+                                {categ.name}
+                              </Dropdown.Item>
+                            </Dropdown>
                           );
                         })}
-                    </Dropdown>
-                  </div>
+                    </div>
+                  ) : (
+                    <div className="select-options">
+                      {allChildCategories
+                        .filter(({ name }) =>
+                          name.toLowerCase().includes(searchText.toLowerCase())
+                        )
+                        .map((cat, index) => (
+                          <div className="checkboxWrapper" key={index}>
+                            <Form.Check
+                              onChange={(event)=> this.categoryChange(event, cat.id)}
+                              className="Checkbox-text"
+                              type="checkbox"
+                              id={`default-${cat.name}`}
+                              label={cat.name}
+                              checked={selectedCategories.includes(cat.id)}
+                            />
+                          </div>
+                        ))}
+                    </div>
+                  )}
                 </div>
               </div>
             )}
           </div>
+        </div>
+
+        <div className="selected__category__list">
+          {selectedCategories &&
+            selectedCategories.length > 0 &&
+            selectedCategories.map((id, index) => (
+              <div className="selected__category__name" key={index}>
+                <Button
+                  variant="secondary"
+                  className="category__remove_button"
+                  onClick={() => this.removeCategory(id)}
+                >
+                  <span className="button-label">
+                    {this.getCategoryName(id)}
+                  </span>
+                  <Icon path={mdiClose} size={1} />
+                </Button>
+              </div>
+            ))}
         </div>
       </>
     );
