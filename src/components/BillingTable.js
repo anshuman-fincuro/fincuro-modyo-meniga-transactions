@@ -5,6 +5,7 @@ import "./../App.css";
 import { mdiCardAccountDetails } from "@mdi/js";
 import { mdiAlertCircle } from "@mdi/js";
 import { connect } from "react-redux";
+import { setCategoryFilterData } from "../store/actions/component-action";
 import CustomDropdown from "./shared/CustomDropdown";
 class BillingTable extends Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class BillingTable extends Component {
       amountFilterValue: this.props.amountFilterValue,
       categoriesData: this.props.categorydata,
       showCategories: 0,
-      categoryFilterData: this.props.categoryFilterData,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.defaultDropdownSelect = this.defaultDropdownSelect.bind(this);
@@ -32,7 +32,9 @@ class BillingTable extends Component {
     );
     return defaultSelectVal[0].name;
   }
-
+  async componentDidMount() {
+    await this.props.setCategoryFilter(this.props.token);
+  }
   render() {
     return (
       <div>
@@ -74,7 +76,7 @@ class BillingTable extends Component {
                           </div>
                           <div className="billingTable-right-dropdown">
                           <CustomDropdown 
-                            items={this.state.categoryFilterData}
+                            items={this.props.categoryFilterData}
                             detectedCategories={item.detectedCategories}
                             defaultSelect={this.defaultDropdownSelect(item.categoryId)}
                             handleSelection={(value)=>{
@@ -112,7 +114,13 @@ class BillingTable extends Component {
   }
 }
 const mapStateToProps = (state) => ({
+  token: state.authReducer.token,
   categoryFilterData: state.componentReducer.categoryFilterData,
 });
 
-export default connect(mapStateToProps)(BillingTable);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCategoryFilter: (token) => dispatch(setCategoryFilterData(token)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BillingTable);
