@@ -11,6 +11,7 @@
     "@meniga/charts": "^5.0.0-alpha.0",
     "@meniga/ui": "^4.12.0",
     "@modyo/cli": "^3.1.25",
+    "@react-google-maps/api": "^2.16.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

@@ -1378,6 +1378,11 @@ button.react-datepicker__close-icon.fincuro_calender_clear::after{
 .fincuro_calender .react-datepicker__day--selected, .fincuro_calender .react-datepicker__day--keyboard-selected{
   background-color: #2b8000;
 }
+
+.map__container{
+  width: 100%;
+  height: 500px;
+}
 /***** #End - Writen by - Maantu Das ***/
 
 

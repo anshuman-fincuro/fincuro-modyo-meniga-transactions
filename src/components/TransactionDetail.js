@@ -15,6 +15,10 @@ import {
 } from "@mdi/js";
 import LineCharts from "./LineCharts";
 import ChartDateFilter from "./ChartDateFilter";
+import Map from "./shared/Map/Map";
+import axios from 'axios';
+const API_URL = process.env.REACT_APP_BACKEND_URL;
+
 
 class TransactionDetail extends Component {
   constructor(props) {
@@ -25,9 +29,22 @@ class TransactionDetail extends Component {
       selectedTransaction: this.props.selectedTransaction,
       selectedTransactionGroup: this.props.selectedTransactionGroup,
       categoriesData: this.props.categorydata,
-      
+      merchantDetails : {}
     };
     this.handleChange = this.handleChange.bind(this) 
+  }
+
+  componentDidMount(){
+    const { selectedTransaction, token } = this.props;
+    if(selectedTransaction && selectedTransaction.merchantId){
+      axios
+      .get(`${API_URL}/merchants/${selectedTransaction.merchantId}?token=Bearer ${token}`)
+      .then((response) => {
+        if (response.status === 200) {
+         this.setState( { merchantDetails: response.data.data})
+        }
+      });
+    }
   }
 
   handleChange(e, transactionID){
@@ -48,8 +65,9 @@ class TransactionDetail extends Component {
         ],
       },
     ];
+
+    const { merchantDetails } = this.state;
     
-     
     return (
       <div>
         {this.state.showDetails === true ? (
@@ -448,9 +466,18 @@ class TransactionDetail extends Component {
                 </div>
               </div>
             </div>
-            <div className="map-wapper">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.411479639982!2d76.8786641141025!3d8.556371698569546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05befa89b02a81%3A0x4a322bab1d9a44b4!2sFINCuro%20Solutions%20Private%20Limited!5e0!3m2!1sen!2sin!4v1665485375770!5m2!1sen!2sin"></iframe>
-            </div>
+            {
+              merchantDetails && merchantDetails.address && merchantDetails.address.latitude  &&
+              merchantDetails && merchantDetails.address && merchantDetails.address.longitude && 
+              (
+                <div className="map-wapper">
+                <Map 
+                  latitude={merchantDetails.address.latitude} 
+                  longitude={merchantDetails.address.longitude} />
+              </div>
+              )
+            }
+            
           </div>
         ) : (
           <div />
