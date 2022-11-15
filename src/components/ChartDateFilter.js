@@ -19,6 +19,9 @@ handleChange(e){
   componentDidMount() {
     this.setState({ dateDropDown: this.getdateRange() });
   }
+  componentDidUpdate(){
+    console.log('spendingData...', this.props.spendingData)
+  }
  
   getdateRange() {
     const dates = [
@@ -119,6 +122,7 @@ handleChange(e){
 }
 const mapStateToProps = (state) => ({
     token: state.authReducer.token,
+    spendingData: state.componentReducer.spendingData,
     
   });
 const mapDispatchToProps = (dispatch,) => {

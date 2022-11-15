@@ -56,9 +56,53 @@ class LineCharts extends Component {
         })
       }
     }
+  } 
+  
+  componentDidUpdate(prevProps) {
+    if (prevProps.spendingData !== this.props.spendingData) {
+      this.setState({ data: []})
+    }
+    if(this.props.spendingData.length !== 0) {
+      console.log(this.props.spendingData.length)
+      const dates = this.props.spendingData.map(x => x.originalDate);
+      const groups = dates.reduce((acc, date) => {
+        const yearWeek = `${moment(new Date(date)).year()}-${moment(new Date(date)).week()}`;
+        if (!acc[yearWeek]) {
+          acc[yearWeek] = [];
+        }
+        acc[yearWeek].push(date);
+        return acc;
+      }, {});
 
+      const lineGraphData = [];
+      let lineCount = 0;
+      for (const item in groups) {
+        let total = 0;
+        const uniqueDates = [...new Set(groups[item])];
+        for(const every of uniqueDates){
+          const filteredData = this.props.spendingData.filter(x => x.originalDate === every);
+          for(const every of filteredData) {
+            total = total + every.carbonFootprint;
+          }
+        }
+        lineGraphData.push({
+          name: Number(item.substring(5,7)),
+          total: Number(Number(total / 1000).toFixed(0))
+        })
+
+        lineCount = lineCount + 1;
+        if(lineCount > 4) break;
+      }
+
+      const sortedLineGraphData = lineGraphData.sort((a, b) => { return a.name - b.name })
+
+      if(this.state.data.length === 0) {
+        this.setState({ data: 
+          sortedLineGraphData.map(x => { return { name: `Week ${x.name}`, Total: x.total } })
+        })
+      }
+    }
   }
-
 
   render() {
     return (

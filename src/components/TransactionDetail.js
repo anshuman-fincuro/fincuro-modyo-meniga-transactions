@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Icon from "@mdi/react";
+import {setSpendingData} from "../store/actions/component-action";
 import "./../style/Base.css";
 import "./../App.css";
 import {
@@ -44,6 +45,12 @@ class TransactionDetail extends Component {
          this.setState( { merchantDetails: response.data.data})
         }
       });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.data !== this.props.data) {
+      console.log('Next up mounted')
     }
   }
 
@@ -497,4 +504,9 @@ const mapStateToProps = (state) => ({
   categoryFilterData: state.componentReducer.categoryFilterData,
 });
 
-export default connect(mapStateToProps) (TransactionDetail);
+const mapDispatchToProps = (dispatch,) => {
+  return {
+      setSpendingData: (token,value) => dispatch(setSpendingData(token,{chartDateRange:value})),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(TransactionDetail);
