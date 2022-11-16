@@ -328,17 +328,17 @@ class TransactionDetail extends Component {
             </div>
             <div className="linechart-wrapper">
               <h2 className="heading">Total expenses this period</h2>
+              <div className="TransactionOverviewChart-tabs-wrapper">                
               <div className="TransactionOverviewChart-dropdown">
               <ChartDateFilter></ChartDateFilter>
               </div>
-              <div className="TransactionOverviewChart-tabs-wrapper">
                 <div>
                   <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
                       <a
                         className="nav-item nav-link active"
                         id="nav-home-tab"
-                        data-toggle="tab"
+                        data-bs-toggle="tab"
                         href="#nav-home"
                         role="tab"
                         aria-controls="nav-home"
@@ -350,7 +350,7 @@ class TransactionDetail extends Component {
                   </nav>
                   <div className="tab-content" id="nav-tabContent">
                     <div
-                      className="tab-pane fade show active"
+                      className="tab-pane active"
                       id="nav-home"
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
