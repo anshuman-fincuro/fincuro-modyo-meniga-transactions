@@ -20,8 +20,8 @@ function AccountListing({ activeAccount }) {
 
             <input
               type="checkbox"
-              id="mycheck"
-              checked={activeAccount === index ? "active" : ""}
+              id={account}
+              checked={ activeAccount === index }
               readOnly
             ></input>
             <span className="checkbox-text ">{account}</span>
