@@ -30,7 +30,8 @@ const SearchTextFilter = () => {
   };
 
   React.useEffect(() => {
-    getSuggestions(searchText);
+    if(searchText.length > 0)
+        getSuggestions(searchText);
   }, [searchText]);
 
   return (
