@@ -12,6 +12,7 @@ import DateDropdown from "./DateDropdown";
 import { connect } from "react-redux";
 import { setSpendingData } from "../store/actions/component-action";
 import { debounce } from "lodash";
+import SearchTextFilter from "./shared/SearchTextFilter/SearchTextFilter";
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class BillingFilter extends Component {
         this.props.setSpendingData(this.props.token, this.state);
       });
   }
+
   filterbyAmount(value) {
     this.setState({ amountType: value }, () => {
       this.props.setSpendingData(this.props.token, this.state);
@@ -92,7 +94,7 @@ class BillingFilter extends Component {
       <div className="billingFilter-wrapper">
         <Form className="billing-form-wrap">
           <div className="form-row">
-            <div className="search-icon-container form-group col-md-12">
+            {/* <div className="search-icon-container form-group col-md-12">
               <Form.Control
                 type="text"
                 className="search-bar"
@@ -110,7 +112,8 @@ class BillingFilter extends Component {
                   color="#dddddd"
                 />
               </span>
-            </div>
+            </div> */}
+            <SearchTextFilter />
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
