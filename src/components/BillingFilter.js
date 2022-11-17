@@ -1,5 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import "bootstrap/dist/css/bootstrap.css";
+
 import React, { Component } from "react";
 import "./../style/Base.css";
 import "./../App.css";
@@ -8,6 +7,7 @@ import Icon from "@mdi/react";
 import { mdiCardsPlayingSpade, mdiMagnify } from "@mdi/js";
 import BillingTable from "./BillingTable";
 import CategoriesDropdown from "./CategoriesDropdown";
+import AccountListing from "./shared/AccountsListing/AccountListing";
 import DateDropdown from "./DateDropdown";
 import { connect } from "react-redux";
 import { setSpendingData } from "../store/actions/component-action";
@@ -31,7 +31,7 @@ class BillingFilter extends Component {
       amountTo: null,
       onlyUncertain: false,
       categoryIds: null,
-      searchText: null,
+      searchText: '',
     };
 
     this.categoryChange = this.categoryChange.bind(this);
@@ -45,7 +45,6 @@ class BillingFilter extends Component {
       });
   }
   filterbyAmount(value) {
-    //this.props.changetransactionDetails(true, value);
     this.setState({ amountType: value }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
@@ -124,7 +123,6 @@ class BillingFilter extends Component {
                   aria-label="option 1"
                   onChange={this.uncertainHandleChange.bind(this)}
                 />
-                {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
                 <span className="checkbox-text">
                   Only uncertain categorization
                 </span>
@@ -163,60 +161,7 @@ class BillingFilter extends Component {
             ></DateDropdown>
           </div>
           <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="inputEmail4">Account</label>
-              <div className="checkboxLabel-wrap">
-                <span className="arrow-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                      fill={"#706e6e"}
-                      d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"
-                    />
-                  </svg>
-                </span>
-
-                <input
-                  type="checkbox"
-                  id="mycheck"
-                  checked={this.props.activeAccount === 0 ? "active" : ""}
-                ></input>
-                <span className="checkbox-text ">credit</span>
-              </div>
-              <div className="checkboxLabel-wrap">
-                <span className="arrow-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                      fill={"#706e6e"}
-                      d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"
-                    />
-                  </svg>
-                </span>
-
-                <input
-                  type="checkbox"
-                  aria-label="option 10"
-                  checked={this.props.activeAccount === 1 ? "active" : ""}
-                />
-                <span className="checkbox-text">Current</span>
-              </div>
-              <div className="checkboxLabel-wrap">
-                <span className="arrow-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                      fill={"#706e6e"}
-                      d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"
-                    />
-                  </svg>
-                </span>
-                {/* <Form.Check aria-label="option 1"  /> */}
-                <input
-                  type="checkbox"
-                  aria-label="option 10"
-                  checked={this.props.activeAccount === 2 ? "active" : ""}
-                />
-                <span className="checkbox-text">Savings</span>
-              </div>
-            </div>
+              <AccountListing activeAccount={this.props.activeAccount} />
           </div>
         </Form>
       </div>
