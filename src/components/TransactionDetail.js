@@ -17,6 +17,7 @@ import {
 import LineCharts from "./LineCharts";
 import ChartDateFilter from "./ChartDateFilter";
 import Map from "./shared/Map/Map";
+import TransactionActions from './shared/TransactionActions/TransactionActions';
 import axios from 'axios';
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -185,99 +186,9 @@ class TransactionDetail extends Component {
                     </div>
                   </div>
                   {/*  */}
+
                   <div className="transactionActionList">
-                    <div className="transactionActionList-list">
-                      <div className="transactionActionList-item">
-                        <button
-                          className="transactionActionList-btn"
-                          type="button"
-                        >
-                          <span className="Button-label">
-                            <Icon
-                              path={mdiBank}
-                              size={1.25}
-                              horizontal
-                              vertical
-                              rotate={180}
-                              color="#fff"
-                            />
-                            Change category
-                          </span>
-                        </button>
-                      </div>
-                      <div className="transactionActionList-item">
-                        <button
-                          className="transactionActionList-btn"
-                          type="button"
-                        >
-                          <span className="Button-label">
-                            <Icon
-                              path={mdiCalendarMonthOutline}
-                              size={1.25}
-                              horizontal
-                              vertical
-                              rotate={180}
-                              color="#fff"
-                            />
-                            Change date
-                          </span>
-                        </button>
-                      </div>
-                      <div className="transactionActionList-item">
-                        <button
-                          className="transactionActionList-btn"
-                          type="button"
-                        >
-                          <span className="Button-label">
-                            <Icon
-                              path={mdiUnfoldMoreVertical}
-                              size={1.25}
-                              horizontal
-                              vertical
-                              rotate={180}
-                              color="#fff"
-                            />
-                            Split
-                          </span>
-                        </button>
-                      </div>
-                      <div className="transactionActionList-item">
-                        <button
-                          className="transactionActionList-btn"
-                          type="button"
-                        >
-                          <span className="Button-label">
-                            <Icon
-                              path={mdiCogOutline}
-                              size={1.25}
-                              horizontal
-                              vertical
-                              rotate={180}
-                              color="#fff"
-                            />
-                            Rule
-                          </span>
-                        </button>
-                      </div>
-                      <div className="transactionActionList-item">
-                        <button
-                          className="transactionActionList-btn"
-                          type="button"
-                        >
-                          <span className="Button-label">
-                            <Icon
-                              path={mdiChat}
-                              size={1.25}
-                              horizontal
-                              vertical
-                              rotate={180}
-                              color="#fff"
-                            />
-                            Add comment
-                          </span>
-                        </button>
-                      </div>
-                    </div>
+                    <TransactionActions />
                   </div>
                 </div>
                 
