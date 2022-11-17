@@ -11,6 +11,7 @@ import CategoriesDropdown from "./CategoriesDropdown";
 import DateDropdown from "./DateDropdown";
 import { connect } from "react-redux";
 import { setSpendingData } from "../store/actions/component-action";
+import { debounce } from "lodash";
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -34,10 +35,10 @@ class BillingFilter extends Component {
     };
 
     this.categoryChange = this.categoryChange.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    console.log("prevProps", prevProps);
     if (prevProps.activeAccount !== this.props.activeAccount)
       this.setState({ activeAccount: this.props.activeAccount }, () => {
         this.props.setSpendingData(this.props.token, this.state);
@@ -51,7 +52,6 @@ class BillingFilter extends Component {
   }
 
   dateOnChange(e) {
-    console.log(e);
     let dateFilter = {};
     if (e) {
       dateFilter = { dateFilter: e };
@@ -66,12 +66,14 @@ class BillingFilter extends Component {
   }
 
   onTextChange(e) {
-    if (e.target.value) {
-      this.setState({ searchText: e.target.value }, () => {
-        this.props.setSpendingData(this.props.token, this.state);
-      });
-    }
+    this.setState({ searchText: e.target.value }, () => {
+      this.debounceChange();
+    });
   }
+
+  debounceChange = debounce(() => {
+    this.props.setSpendingData(this.props.token, this.state);
+  }, 1000);
 
   uncertainHandleChange(event) {
     const flag = event.target.value == "on" ? true : false;
@@ -97,7 +99,7 @@ class BillingFilter extends Component {
                 className="search-bar"
                 placeholder="Search..."
                 value={this.state.searchText}
-                onChange={this.onTextChange.bind(this)}
+                onChange={this.onTextChange}
               />
               <span className="search-icon">
                 <Icon
