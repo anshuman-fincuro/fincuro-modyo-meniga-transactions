@@ -1,6 +1,7 @@
 .custom-dropdown-wrapper .dropdown-menu {
     width: max-content;
     padding: 0.75rem 0.25rem;
+    min-width: 220px;
 }
 
 .custom-dropdown-wrapper .dropdown-toggle,
