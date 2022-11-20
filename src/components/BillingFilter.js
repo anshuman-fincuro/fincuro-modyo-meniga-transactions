@@ -66,9 +66,9 @@ class BillingFilter extends Component {
     }
   }
 
-  onTextChange(e) {
-    this.setState({ searchText: e.target.value }, () => {
-      this.debounceChange();
+  onTextChange(data) {
+    this.setState({ searchText: data }, () => {
+      this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
@@ -94,26 +94,7 @@ class BillingFilter extends Component {
       <div className="billingFilter-wrapper">
         <Form className="billing-form-wrap">
           <div className="form-row">
-            {/* <div className="search-icon-container form-group col-md-12">
-              <Form.Control
-                type="text"
-                className="search-bar"
-                placeholder="Search..."
-                value={this.state.searchText}
-                onChange={this.onTextChange}
-              />
-              <span className="search-icon">
-                <Icon
-                  path={mdiMagnify}
-                  size={1.5}
-                  horizontal
-                  vertical
-                  rotate={180}
-                  color="#dddddd"
-                />
-              </span>
-            </div> */}
-            <SearchTextFilter />
+            <SearchTextFilter onSearchChange={(event)=> this.onTextChange(event)} />
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
@@ -135,7 +116,7 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
               <label htmlFor="inputEmail4">Amount</label>
-              <Form.Select
+              {/* <Form.Select
                 aria-label="Default select"
                 onChange={(e) => {
                   this.filterbyAmount(e.target.value);
@@ -143,8 +124,13 @@ class BillingFilter extends Component {
                     amountFilterValue={e.target.value}
                   ></BillingTable>;
                 }}
+              > */}
+
+                <Form.Select
+                aria-label="Default select"
+                onChange={(e) => this.filterbyAmount(e.target.value)}
               >
-                <option>Select type</option>
+                <option value=''>Select type</option>
                 <option value="0">Expenses</option>
                 <option value="1">Income</option>
               </Form.Select>
