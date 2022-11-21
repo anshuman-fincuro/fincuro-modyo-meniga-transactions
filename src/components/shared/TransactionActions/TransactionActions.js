@@ -8,15 +8,18 @@ import {
   mdiCogOutline,
   mdiChat,
 } from "@mdi/js";
+import Modal from "../Modal/Modal";
 
 const TransactionActions = () => {
 
     const [activeModal, setActiveModal] = React.useState('');
+    const [ isOpen, setIsOpen] = React.useState(true);
 
   return (
+    <>
       <div className="transactionActionList-list">
         <div className="transactionActionList-item">
-          <button className="transactionActionList-btn" type="button" onClick={()=>setActiveModal('changeCategory')}>
+          <button className="transactionActionList-btn" type="button" onClick={()=> { setActiveModal('changeCategory'); setIsOpen(true) } }>
             <span className="Button-label">
               <Icon
                 path={mdiBank}
@@ -91,6 +94,10 @@ const TransactionActions = () => {
           </button>
         </div>
       </div>
+      <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} >
+      sfdsfdsfdfjdsklj
+      </Modal>
+      </>
   );
 };
 export default TransactionActions;
