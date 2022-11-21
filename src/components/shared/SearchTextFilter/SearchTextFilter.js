@@ -1,11 +1,11 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
-import { mdiMagnify } from "@mdi/js";
-import { debounce } from "lodash";
+import { mdiMagnify, mdiLoading } from "@mdi/js";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import "./SearchTextFilter.css";
+import useDebounce from "./../../../hooks/useDebounce";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -15,8 +15,10 @@ const SearchTextFilter = ({ onSearchChange }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { token } = useSelector((store) => store.authReducer);
   const ref = React.useRef(null);
+  const [loading, setLoading] = React.useState(false);
 
   const getSuggestions = (searchText) => {
+    setLoading(true);
     axios
       .get(
         `${API_URL}/transactions/suggestions?token=Bearer ${token}&text=${searchText}&orderBy=ByText`
@@ -27,6 +29,12 @@ const SearchTextFilter = ({ onSearchChange }) => {
         } else {
           setSuggestions([]);
         }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -36,21 +44,23 @@ const SearchTextFilter = ({ onSearchChange }) => {
     }
   };
 
-  function onSuggestionClick(item){
+  function onSuggestionClick(item) {
     setIsOpen(false);
     onSearchChange(item.text);
-  };
+  }
 
-  const highLight = (val)=> val.replace(new RegExp(searchText, 'gi'), (str)=> `<u>${str}</u>`);
-  
+  const highLight = (val) =>
+    val.replace(new RegExp(searchText, "gi"), (str) => `<u>${str}</u>`);
+
+  const debouncedSearchTerm = useDebounce(searchText, 1000);
 
   React.useEffect(() => {
-    if (searchText.length > 0) {
-      getSuggestions(searchText);
+    if (debouncedSearchTerm) {
+      getSuggestions(debouncedSearchTerm);
     } else {
       setSuggestions([]);
     }
-  }, [searchText]);
+  }, [debouncedSearchTerm]);
 
   React.useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
@@ -72,14 +82,26 @@ const SearchTextFilter = ({ onSearchChange }) => {
             onChange={(event) => setSearchText(event.target.value)}
           />
           <span className="search-icon">
-            <Icon
-              path={mdiMagnify}
-              size={1.5}
-              horizontal
-              vertical
-              rotate={180}
-              color="#dddddd"
-            />
+            {loading ? (
+              <Icon
+                path={mdiLoading}
+                size={1.5}
+                horizontal
+                vertical
+                rotate={180}
+                color="#dddddd"
+                spin
+              />
+            ) : (
+              <Icon
+                path={mdiMagnify}
+                size={1.5}
+                horizontal
+                vertical
+                rotate={180}
+                color="#dddddd"
+              />
+            )}
           </span>
         </div>
         {isOpen && suggestions.length > 0 && (
@@ -91,7 +113,10 @@ const SearchTextFilter = ({ onSearchChange }) => {
                     className="search-suggestion-item"
                     onClick={() => onSuggestionClick(item)}
                   >
-                    <div className="suggestion-text" dangerouslySetInnerHTML={{ __html: highLight(item.text) }}></div>
+                    <div
+                      className="suggestion-text"
+                      dangerouslySetInnerHTML={{ __html: highLight(item.text) }}
+                    ></div>
                     <div className="suggestion-type">{item.type}</div>
                   </div>
                 </div>
