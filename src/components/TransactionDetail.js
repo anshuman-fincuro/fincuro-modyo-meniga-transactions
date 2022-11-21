@@ -18,6 +18,7 @@ import LineCharts from "./LineCharts";
 import ChartDateFilter from "./ChartDateFilter";
 import Map from "./shared/Map/Map";
 import TransactionActions from './shared/TransactionActions/TransactionActions';
+import CustomDropdown from "./shared/CustomDropdown";
 import axios from 'axios';
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -26,6 +27,7 @@ class TransactionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+       data: this.props.transactionData,
       spendingData: this.props.spendingData,
       showDetails: this.props.showDetails,
       selectedTransaction: this.props.selectedTransaction,
@@ -33,9 +35,24 @@ class TransactionDetail extends Component {
       categoriesData: this.props.categorydata,
       merchantDetails : {}
     };
-    this.handleChange = this.handleChange.bind(this) 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    
+    this.defaultDropdownSelect = this.defaultDropdownSelect.bind(this);
   }
-
+  handleInputChange(value) {
+    console.log('Custom Selected Drop Val', value);
+    if (value === "Show All Categories") {
+      console.log("value set to true");
+      this.setState({ showCategories: value });
+    }
+  }
+  defaultDropdownSelect(val) {
+    let defaultSelectVal = this.state.categoriesData.filter(
+      data => (data.id === val)
+    );
+    return defaultSelectVal[0].name;
+  }
   componentDidMount(){
     const { selectedTransaction, token } = this.props;
     if(selectedTransaction && selectedTransaction.merchantId){
@@ -141,28 +158,15 @@ class TransactionDetail extends Component {
                                           />
                                         </span>
                                         <span className="billingTable-right-dropdown transaction-detail-dropdown">
-                                        {this.state.showCategories === this.state.selectedTransaction.id ? 
-                                                  ( <select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }}  >
-                                                  {this.props.categoryFilterData.map((allCategory, i) => (              
-                <optgroup label={allCategory.name} onClick={(event) => event.stopPropagation()}> 
-                {allCategory.children.map((subCategory) => (<option value={subCategory.name}>{subCategory.name}</option>))}
-                
-                 </optgroup>
-            ))}      
-                  
-                                                    </select>
-                                                
-                                                    ) : (<select onClick={(event) => event.stopPropagation()} style={{ zIndex: '10' }} value={this.state.selectValue} onChange={(e) => {
-                                                        this.handleChange(e, this.state.selectedTransaction.id)}}>
-                                                    {(this.state.selectedTransaction.detectedCategories.map((categId) => (
-            this.props.categorydata.filter(detectid => detectid.id === categId.categoryId)                                               
-            ))).map((categ) => (
-                <option value={categ[0].name}>{categ[0].name}</option>
-          
- )) }
- <option>Show All Categories</option>
-
-                                                    </select> )} 
+                                        <CustomDropdown 
+                                          items={this.props.categoryFilterData}
+                                          detectedCategories={this.state.selectedTransaction.detectedCategories}
+                                          defaultSelect={this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
+                                          handleSelection={(value)=>{
+                                              this.handleInputChange(value)
+                                          }}                            
+                                          categorydata={this.props.categorydata}
+                                          />                                        
                                         </span>
                                       </div>
                                     </span>
@@ -239,17 +243,17 @@ class TransactionDetail extends Component {
             </div>
             <div className="linechart-wrapper">
               <h2 className="heading">Total expenses this period</h2>
+              <div className="TransactionOverviewChart-tabs-wrapper">                
               <div className="TransactionOverviewChart-dropdown">
               <ChartDateFilter></ChartDateFilter>
               </div>
-              <div className="TransactionOverviewChart-tabs-wrapper">
                 <div>
                   <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
                       <a
                         className="nav-item nav-link active"
                         id="nav-home-tab"
-                        data-toggle="tab"
+                        data-bs-toggle="tab"
                         href="#nav-home"
                         role="tab"
                         aria-controls="nav-home"
@@ -261,7 +265,7 @@ class TransactionDetail extends Component {
                   </nav>
                   <div className="tab-content" id="nav-tabContent">
                     <div
-                      className="tab-pane fade show active"
+                      className="tab-pane active"
                       id="nav-home"
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"

@@ -1,5 +1,4 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import "bootstrap/dist/css/bootstrap.css";
+
 import React, { Component } from "react";
 import "./../style/Base.css";
 import "./../App.css";
@@ -7,10 +6,13 @@ import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
 import { mdiCardsPlayingSpade, mdiMagnify } from "@mdi/js";
 import BillingTable from "./BillingTable";
-import CategoriesDropdown from "./CategoriesDropdown";
+import CategoriesDropdown from "./shared/CategoriesDropdown/CategoriesDropdown";
+import AccountListing from "./shared/AccountsListing/AccountListing";
 import DateDropdown from "./DateDropdown";
 import { connect } from "react-redux";
 import { setSpendingData } from "../store/actions/component-action";
+import { debounce } from "lodash";
+import SearchTextFilter from "./shared/SearchTextFilter/SearchTextFilter";
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -30,28 +32,27 @@ class BillingFilter extends Component {
       amountTo: null,
       onlyUncertain: false,
       categoryIds: null,
-      searchText: null,
+      searchText: '',
     };
 
     this.categoryChange = this.categoryChange.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    console.log("prevProps", prevProps);
     if (prevProps.activeAccount !== this.props.activeAccount)
       this.setState({ activeAccount: this.props.activeAccount }, () => {
         this.props.setSpendingData(this.props.token, this.state);
       });
   }
+
   filterbyAmount(value) {
-    //this.props.changetransactionDetails(true, value);
     this.setState({ amountType: value }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
   dateOnChange(e) {
-    console.log(e);
     let dateFilter = {};
     if (e) {
       dateFilter = { dateFilter: e };
@@ -65,13 +66,15 @@ class BillingFilter extends Component {
     }
   }
 
-  onTextChange(e) {
-    if (e.target.value) {
-      this.setState({ searchText: e.target.value }, () => {
-        this.props.setSpendingData(this.props.token, this.state);
-      });
-    }
+  onTextChange(data) {
+    this.setState({ searchText: data }, () => {
+      this.props.setSpendingData(this.props.token, this.state);
+    });
   }
+
+  debounceChange = debounce(() => {
+    this.props.setSpendingData(this.props.token, this.state);
+  }, 1000);
 
   uncertainHandleChange(event) {
     const flag = event.target.value == "on" ? true : false;
@@ -91,25 +94,7 @@ class BillingFilter extends Component {
       <div className="billingFilter-wrapper">
         <Form className="billing-form-wrap">
           <div className="form-row">
-            <div className="search-icon-container form-group col-md-12">
-              <Form.Control
-                type="text"
-                className="search-bar"
-                placeholder="Search..."
-                value={this.state.searchText}
-                onChange={this.onTextChange.bind(this)}
-              />
-              <span className="search-icon">
-                <Icon
-                  path={mdiMagnify}
-                  size={1.5}
-                  horizontal
-                  vertical
-                  rotate={180}
-                  color="#dddddd"
-                />
-              </span>
-            </div>
+            <SearchTextFilter onSearchChange={(event)=> this.onTextChange(event)} />
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
@@ -122,7 +107,6 @@ class BillingFilter extends Component {
                   aria-label="option 1"
                   onChange={this.uncertainHandleChange.bind(this)}
                 />
-                {/* <input type="checkbox" id="mycheck" onClick={myFunction()}></input> */}
                 <span className="checkbox-text">
                   Only uncertain categorization
                 </span>
@@ -132,7 +116,7 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
               <label htmlFor="inputEmail4">Amount</label>
-              <Form.Select
+              {/* <Form.Select
                 aria-label="Default select"
                 onChange={(e) => {
                   this.filterbyAmount(e.target.value);
@@ -140,8 +124,13 @@ class BillingFilter extends Component {
                     amountFilterValue={e.target.value}
                   ></BillingTable>;
                 }}
+              > */}
+
+                <Form.Select
+                aria-label="Default select"
+                onChange={(e) => this.filterbyAmount(e.target.value)}
               >
-                <option>Select type</option>
+                <option value=''>Select type</option>
                 <option value="0">Expenses</option>
                 <option value="1">Income</option>
               </Form.Select>
@@ -161,60 +150,7 @@ class BillingFilter extends Component {
             ></DateDropdown>
           </div>
           <div className="form-row">
-            <div className="form-group col-md-6">
-              <label htmlFor="inputEmail4">Account</label>
-              <div className="checkboxLabel-wrap">
-                <span className="arrow-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                      fill={"#706e6e"}
-                      d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"
-                    />
-                  </svg>
-                </span>
-
-                <input
-                  type="checkbox"
-                  id="mycheck"
-                  checked={this.props.activeAccount === 0 ? "active" : ""}
-                ></input>
-                <span className="checkbox-text ">credit</span>
-              </div>
-              <div className="checkboxLabel-wrap">
-                <span className="arrow-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                      fill={"#706e6e"}
-                      d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"
-                    />
-                  </svg>
-                </span>
-
-                <input
-                  type="checkbox"
-                  aria-label="option 10"
-                  checked={this.props.activeAccount === 1 ? "active" : ""}
-                />
-                <span className="checkbox-text">Current</span>
-              </div>
-              <div className="checkboxLabel-wrap">
-                <span className="arrow-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path
-                      fill={"#706e6e"}
-                      d="M192 384c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L192 306.8l137.4-137.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-160 160C208.4 380.9 200.2 384 192 384z"
-                    />
-                  </svg>
-                </span>
-                {/* <Form.Check aria-label="option 1"  /> */}
-                <input
-                  type="checkbox"
-                  aria-label="option 10"
-                  checked={this.props.activeAccount === 2 ? "active" : ""}
-                />
-                <span className="checkbox-text">Savings</span>
-              </div>
-            </div>
+              <AccountListing activeAccount={this.props.activeAccount} />
           </div>
         </Form>
       </div>
