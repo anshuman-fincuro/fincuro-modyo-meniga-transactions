@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Icon from "@mdi/react";
 import { mdiCardsPlayingSpade, mdiMagnify } from "@mdi/js";
 import BillingTable from "./BillingTable";
-import CategoriesDropdown from "./CategoriesDropdown";
+import CategoriesDropdown from "./shared/CategoriesDropdown/CategoriesDropdown";
 import AccountListing from "./shared/AccountsListing/AccountListing";
 import DateDropdown from "./DateDropdown";
 import { connect } from "react-redux";

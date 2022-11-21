@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import { setCategoryFilterData } from "../store/actions/component-action";
+import { setCategoryFilterData } from "./../../../store/actions/component-action"
 import { connect } from "react-redux";
 import { Dropdown, Accordion, useAccordionButton } from "react-bootstrap";
 import "./CategoriesDropdown.css";
