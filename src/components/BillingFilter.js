@@ -52,6 +52,18 @@ class BillingFilter extends Component {
     });
   }
 
+  filterbyAmountFrom(value) {
+    this.setState({ amountFrom: value }, () => {
+      this.props.setSpendingData(this.props.token, this.state);
+    });
+  }
+
+  filterbyAmountTo(value) {
+    this.setState({ amountTo: value }, () => {
+      this.props.setSpendingData(this.props.token, this.state);
+    });
+  }
+
   dateOnChange(e) {
     let dateFilter = {};
     if (e) {
@@ -131,17 +143,17 @@ class BillingFilter extends Component {
                 onChange={(e) => this.filterbyAmount(e.target.value)}
               >
                 <option value=''>Select type</option>
-                <option value="0">Expenses</option>
-                <option value="1">Income</option>
+                <option value="Expenses">Expenses</option>
+                <option value="Income">Income</option>
               </Form.Select>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col-md-6 col-sm-12">
-              <Form.Control type="text" placeholder="From" />
+              <Form.Control type="text" placeholder="From" name="amountFrom" onBlur={(e) => this.filterbyAmountFrom(e.target.value)} />
             </div>
             <div className="form-group col-md-6 col-sm-12">
-              <Form.Control type="text" placeholder="To" />
+              <Form.Control type="text" placeholder="To" name="amountTo" onBlur={(e) => this.filterbyAmountTo(e.target.value)} />
             </div>
           </div>
           <div className="form-row">

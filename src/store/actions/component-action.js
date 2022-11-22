@@ -1,25 +1,9 @@
 import axios from 'axios';
 import TYPES from '../types';
+import { isNumeric, getFromDate, getToDate } from '../../utils';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
-export function getToDate(){
-
-  let newDate = new Date()
-  let date = newDate.getDate();
-  let month = newDate.getMonth() + 1;
-  let year = newDate.getFullYear();
-  return `${year}-${month<10?`0${month}`:`${month}`}-${date<10?`0${date}`:`${date}`}`
-  }
-
-  export function getFromDate(){
-
-    let newDate = new Date()
-    let date = newDate.getDate();
-    let month = newDate.getMonth() -2;
-    let year = newDate.getFullYear();
-    return `${year}-${month<10?`0${month}`:`${month}`}-${date<10?`0${date}`:`${date}`}`
-    }
 export const setAccountsData = (token) => {
   return (dispatch) => {
     axios
@@ -69,8 +53,8 @@ export const setPlanningData = (token) => {
 export const setSpendingData = (token,filter={}) => {
   console.log(filter)
   let query = '';
-  let fromDate = getFromDate()
-  let toDate = getToDate()
+  let fromDate = getFromDate();
+  let toDate = getToDate();
   if(filter.chartDateRange && filter.chartDateRange != null){
     fromDate = filter.chartDateRange.split(',')[0]
     toDate = filter.chartDateRange.split(',')[1]
@@ -87,8 +71,23 @@ export const setSpendingData = (token,filter={}) => {
   }
 
   if(filter.amountType){
-    query+= `&amountType=${filter.amountType}`;
+    query+= `&categoryTypes=${filter.amountType}`;
   }
+
+  if(filter.amountFrom && isNumeric(filter.amountFrom)){
+    if(!filter.amountType || filter.amountType === 'Income')
+      query+= `&amountFrom=${filter.amountFrom}`;
+    else
+      query+= `&amountTo=-${filter.amountFrom}`;
+  }
+
+  if(filter.amountTo && isNumeric(filter.amountTo)){
+    if(!filter.amountType || filter.amountType === 'Income')
+      query+= `&amountTo=${filter.amountTo}`;
+    else
+      query+= `&amountFrom=-${filter.amountTo}`;
+  }
+
   if(filter.searchText){
     query+= `&searchText=${filter.searchText}`;
   }
