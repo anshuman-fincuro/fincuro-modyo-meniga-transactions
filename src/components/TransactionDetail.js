@@ -316,7 +316,7 @@ class TransactionDetail extends Component {
                 <div className="transactionOverviewChart-graph-wrapper mt-5">
                   <h2 className="heading">Total expenses this year</h2>
                   <div className="transactionOverviewChart-list">
-                    <div className="transactionOverviewChart-list-item">
+                    <div className="transactionOverviewChart-list-item me-3">
                       <div className="transactionOverviewChart-text">
                       {this.state.selectedTransaction.text}
                       </div>
@@ -324,7 +324,7 @@ class TransactionDetail extends Component {
                         £ {this.totalSelectedMerchantAmt(this.state.selectedTransaction.text)}
                       </div>
                     </div>
-                    <div className="transactionOverviewChart-list-item border-color-blue">
+                    <div className="transactionOverviewChart-list-item me-3 border-color-blue">
                       <div className="transactionOverviewChart-text">
                         Carbon footprint
                       </div>
@@ -332,7 +332,7 @@ class TransactionDetail extends Component {
                         £ 0.00
                       </div>
                     </div>
-                    <div className="transactionOverviewChart-list-item border-color-purpel">
+                    <div className="transactionOverviewChart-list-item me-3 border-color-purpel">
                       <div className="transactionOverviewChart-text">
                       {this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
                       </div>
