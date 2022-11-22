@@ -27,7 +27,7 @@ class TransactionDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-       data: this.props.transactionData,
+      data: this.props.transactionData,
       spendingData: this.props.spendingData,
       showDetails: this.props.showDetails,
       selectedTransaction: this.props.selectedTransaction,
@@ -52,6 +52,20 @@ class TransactionDetail extends Component {
       data => (data.id === val)
     );
     return defaultSelectVal[0].name;
+  }
+  totalSelectedMerchantAmt(val) {
+    console.log('val', val);
+    console.log('this.state.data',this.props.spendingData);
+    let countVal=0;
+    let totalSelectedMerchantAmtVal = this.props.spendingData.filter(
+      data => 
+      {if(data.text === val) {
+        countVal = countVal + data.originalAmount;
+        console.log('data.originalAmount', data.originalAmount);
+      }}
+    );
+    console.log('totalSlectedCatAmtVal', totalSelectedMerchantAmtVal, countVal);
+    return +countVal;
   }
   componentDidMount(){
     const { selectedTransaction, token } = this.props;
@@ -218,7 +232,7 @@ class TransactionDetail extends Component {
                       {this.state.selectedTransaction.text}
                       </div>
                       <div className="transactionOverviewChart-amount">
-                        £ -180.00
+                        £ {this.totalSelectedMerchantAmt(this.state.selectedTransaction.text)}
                       </div>
                     </div>
                     <div className="transactionOverviewChart-list-item border-color-blue">
@@ -231,7 +245,7 @@ class TransactionDetail extends Component {
                     </div>
                     <div className="transactionOverviewChart-list-item border-color-purpel">
                       <div className="transactionOverviewChart-text">
-                        Transport for London
+                      {this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
                       </div>
                       <div className="transactionOverviewChart-amount">
                         £ -180.00
