@@ -85,16 +85,17 @@ input::placeholder {
 .TransactionOverviewChart-tabs-wrapper {
   position: relative;
 }
-.linechart-wrapper .TransactionOverviewChart-tabs-wrapper .TransactionOverviewChart-dropdown{
+.linechart-wrapper .TransactionOverviewChart-dropdown{
   position: absolute;
   right: 0;
 }
-.linechart-wrapper .TransactionOverviewChart-tabs-wrapper .TransactionOverviewChart-dropdown select {
+.linechart-wrapper .TransactionOverviewChart-dropdown select {
   position: absolute;
-  right: 0px;
+  right: 0px !important;
   margin-top: 9px;
   border: 2px solid #1c242c;
   color: #4d4d4d;
   width: max-content;
   font-size: 18px;
+  width: 180px;
 }
