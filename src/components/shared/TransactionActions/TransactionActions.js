@@ -13,7 +13,7 @@ import Modal from "../Modal/Modal";
 const TransactionActions = () => {
 
     const [activeModal, setActiveModal] = React.useState('');
-    const [ isOpen, setIsOpen] = React.useState(true);
+    const [ isOpen, setIsOpen] = React.useState(false);
 
   return (
     <>
@@ -94,8 +94,8 @@ const TransactionActions = () => {
           </button>
         </div>
       </div>
-      <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} >
-      sfdsfdsfdfjdsklj
+      <Modal isOpen={isOpen} handleClose={() => setIsOpen(false)} title="Change category" >
+          Test Modal
       </Modal>
       </>
   );
