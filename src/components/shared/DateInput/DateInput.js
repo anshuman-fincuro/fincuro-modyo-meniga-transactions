@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import { mdiCalendarMonth } from "@mdi/js";
 import "react-datepicker/dist/react-datepicker.css";
 import * as moment from "moment";
+import "../../../style/Base.css";
+import "./DateInput.css";
 
 const CustomInput = React.forwardRef((props, ref) => {
   return (

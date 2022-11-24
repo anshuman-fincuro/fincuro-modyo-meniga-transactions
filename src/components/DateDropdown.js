@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import { getdateRanges, getFromToDate } from "../utils";
-import DateInput from "./DateInput";
+import DateInput from "./shared/DateInput/DateInput";
 import * as moment from "moment";
 import { mdiCalendarMonth, mdiClose } from "@mdi/js";
 import Icon from "@mdi/react";
 import Button from 'react-bootstrap/Button';
+import "./../style/Base.css";
+
 class DateDropdown extends Component {
   constructor(props) {
     super(props);
@@ -108,17 +110,7 @@ class DateDropdown extends Component {
             <option value="thisYear">This year</option>
             <option value="lastYear">Last year</option>
             <option value="custom">Custom</option>
-            {/* {dateDropDown &&
-              dateDropDown.map((range, i) => (
-                <option key={i} value={range.value}>
-                  {range.label}
-                </option>
-              ))} */}
           </Form.Select>
-    
-        {/* <Button variant="outline-light" className="filterClear">
-          Clear  <Icon path={mdiClose} size={1.25} />
-          </Button> */}
         </div>
         {showDateRange && (
           <>
