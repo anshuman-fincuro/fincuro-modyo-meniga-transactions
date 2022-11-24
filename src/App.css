@@ -39,6 +39,18 @@ progress::-webkit-progress-bar {
   padding: 32px;
 }
 
+.spinning-icon{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.spinning-icon .loading-text{
+  font-size: 16px;
+}
+
 @media screen and (max-width: 600px) {
   progress {
     border: none;
