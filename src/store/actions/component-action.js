@@ -6,14 +6,23 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const setAccountsData = (token) => {
   return (dispatch) => {
-    axios.get(`${API_URL}/accounts?token=Bearer ${token}`).then((response) => {
-      if (response.status === 200) {
-        dispatch({
-          type: TYPES.COMPONENT.ON_ACCOUNTS_SUCCESS,
-          payload: { accountsData: response.data.data },
-        });
-      }
-    });
+    axios
+      .get(`${API_URL}/accounts?token=Bearer ${token}`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: TYPES.COMPONENT.ON_ACCOUNTS_SUCCESS,
+            payload:  { accountsData: response.data.data },
+          });
+        }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
+      });
   };
 };
 
@@ -28,20 +37,36 @@ export const setCategoriesData = (token) => {
             payload: { categoriesData: response.data.data },
           });
         }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
       });
   };
 };
 
 export const setPlanningData = (token) => {
   return (dispatch) => {
-    axios.get(`${API_URL}/budgets?token=Bearer ${token}`).then((response) => {
-      if (response.status === 200) {
-        dispatch({
-          type: TYPES.COMPONENT.ON_PLANNING_SUCCESS,
-          payload: { planningData: response.data.data },
-        });
-      }
-    });
+    axios
+      .get(`${API_URL}/budgets?token=Bearer ${token}`)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch({
+            type: TYPES.COMPONENT.ON_PLANNING_SUCCESS,
+            payload: { planningData: response.data.data },
+          });
+        }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
+      });
   };
 };
 
@@ -117,6 +142,13 @@ export const setSpendingData = (token, filter = {}) => {
             payload: { spendingData: response.data.data },
           });
         }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
       });
   };
 };
@@ -130,22 +162,34 @@ export const setMerchantData = (token) => {
           payload: { merchantData: response.data.data },
         });
       }
+    }).catch((error) => {
+      if(error) {        
+        dispatch({  
+          type: TYPES.COMPONENT.ERRMESSAGE,
+          payload:  { errorMessage: 'something snappped. please try later !' },
+        });
+      }
     });
   };
 };
 
 export const setCategoryFilterData = (token) => {
   return (dispatch) => {
-    axios
-      .get(`${API_URL}/categories?token=Bearer ${token}`)
-      .then((response) => {
-        if (response.status === 200) {
-          dispatch({
-            type: TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS,
-            payload: { catFilterData: response.data.data },
-          });
-        }
-      });
+    axios.get(`${API_URL}/categories?token=Bearer ${token}`).then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS,
+          payload: { catFilterData: response.data.data },
+        });
+      }
+    }).catch((error) => {
+      if(error) {        
+        dispatch({  
+          type: TYPES.COMPONENT.ERRMESSAGE,
+          payload:  { errorMessage: 'something snappped. please try later !' },
+        });
+      }
+    });
   };
 };
 

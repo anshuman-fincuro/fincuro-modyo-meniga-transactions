@@ -8,7 +8,8 @@ const initialState = {
   planningData: [],
   spendingData: [],
   categoryFilterData: [],
-  settings: {}
+  settings: {},
+  errMeessage:''
 };
 
 const compare = (a, b) => {
@@ -60,6 +61,12 @@ const componentReducer = (state = initialState, action) => {
           ...state,
           settings: action.payload.settings,
         };
+
+    case TYPES.COMPONENT.ERRMESSAGE:
+      return {
+        ...state,
+        errorMessage: action.payload.errorMessage,
+      };
     default:
       return {
         ...state,

@@ -20,6 +20,7 @@ import BillingTable from "./components/BillingTable";
 import BillingFilter from "./components/BillingFilter";
 import TransactionDetail from "./components/TransactionDetail";
 import { mdiMagnify, mdiRhombusSplit } from "@mdi/js";
+import APIErrToast from "./components/shared/Toast/APIErrToast";
 
 class App extends Component {
   constructor(props) {
@@ -202,6 +203,7 @@ class App extends Component {
             spendingData={this.state.spendingData}
           ></TransactionDetail>
         )}
+        {this.props.errorMessage!=="" && <APIErrToast errmsg={this.props.errorMessage} />}
       </div>
     );
   }
@@ -210,6 +212,8 @@ class App extends Component {
 //
 const mapStateToProps = (state) => ({
   token: state.authReducer.token,
+  errorMessage: state.authReducer.errorMessage,
+  errorMessage: state.componentReducer.errorMessage,
   accountsData: state.componentReducer.accountsData,
   planningData: state.componentReducer.planningData,
   merchantData: state.componentReducer.merchantData,
