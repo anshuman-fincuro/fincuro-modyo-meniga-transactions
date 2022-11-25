@@ -69,6 +69,11 @@ const SearchTextFilter = ({ onSearchChange }) => {
     };
   }, []);
 
+  React.useEffect( ()=>{
+    if(debouncedSearchTerm.length == 0)
+      onSearchChange(null);
+  }, [debouncedSearchTerm])
+
   return (
     <div className="search-icon-container form-group col-md-12">
       <div className="search-suggestion-wrapper" ref={ref}>

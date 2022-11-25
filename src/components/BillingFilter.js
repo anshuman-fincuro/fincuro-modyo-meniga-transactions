@@ -3,16 +3,13 @@ import React, { Component } from "react";
 import "./../style/Base.css";
 import "./../App.css";
 import Form from "react-bootstrap/Form";
-import Icon from "@mdi/react";
-import { mdiCardsPlayingSpade, mdiMagnify } from "@mdi/js";
-import BillingTable from "./BillingTable";
 import CategoriesDropdown from "./shared/CategoriesDropdown/CategoriesDropdown";
 import AccountListing from "./shared/AccountsListing/AccountListing";
-import DateDropdown from "./DateDropdown";
 import { connect } from "react-redux";
 import { setSpendingData } from "../store/actions/component-action";
 import { debounce } from "lodash";
 import SearchTextFilter from "./shared/SearchTextFilter/SearchTextFilter";
+import DateFilter from "./shared/DateFilter/DateFilter";
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -128,16 +125,7 @@ class BillingFilter extends Component {
           <div className="form-row">
             <div className="form-group col-md-12">
               <label htmlFor="inputEmail4">Amount</label>
-              {/* <Form.Select
-                aria-label="Default select"
-                onChange={(e) => {
-                  this.filterbyAmount(e.target.value);
-                  <BillingTable
-                    amountFilterValue={e.target.value}
-                  ></BillingTable>;
-                }}
-              > */}
-
+              
                 <Form.Select
                 aria-label="Default select"
                 onChange={(e) => this.filterbyAmount(e.target.value)}
@@ -157,9 +145,7 @@ class BillingFilter extends Component {
             </div>
           </div>
           <div className="form-row">
-            <DateDropdown
-              onChange={(date) => this.dateOnChange(date)}
-            ></DateDropdown>
+            <DateFilter onChange={(date) => this.dateOnChange(date)}></DateFilter>
           </div>
           <div className="form-row">
               <AccountListing activeAccount={this.props.activeAccount} />
