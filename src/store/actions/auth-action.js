@@ -13,6 +13,13 @@ export const setAuthToken = () => {
           payload: { token: response.data.data.accessToken },
         });
       }
+    }).catch((error) => {
+      if(error) {        
+        dispatch({  
+          type: TYPES.AUTH.ERRMESSAGE,
+          payload:  { errorMessage: 'something snappped. please try later !' },
+        });
+      }
     });
   };
 };

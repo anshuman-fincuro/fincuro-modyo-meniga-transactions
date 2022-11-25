@@ -15,6 +15,13 @@ export const setAccountsData = (token) => {
             payload:  { accountsData: response.data.data },
           });
         }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
       });
   };
 };
@@ -31,6 +38,13 @@ export const setCategoriesData = (token) => {
             
           });
         }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
       });
   };
 };
@@ -44,6 +58,13 @@ export const setPlanningData = (token) => {
           dispatch({
             type: TYPES.COMPONENT.ON_PLANNING_SUCCESS,
             payload: { planningData: response.data.data },
+          });
+        }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
           });
         }
       });
@@ -113,6 +134,13 @@ export const setSpendingData = (token,filter={}) => {
             payload: { spendingData: response.data.data },
           });
         }
+      }).catch((error) => {
+        if(error) {        
+          dispatch({  
+            type: TYPES.COMPONENT.ERRMESSAGE,
+            payload:  { errorMessage: 'something snappped. please try later !' },
+          });
+        }
       });
   };
 };
@@ -126,6 +154,13 @@ export const setMerchantData = (token) => {
           payload: { merchantData: response.data.data },
         });
       }
+    }).catch((error) => {
+      if(error) {        
+        dispatch({  
+          type: TYPES.COMPONENT.ERRMESSAGE,
+          payload:  { errorMessage: 'something snappped. please try later !' },
+        });
+      }
     });
   };
 };
@@ -137,6 +172,13 @@ export const setCategoryFilterData = (token) => {
         dispatch({
           type: TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS,
           payload: { catFilterData: response.data.data },
+        });
+      }
+    }).catch((error) => {
+      if(error) {        
+        dispatch({  
+          type: TYPES.COMPONENT.ERRMESSAGE,
+          payload:  { errorMessage: 'something snappped. please try later !' },
         });
       }
     });

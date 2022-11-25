@@ -1,0 +1,6 @@
+.Toastify__toast-container {
+    width: max-content !important;
+}
+.Toastify__toast {
+    font-size: 1.5rem;
+}

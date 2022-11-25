@@ -3,6 +3,7 @@ import TYPES from '../types';
 // Initial State
 const initialState = {
   token: null,
+  errorMessage: ''
 };
 
 const authReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
+      };
+      case TYPES.AUTH.ERRMESSAGE:
+      return {
+        ...state,
+        errorMessage: action.payload.errorMessage,
       };
     default:
       return {
