@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import "./App.css";
 import "./../src/style/Base.css";
+import "./../src/style/Styles.css";
 import { setAuthToken } from "./store/actions/auth-action";
 import { SpinningCircles } from "react-loading-icons";
 import AccountDropdown from "./components/AccountDropdown";

@@ -42,7 +42,7 @@ class BillingTable extends Component {
           <div className="billingTable-wrapper">
             {this.props.transactionData.map((x, i) => (
               <div key={i}>
-                <div className="billingTable-heading">{x.group}</div>
+                <div className="billingTable-heading mt-3">{x.group}</div>
                 <div className="billingTable-container">
                   {x.data.map((item, j) => (
                     <div
@@ -53,15 +53,8 @@ class BillingTable extends Component {
                       key={j}
                     >
                       <div className="billingTable-left">
-                        <div className="billingTable-icon">
-                          <Icon
-                            path={mdiCardAccountDetails}
-                            size={2}
-                            horizontal
-                            vertical
-                            rotate={180}
-                            color="#1c242c"
-                          />
+                        <div className="billingTable-icon">                          
+                        {/* <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${item.categoryId}`}></i>  */}
                         </div>
                         <div className="billingTable-date">
                           {" "}
