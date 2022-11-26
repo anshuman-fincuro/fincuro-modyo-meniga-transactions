@@ -118,8 +118,9 @@ export const setSpendingData = (token, filter = {}) => {
   if (filter.onlyUncertain) {
     query += `&onlyUncertain=${filter.onlyUncertain}`;
   }
-  if (filter.activeAccount) {
-    query += `&accountTypes=${filter.activeAccount}`;
+
+  if (filter.accountIds) {
+    query += `&accountIds=${filter.accountIds}`;
   }
 
   if (filter.categoryIds) {

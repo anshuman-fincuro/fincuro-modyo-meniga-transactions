@@ -12,7 +12,7 @@ const AccountDropdown = ({ accountsData }) => {
 
   const changeAccount = (account, index)=>{
       setActive(index);
-      dispatch(setSpendingData(token, { activeAccount : account.accountCategory}))
+      dispatch(setSpendingData(token, { accountIds : account.id}))
   }
 
   return (
