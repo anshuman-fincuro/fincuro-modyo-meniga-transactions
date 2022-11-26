@@ -53,8 +53,9 @@ class BillingTable extends Component {
                       key={j}
                     >
                       <div className="billingTable-left">
-                        <div className="billingTable-icon">                          
-                        {/* <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${item.categoryId}`}></i>  */}
+                        <div className="billingTable-icon"> 
+                        {/* Category Icons                           */}
+                        <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${item.categoryId}`}></i> 
                         </div>
                         <div className="billingTable-date">
                           {" "}
