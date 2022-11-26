@@ -21,6 +21,7 @@ import BillingFilter from "./components/BillingFilter";
 import TransactionDetail from "./components/TransactionDetail";
 import { mdiMagnify, mdiRhombusSplit } from "@mdi/js";
 import APIErrToast from "./components/shared/Toast/APIErrToast";
+import Spinner from "./components/shared/Spinner/Spinner";
 
 class App extends Component {
   constructor(props) {
@@ -53,12 +54,9 @@ class App extends Component {
     await this.props.setAuth();
   }
 
-  getTransactionData(accountDropdownData) {
+  getTransactionData() {
     return this.props.spendingData
-      ? this.props.spendingData.filter(
-          (x) =>
-            x.accountId === accountDropdownData[this.state.activeAccount].id
-        )
+      ? this.props.spendingData
       : [];
   }
 
@@ -97,6 +95,8 @@ class App extends Component {
     this.setState({ activeCheckboxSaving: true });
   };
 
+  
+
   render() {
     var categorydata = this.props.categoriesData;
     var accountDropdownData = this.props.accountsData
@@ -104,7 +104,7 @@ class App extends Component {
           (acc) => acc.accountCategory !== "Wallet"
         )
       : [];
-    var transactionData = this.getTransactionData(accountDropdownData);
+    var transactionData = this.getTransactionData();
     var months = [
       "",
       "January",
@@ -148,9 +148,7 @@ class App extends Component {
                   <h2 className="mb-4">Transactions</h2>
                   <div className="account-top-bar">
                     <AccountDropdown
-                      changeAccount={this.onTrigger.bind(this)}
                       accountsData={accountDropdownData}
-                      activeAccount={this.state.activeAccount}
                     ></AccountDropdown>
                   </div>
                   <div className="bill-table-form-wrap">
@@ -204,6 +202,7 @@ class App extends Component {
           ></TransactionDetail>
         )}
         {this.props.errorMessage!=="" && <APIErrToast errmsg={this.props.errorMessage} />}
+        <Spinner />
       </div>
     );
   }
