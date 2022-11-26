@@ -119,20 +119,18 @@ export const setSpendingData = (token, filter = {}) => {
     query += `&onlyUncertain=${filter.onlyUncertain}`;
   }
   if (filter.activeAccount) {
-    const accountTypes =
-      filter.activeAccount == 0
-        ? "Credit"
-        : filter.activeAccount == 1
-        ? "Current"
-        : "Savings";
-    query += `&accountTypes=${accountTypes}`;
+    query += `&accountTypes=${filter.activeAccount}`;
   }
 
   if (filter.categoryIds) {
     query += `&categoryIds=${filter.categoryIds}`;
   }
 
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    console.log(getState())
+    dispatch({
+      type: TYPES.COMPONENT.ON_REQUEST_LOAD
+    });
     axios
       .get(`${API_URL}/transactions?token=Bearer ${token}${query}`)
       .then((response) => {

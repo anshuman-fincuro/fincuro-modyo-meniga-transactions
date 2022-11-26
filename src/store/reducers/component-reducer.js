@@ -9,7 +9,8 @@ const initialState = {
   spendingData: [],
   categoryFilterData: [],
   settings: {},
-  errMeessage:''
+  errMeessage:'',
+  loading:  false
 };
 
 const compare = (a, b) => {
@@ -43,6 +44,7 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         spendingData: action.payload.spendingData,
+        loading: false
       };
     case TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS:
       const payload = action.payload.catFilterData;
@@ -66,6 +68,11 @@ const componentReducer = (state = initialState, action) => {
       return {
         ...state,
         errorMessage: action.payload.errorMessage,
+      };
+    case TYPES.COMPONENT.ON_REQUEST_LOAD:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return {

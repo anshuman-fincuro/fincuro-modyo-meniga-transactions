@@ -147,9 +147,9 @@ class BillingFilter extends Component {
           <div className="form-row">
             <DateFilter onChange={(date) => this.dateOnChange(date)}></DateFilter>
           </div>
-          <div className="form-row">
+          {/* <div className="form-row">
               <AccountListing activeAccount={this.props.activeAccount} />
-          </div>
+          </div> */}
         </Form>
       </div>
     );
