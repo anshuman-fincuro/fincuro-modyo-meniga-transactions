@@ -54,7 +54,7 @@ class BillingTable extends Component {
                     >
                       <div className="billingTable-left">
                         <div className="billingTable-icon">                          
-                        {/* <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${item.categoryId}`}></i>  */}
+                        <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${item.categoryId}`}></i> 
                         </div>
                         <div className="billingTable-date">
                           {" "}
