@@ -1384,6 +1384,30 @@ button.react-datepicker__close-icon.fincuro_calender_clear::after{
   width: 100%;
   height: 500px;
 }
+
+.spinner{
+  position:fixed;
+  bottom:0; 
+  left:0; 
+  top:0; 
+  width:100%; 
+  height:100%; 
+  z-index:100;
+  background:rgba(0,0,0,0.2); 
+}
+
+.spinning-icon{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.spinning-icon .loading-text{
+  font-size: 16px;
+}
 /***** #End - Writen by - Maantu Das ***/
 
 
