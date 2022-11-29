@@ -15,16 +15,13 @@ class BillingTable extends Component {
       amountFilterValue: this.props.amountFilterValue,
       categoriesData: this.props.categorydata,
       showCategories: 0,
+      selectedDropRow:''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.defaultDropdownSelect = this.defaultDropdownSelect.bind(this);
   }
-  handleInputChange(value) {
-    console.log('Custom Selected Drop Val', value);
-    if (value === "Show All Categories") {
-      console.log("value set to true");
-      this.setState({ showCategories: value });
-    }
+  handleInputChange(categoryName, categoryId, rowId) {
+      this.setState({selectedDropRow:rowId, selectedCategoryId:categoryId});
   }
   defaultDropdownSelect(val) {
     let defaultSelectVal = this.state.categoriesData.filter(
@@ -55,7 +52,7 @@ class BillingTable extends Component {
                       <div className="billingTable-left">
                         <div className="billingTable-icon"> 
                         {/* Category Icons                           */}
-                        <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${item.categoryId}`}></i> 
+                        <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${(this.state.selectedDropRow === item.id)?this.state.selectedCategoryId:item.categoryId}`}></i> 
                         </div>
                         <div className="billingTable-date">
                           {" "}
@@ -71,10 +68,11 @@ class BillingTable extends Component {
                           <div className="billingTable-right-dropdown">
                           <CustomDropdown 
                             items={this.props.categoryFilterData}
+                            rowId={item.id}
                             detectedCategories={item.detectedCategories}
                             defaultSelect={this.defaultDropdownSelect(item.categoryId)}
-                            handleSelection={(value)=>{
-                                this.handleInputChange(value)
+                            handleSelection={(categoryName, categoryId, rowId)=>{
+                                this.handleInputChange(categoryName, categoryId, rowId)
                             }}                            
                             categorydata={this.props.categorydata}
                             />                           
