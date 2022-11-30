@@ -264,9 +264,7 @@ class CategoriesDropdown extends Component {
                             <Accordion key={index}>
                               <div className="accordianHeader">
                                 <div className="accordianHeaderCheckbox">
-                                  <div className="icon-section">
-                                  <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${categ.id}`}></i> 
-                                  </div> 
+                                 
                                   <Form.Check
                                     type="checkbox"
                                     id={`default-${categ.name}`}
@@ -282,6 +280,9 @@ class CategoriesDropdown extends Component {
                                     }
                                     checked={this.checkParent(categ)}
                                   />
+                                   {/* <div className="icon-section">
+                                  <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${categ.id}`}></i> 
+                                  </div>  */}
                                 </div>
                                 <div className="accordianToggle">
                                   <CustomToggle eventKey={index}></CustomToggle>
