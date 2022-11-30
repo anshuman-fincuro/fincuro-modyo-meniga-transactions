@@ -10,6 +10,7 @@ import { setSpendingData } from "../store/actions/component-action";
 import { debounce } from "lodash";
 import SearchTextFilter from "./shared/SearchTextFilter/SearchTextFilter";
 import DateFilter from "./shared/DateFilter/DateFilter";
+import AmountFilterDropdown from "./shared/AmountFilterDropdown/AmountFilterDropdown";
 
 class BillingFilter extends Component {
   constructor(props) {
@@ -122,28 +123,14 @@ class BillingFilter extends Component {
               </div>
             </div>
           </div>
-          <div className="form-row">
-            <div className="form-group col-md-12">
-              <label htmlFor="inputEmail4">Amount</label>
-              
-                <Form.Select
-                aria-label="Default select"
-                onChange={(e) => this.filterbyAmount(e.target.value)}
-              >
-                <option value=''>Select type</option>
-                <option value="Expenses">Expenses</option>
-                <option value="Income">Income</option>
-              </Form.Select>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="form-group col-md-6 col-sm-12">
-              <Form.Control type="text" placeholder="From" name="amountFrom" onBlur={(e) => this.filterbyAmountFrom(e.target.value)} />
-            </div>
-            <div className="form-group col-md-6 col-sm-12">
-              <Form.Control type="text" placeholder="To" name="amountTo" onBlur={(e) => this.filterbyAmountTo(e.target.value)} />
-            </div>
-          </div>
+
+          <AmountFilterDropdown
+            typeChange={(val) => this.filterbyAmount(val)}
+            amountFromChange = {(val) => this.filterbyAmountFrom(val)}
+            amountToChange = {(val) => this.filterbyAmountTo(val)}
+          ></AmountFilterDropdown>
+
+
           <div className="form-row">
             <DateFilter onChange={(date) => this.dateOnChange(date)}></DateFilter>
           </div>

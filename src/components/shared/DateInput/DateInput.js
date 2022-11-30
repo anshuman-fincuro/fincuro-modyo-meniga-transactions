@@ -38,7 +38,6 @@ function DateInput(props) {
   },[date]);
   
   return (
-    <div>
       <DatePicker
         wrapperClassName="fincuro_wrapper"
         calendarClassName="fincuro_calender"
@@ -50,7 +49,6 @@ function DateInput(props) {
         customInput={<CustomInput inputRef={inputRef}/>}
         onChange={(date) => setDate(date)}
       ></DatePicker>
-    </div>
   );
 }
 

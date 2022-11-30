@@ -30,7 +30,7 @@ function DateFilter({ onChange }) {
   }, [fromDate, toDate]);
 
   return (
-    <div>
+    <>
       <div className="form-group col-md-12 filterWrapper">
         <label htmlFor="inputEmail4">Date</label>
         <Form.Select
@@ -64,7 +64,7 @@ function DateFilter({ onChange }) {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 }
 export default DateFilter;
