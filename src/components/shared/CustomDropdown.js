@@ -3,15 +3,15 @@ import { Dropdown, Accordion } from 'react-bootstrap';
 import './CustomDropdown.css';
 
 const CustomDropdown = (props) => {
-    const { items, handleSelection, detectedCategories, defaultSelect } = props;
+    const { items, handleSelection, detectedCategories, defaultSelect, rowId } = props;
     const [selectedValue, setSelectedValue] = useState(defaultSelect);
     const [showAllCategorie, setShowAllCategories] = useState('');
     const [show, setShow] = useState();
     const [search, setSearch] = useState('');
 
-    const handleSelect = (value) => {
-        handleSelection(value);
-        setSelectedValue(value);
+    const handleSelect = (categoryName, categoryId, rowId) => {
+        handleSelection(categoryName, categoryId, rowId);
+        setSelectedValue(categoryName);
     }
     const showAllCategories = (val) => {
         setShowAllCategories(val);
@@ -30,7 +30,7 @@ const CustomDropdown = (props) => {
             <Dropdown show={show}
                 onToggle={(isOpen, event, metadata) => {
                     setShow(isOpen);
-                }} onClick={(event) => event.stopPropagation()} onSelect={handleSelect}>
+                }} onClick={(event) => event.stopPropagation()}>
                 <Dropdown.Toggle>
                     {selectedValue}
                 </Dropdown.Toggle>
@@ -50,17 +50,17 @@ const CustomDropdown = (props) => {
                                         )
                                     )
                                         .map((categ) => (
-                                            <Dropdown.Item key={categ[0].name} eventKey={categ[0].name}>{categ[0].name}</Dropdown.Item>
+                                            <Dropdown.Item key={categ[0].name} eventKey={categ[0].name} onClick={()=>handleSelect(categ[0].name,categ[0].id,rowId)}><i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${categ[0].id}`}></i>  {categ[0].name}</Dropdown.Item>
                                         ))}
                                 </div>) : (
                                     <Accordion>
                                         {
                                             items && items.map(item => (
                                                 <Accordion.Item eventKey={item.id}>
-                                                    <Accordion.Header>{item.name}</Accordion.Header>
+                                                    <Accordion.Header><i className={`Icon Icon--info CategoryIcon Icon--line Icon--primaryAction Icon--light Icon--round CategoryIcon--${item.id}`}></i> {item.name}</Accordion.Header>
                                                     <Accordion.Body>
                                                         {item.children.map(children => (
-                                                            <Dropdown.Item key={children.id} eventKey={children.name}>{children.name}</Dropdown.Item>
+                                                            <Dropdown.Item key={children.id} eventKey={children.name} onClick={()=>handleSelect(children.name,children.id,rowId)}><i className={`Icon Icon--info CategoryIcon Icon--line Icon--primaryAction Icon--light CategoryIcon--${children.id}`}></i> {children.name}</Dropdown.Item>
                                                         ))}
                                                     </Accordion.Body>
                                                 </Accordion.Item>
@@ -78,7 +78,7 @@ const CustomDropdown = (props) => {
                                             ? item
                                             : item.name.toLowerCase().includes(search.toLowerCase());
                                         }).map(children => (
-                                            <Dropdown.Item key={children.id} eventKey={children.name}>{children.name}</Dropdown.Item>
+                                            <Dropdown.Item key={children.id} eventKey={children.name} onClick={()=>handleSelect(children.name,children.id,rowId)}><i className={`Icon Icon--info CategoryIcon Icon--line Icon--primaryAction Icon--light CategoryIcon--${children.id}`}></i> {children.name}</Dropdown.Item>
                                         ))}
                                     </>
                                 ))}

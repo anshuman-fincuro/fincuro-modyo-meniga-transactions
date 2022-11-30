@@ -275,7 +275,7 @@ line-height: 1;
   .Icon--info.Icon--square,
   .Icon--primary.Icon--round,
   .Icon--info.Icon--round {
-    border-color: #fff;
+    /* border-color: #fff; */
   }
   .Icon--primary.Icon--square.Icon--invert,
   .Icon--info.Icon--square.Icon--invert,
@@ -1667,3 +1667,10 @@ line-height: 1;
 .CategoryIcon.CategoryIcon--262.Icon--solid:before { content:"\eaf0"; }
 .CategoryIcon.CategoryIcon--winter.Icon--line:before { content:"\eaf1"; }
 .CategoryIcon.CategoryIcon--winter.Icon--solid:before { content:"\eaf0"; }
+
+.single-values i,
+.accordion .accordion-header i,
+.accordion .accordion-body i {
+  margin-right: 1rem;
+  color: #899ea9;
+}
