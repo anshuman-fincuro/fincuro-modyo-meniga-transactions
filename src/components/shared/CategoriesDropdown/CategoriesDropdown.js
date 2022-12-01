@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
-import { setCategoryFilterData } from "./../../../store/actions/component-action"
+import { setCategoryFilterData } from "./../../../store/actions/component-action";
 import { connect } from "react-redux";
 import { Dropdown, Accordion, useAccordionButton } from "react-bootstrap";
 import "./CategoriesDropdown.css";
@@ -8,7 +8,7 @@ import { mdiChevronDown, mdiChevronUp, mdiClose } from "@mdi/js";
 import Icon from "@mdi/react";
 import Button from "react-bootstrap/Button";
 
-function CustomToggle({eventKey }) {
+function CustomToggle({ eventKey }) {
   const [open, setOpen] = React.useState(false);
   const decoratedOnClick = useAccordionButton(eventKey, (e) => {
     setOpen(!open);
@@ -43,7 +43,7 @@ class CategoriesDropdown extends Component {
       selectedCategories: [],
       allChildCategories: [],
       searchText: "",
-      search:  false
+      search: false,
     };
     this.wrapper = React.createRef();
     this.selectClick = this.selectClick.bind(this);
@@ -114,7 +114,6 @@ class CategoriesDropdown extends Component {
     }
   }
 
- 
   childCatClick(event, parentCatId, childCatId) {
     event.stopPropagation();
     if (!event.target.checked) {
@@ -208,14 +207,19 @@ class CategoriesDropdown extends Component {
     );
   }
 
-  categoryChange(event,id){
-      if(event.target.checked){
-        this.setState( (prevState) => ({ selectedCategories: [...prevState.selectedCategories, id] }), ()=>{
+  categoryChange(event, id) {
+    if (event.target.checked) {
+      this.setState(
+        (prevState) => ({
+          selectedCategories: [...prevState.selectedCategories, id],
+        }),
+        () => {
           this.props.onChange(this.state.selectedCategories);
-        })
-      }else{
-        this.removeCategory(id);
-      }
+        }
+      );
+    } else {
+      this.removeCategory(id);
+    }
   }
 
   render() {
@@ -264,54 +268,77 @@ class CategoriesDropdown extends Component {
                             <Accordion key={index}>
                               <div className="accordianHeader">
                                 <div className="accordianHeaderCheckbox">
-                                 
                                   <Form.Check
                                     type="checkbox"
-                                    id={`default-${categ.name}`}
-                                    label={categ.name}
+                                    id={`cat-${index}`}
                                     className={
                                       "Checkbox-text " +
                                       (this.checkParentIndeterminate(categ)
                                         ? "indeterminate"
                                         : "")
                                     }
-                                    onChange={(event) =>
-                                      this.parentCatClick(event, categ.id)
-                                    }
-                                    checked={this.checkParent(categ)}
-                                  />
-                                   {/* <div className="icon-section">
-                                  <i className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${categ.id}`}></i> 
-                                  </div>  */}
+                                  >
+                                    <div className="input-icon-section">
+                                      <Form.Check.Input
+                                        type="checkbox"
+                                        onChange={(event) =>
+                                          this.parentCatClick(event, categ.id)
+                                        }
+                                        checked={this.checkParent(categ)}
+                                      />
+                                      <div className="icon-section">
+                                        <i
+                                          className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${categ.id}`}
+                                        ></i>
+                                      </div>
+                                    </div>
+
+                                    <Form.Check.Label>
+                                      {categ.name}
+                                    </Form.Check.Label>
+                                  </Form.Check>
                                 </div>
+
                                 <div className="accordianToggle">
                                   <CustomToggle eventKey={index}></CustomToggle>
                                 </div>
                               </div>
                               <Accordion.Collapse eventKey={index}>
                                 <div className="collapsableContent">
-                                  {categ.children.map((children) => (
+                                  {categ.children.map((child) => (
                                     <div
                                       eventKey={`${categ.id}`}
                                       className="checkboxWrapper"
-                                      key={children.id}
+                                      key={child.id}
                                     >
                                       <Form.Check
-                                        onChange={(event) =>
-                                          this.childCatClick(
-                                            event,
-                                            categ.id,
-                                            children.id
-                                          )
-                                        }
                                         className="Checkbox-text"
                                         type="checkbox"
-                                        id={`default-${children.name}`}
-                                        label={children.name}
-                                        checked={selectedCategories.includes(
-                                          children.id
-                                        )}
-                                      />
+                                        id={`default-${child.name}`}
+                                      >
+                                        <div className="input-icon-section">
+                                          <Form.Check.Input
+                                            onChange={(event) =>
+                                              this.childCatClick(
+                                                event,
+                                                categ.id,
+                                                child.id
+                                              )
+                                            }
+                                            checked={selectedCategories.includes(
+                                              child.id
+                                            )}
+                                          ></Form.Check.Input>
+                                          <div className="icon-section">
+                                            <i
+                                              className={`Icon Icon--info CategoryIcon Icon--line CategoryIcon--${child.id}`}
+                                            ></i>
+                                          </div>
+                                        </div>
+                                        <Form.Check.Label>
+                                          {child.name}
+                                        </Form.Check.Label>
+                                      </Form.Check>
                                     </div>
                                   ))}
                                 </div>
@@ -338,7 +365,9 @@ class CategoriesDropdown extends Component {
                         .map((cat, index) => (
                           <div className="checkboxWrapper" key={index}>
                             <Form.Check
-                              onChange={(event)=> this.categoryChange(event, cat.id)}
+                              onChange={(event) =>
+                                this.categoryChange(event, cat.id)
+                              }
                               className="Checkbox-text"
                               type="checkbox"
                               id={`default-${cat.name}`}
