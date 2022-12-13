@@ -7,6 +7,7 @@ const initialState = {
   merchantData: [],
   planningData: [],
   spendingData: [],
+  lineChartData:[],
   categoryFilterData: [],
   settings: {},
   errMeessage:'',
@@ -46,6 +47,12 @@ const componentReducer = (state = initialState, action) => {
         spendingData: action.payload.spendingData,
         loading: false
       };
+      case TYPES.COMPONENT.ON_LINECHART_SUCCESS:
+        return {
+          ...state,
+          lineChartData: action.payload.lineChartData,
+          loading: false
+        };
     case TYPES.FILTER.ON_CATEGORY_FILTER_SUCCESS:
       const payload = action.payload.catFilterData;
       const filteredData =
