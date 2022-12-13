@@ -206,3 +206,18 @@ export const setSettingsData = (token) => {
       });
   };
 };
+
+export const setLineChartData = (token, param) => {
+
+  return (dispatch) => {
+    axios.post(`${API_URL}/transactions/series?token=Bearer ${token}`, param).then((response) => {
+      if (response.status === 200) {
+        dispatch({
+          type: TYPES.COMPONENT.ON_LINECHART_SUCCESS,
+          payload: { lineChartData: response.data.data},
+        });
+      }
+      
+    });
+  };
+};

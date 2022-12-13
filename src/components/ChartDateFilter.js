@@ -2,27 +2,118 @@ import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import * as moment from "moment";
 import { connect } from "react-redux";
-import {setSpendingData} from "../store/actions/component-action";
+import { setSpendingData } from "../store/actions/component-action";
+import { setLineChartData } from "../store/actions/component-action";
 class ChartDateFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dateDropDown: [],
-      selectValue:{},
+      selectValue: {},
     };
-    this.handleChange = this.handleChange.bind(this) 
-}
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-handleChange(e){
-   this.props.setSpendingData(this.props.token,e.target.value)
+  handleChange(e) {
+    console.log(e.target.value.split(",")[0]);
+    console.log(e.target.value.split(",")[1]);
+    let merchantData;
+    if (this.props.merchantId !== null) {
+      merchantData = {
+        "merchantIds": [
+          this.props.merchantId
+        ], "useParentMerchantIds": true
+      }
+    }
+    else {
+      merchantData = {
+        "merchantTexts": [
+          this.props.merchantTexts
+        ], useExactMerchantTexts
+          :
+          true
+      }
+    }
+    let param = {
+      "transactionFilter": {
+        "periodFrom": e.target.value.split(",")[0],
+        "periodTo": e.target.value.split(",")[1],
+        "hideExcluded": true
+      },
+      "options": {
+        "timeResolution": "Month",
+        "overTime": true,
+        "type": "categorySeries",
+        "includeCarbonFootprint": true
+      },
+      "seriesSelectors": [
+        {
+          "filter": {
+            "categoryIds": [
+              this.props.categoryId
+            ]
+          }
+        },
+        {
+          "filter": merchantData
+        }
+      ]
+    }
+    this.props.setLineChartData(this.props.token, param)
   }
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({ dateDropDown: this.getdateRange() });
+    let merchantData;
+    if (this.props.merchantId !== null) {
+      merchantData = {
+        "merchantIds": [
+          this.props.merchantId
+        ], "useParentMerchantIds": true
+      }
+    }
+    else {
+      merchantData = {
+        "merchantTexts": [
+          this.props.merchantTexts
+        ], useExactMerchantTexts
+          :
+          true
+      }
+    }
+    let param = {
+      "transactionFilter": {
+        "periodFrom": moment().subtract(1, 'months').startOf("month").format("YYYY-MM-DD"),
+        "periodTo": moment().endOf("month").format("YYYY-MM-DD"),
+        "hideExcluded": true
+      },
+      "options": {
+        "timeResolution": "Month",
+        "overTime": true,
+        "type": "categorySeries",
+        "includeCarbonFootprint": true
+      },
+      "seriesSelectors": [
+        {
+          "filter": {
+            "categoryIds": [
+              this.props.categoryId
+            ]
+          }
+        },
+        {
+          "filter": merchantData
+        }
+      ]
+    }
+    this.props.setLineChartData(this.props.token, param);
+    this.props.onSelectChartData(this.props.lineChartData);
+    console.log('this.props.lineChartData...0', this.props.lineChartData)
   }
-  componentDidUpdate(){
-    console.log('spendingData...', this.props.spendingData)
+  componentDidUpdate(prevProps) {
+    console.log('this.props.lineChartData...', this.props.lineChartData);
+    this.props.onSelectChartData(this.props.lineChartData);
   }
- 
+
   getdateRange() {
     const dates = [
       "Last month",
@@ -43,37 +134,25 @@ handleChange(e){
           .subtract(1, "months")
           .startOf("month")
           .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
+        endDate = moment().endOf("month").format("YYYY-MM-DD");
       } else if (item === "Last 3 months") {
         startDate = moment()
           .subtract(3, "months")
           .startOf("month")
           .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
+        endDate = endDate = moment().endOf("month").format("YYYY-MM-DD");
       } else if (item === "Last 6 months") {
         startDate = moment()
           .subtract(6, "months")
           .startOf("month")
           .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
+        endDate = moment().endOf("month").format("YYYY-MM-DD");
       } else if (item === "Last 12 months") {
         startDate = moment()
           .subtract(12, "months")
           .startOf("month")
           .format("YYYY-MM-DD");
-        endDate = moment()
-          .subtract(1, "months")
-          .endOf("month")
-          .format("YYYY-MM-DD");
+        endDate = moment().endOf("month").format("YYYY-MM-DD");
       } else if (item === "This year") {
         startDate = moment().startOf("year").format("YYYY-MM-DD");
         endDate = moment().endOf("month").format("YYYY-MM-DD");
@@ -104,7 +183,8 @@ handleChange(e){
       <>
         <div className="form-group col-md-12">
           <Form.Select aria-label="Default select example" onChange={(e) => {
-                                                        this.handleChange(e)}}>
+            this.handleChange(e)
+          }}>
             <option>Select period</option>
             {ranges &&
               ranges.map((range, i) => (
@@ -121,13 +201,13 @@ handleChange(e){
   }
 }
 const mapStateToProps = (state) => ({
-    token: state.authReducer.token,
-    spendingData: state.componentReducer.spendingData,
-    
-  });
+  token: state.authReducer.token,
+  lineChartData: state.componentReducer.lineChartData,
+
+});
 const mapDispatchToProps = (dispatch,) => {
-    return {
-        setSpendingData: (token,value) => dispatch(setSpendingData(token,{chartDateRange:value})),
-    };
+  return {
+    setLineChartData: (token, value) => dispatch(setLineChartData(token, value)),
   };
-  export default connect(mapStateToProps,mapDispatchToProps)(ChartDateFilter);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ChartDateFilter);

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Icon from "@mdi/react";
+import * as moment from "moment";
 import {setSpendingData} from "../store/actions/component-action";
+import {setLineChartData} from "../store/actions/component-action";
 import "./../style/Base.css";
 import "./../App.css";
 import {
@@ -32,18 +34,23 @@ class TransactionDetail extends Component {
       selectedTransaction: this.props.selectedTransaction,
       selectedTransactionGroup: this.props.selectedTransactionGroup,
       categoriesData: this.props.categorydata,
-      merchantDetails : {}
+      merchantDetails : {},
+      selectedDropCategory:''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    // this.onSelectChartData = this.onSelectChartData.bind(this);
     
     this.defaultDropdownSelect = this.defaultDropdownSelect.bind(this);
   }
-  handleInputChange(value) {
-    console.log('Custom Selected Drop Val', value);
+  handleInputChange(value, categId) {
+    console.log('Custom Selected Drop Val', value, categId);
     if (value === "Show All Categories") {
       console.log("value set to true");
       this.setState({ showCategories: value });
+    }
+    else {
+      this.setState({ selectedDropCategory: value, categId:categId });
     }
   }
   defaultDropdownSelect(val) {
@@ -66,7 +73,7 @@ class TransactionDetail extends Component {
     console.log('totalSlectedCatAmtVal', totalSelectedMerchantAmtVal, countVal);
     return +countVal;
   }
-  componentDidMount(){
+  async componentDidMount(){
     const { selectedTransaction, token } = this.props;
     if(selectedTransaction && selectedTransaction.merchantId){
       axios
@@ -92,6 +99,9 @@ class TransactionDetail extends Component {
       this.setState({showCategories: transactionID})
      }
     }
+    onSelectChartData = (chartdata) => {
+      this.setState({lineChartData: chartdata});
+  }
   render() {
     const data = [
       {
@@ -161,22 +171,15 @@ class TransactionDetail extends Component {
                                     <span className="SelectPlaceholder-text">
                                       <div className="SelectOptionPlaceholder">
                                         <span className="SelectOptionPlaceholder-icon">
-                                          <Icon
-                                            path={mdiBank}
-                                            size={1.25}
-                                            horizontal
-                                            vertical
-                                            rotate={180}
-                                            color="#000"
-                                          />
+                                        <i className={`Icon Icon--info CategoryIcon Icon--line Icon--primaryAction Icon--light CategoryIcon--${this.state.categId === undefined ? this.state.selectedTransaction.categoryId:this.state.categId}`}></i>
                                         </span>
                                         <span className="billingTable-right-dropdown transaction-detail-dropdown">
                                         <CustomDropdown 
                                           items={this.props.categoryFilterData}
                                           detectedCategories={this.state.selectedTransaction.detectedCategories}
                                           defaultSelect={this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
-                                          handleSelection={(value)=>{
-                                              this.handleInputChange(value)
+                                          handleSelection={(value, categId)=>{
+                                              this.handleInputChange(value, categId)
                                           }}                            
                                           categorydata={this.props.categorydata}
                                           />                                        
@@ -334,7 +337,7 @@ class TransactionDetail extends Component {
                     </div>
                     <div className="transactionOverviewChart-list-item me-3 border-color-purpel">
                       <div className="transactionOverviewChart-text">
-                      {this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
+                      {this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
                       </div>
                       <div className="transactionOverviewChart-amount">
                         £ -180.00
@@ -348,7 +351,7 @@ class TransactionDetail extends Component {
               <h2 className="heading">Total expenses this period</h2>
               <div className="TransactionOverviewChart-tabs-wrapper">                
               <div className="TransactionOverviewChart-dropdown">
-              <ChartDateFilter></ChartDateFilter>
+              <ChartDateFilter onSelectChartData={this.onSelectChartData} categoryId={this.state.selectedTransaction.categoryId} merchantId={this.props.selectedTransaction.merchantId} merchantTexts={this.state.selectedTransaction.text}></ChartDateFilter>
               </div>
                 <div>
                   <nav>
@@ -373,7 +376,7 @@ class TransactionDetail extends Component {
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
                     >
-                      <LineCharts spendingData={this.props.spendingData} />
+                      {this.state.lineChartData && <LineCharts selectedCategory={this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)} selectedTransaction={this.state.selectedTransaction.text} lineChartData={this.state.lineChartData} spendingData={this.props.spendingData} /> }
                       <table className="TransactionChartTable">
                         <thead>
                           <tr>
@@ -401,7 +404,7 @@ class TransactionDetail extends Component {
                             </td>
                             <td>
                               <span className="TransactionChartTable-row-text TransactionChartTable-dot dot-color">
-                                Public Transportation
+                              {this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
                               </span>
                             </td>
                             <td className="TransactionChartTable-text">
@@ -519,12 +522,14 @@ const mapStateToProps = (state) => ({
   merchantData: state.componentReducer.merchantData,
   categoriesData: state.componentReducer.categoriesData,
   spendingData: state.componentReducer.spendingData,
+  lineChartData: state.componentReducer.lineChartData,
   categoryFilterData: state.componentReducer.categoryFilterData,
 });
 
 const mapDispatchToProps = (dispatch,) => {
   return {
       setSpendingData: (token,value) => dispatch(setSpendingData(token,{chartDateRange:value})),
+      setLineChartData: (token,value) => dispatch(setLineChartData(token,value)),
   };
 };
 export default connect(mapStateToProps,mapDispatchToProps)(TransactionDetail);
