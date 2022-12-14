@@ -17,6 +17,10 @@ class ChartDateFilter extends Component {
   handleChange(e) {
     console.log(e.target.value.split(",")[0]);
     console.log(e.target.value.split(",")[1]);
+    var index = e.nativeEvent.target.selectedIndex;
+    var text =e.nativeEvent.target[index].text;
+  
+   this.setState({selectedMonthLabel:text});
     let merchantData;
     if (this.props.merchantId !== null) {
       merchantData = {
@@ -82,7 +86,7 @@ class ChartDateFilter extends Component {
     }
     let param = {
       "transactionFilter": {
-        "periodFrom": moment().subtract(1, 'months').startOf("month").format("YYYY-MM-DD"),
+        "periodFrom": moment().subtract(6, 'months').startOf("month").format("YYYY-MM-DD"),
         "periodTo": moment().endOf("month").format("YYYY-MM-DD"),
         "hideExcluded": true
       },
@@ -106,12 +110,12 @@ class ChartDateFilter extends Component {
       ]
     }
     this.props.setLineChartData(this.props.token, param);
-    this.props.onSelectChartData(this.props.lineChartData);
+    this.props.onSelectChartData(this.props.lineChartData, this.state.selectedMonthLabel);
     console.log('this.props.lineChartData...0', this.props.lineChartData)
   }
   componentDidUpdate(prevProps) {
     console.log('this.props.lineChartData...', this.props.lineChartData);
-    this.props.onSelectChartData(this.props.lineChartData);
+    this.props.onSelectChartData(this.props.lineChartData, this.state.selectedMonthLabel);
   }
 
   getdateRange() {
@@ -185,11 +189,10 @@ class ChartDateFilter extends Component {
           <Form.Select aria-label="Default select example" onChange={(e) => {
             this.handleChange(e)
           }}>
-            <option>Select period</option>
             {ranges &&
               ranges.map((range, i) => (
                 <>
-                  <option key={i} value={range.value}>
+                  <option key={i} label={range.label} value={range.value} selected={range.label === "Last 6 months"}>
                     {range.label}
                   </option>
                 </>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, BarChart, Bar, } from "recharts";
 import _ from 'lodash';
 import * as moment from 'moment';
 
@@ -17,6 +17,7 @@ class LineCharts extends Component {
   }
   async componentDidMount() {   
       this.linechartPlotData();
+      console.log('this.props.selectedMonthLabel',this.props.selectedMonthLabel)
   }
   componentDidUpdate(prevProps) {   
     if(prevProps.lineChartData !== this.props.lineChartData){
@@ -54,13 +55,21 @@ class LineCharts extends Component {
       <div className="mt-5 col-12">
         {this.state.data &&
           <ResponsiveContainer width="98%" height={250}>
-            <LineChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            {this.props.selectedMonthLabel === "Last month" ? <BarChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
               <XAxis dataKey="date" padding={{ left: 50, right: 50 }} />
               <YAxis type="number" reversed />
               <Tooltip />              
-              <Line type="monotone" dataKey={this.props.selectedTransaction} stroke="#feb734" />
-              <Line type="monotone" dataKey={this.props.selectedCategory} stroke="#6bc1d3" />
-            </LineChart>
+              <Bar type="monotone" dataKey={this.props.selectedTransaction} fill="#feb734" />
+              <Bar type="monotone" dataKey={this.props.selectedCategory} fill="#6bc1d3" />
+            </BarChart> :
+            <LineChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="date" padding={{ left: 50, right: 50 }} />
+            <YAxis type="number" reversed />
+            <Tooltip />              
+            <Line type="monotone" dataKey={this.props.selectedTransaction} stroke="#feb734" />
+            <Line type="monotone" dataKey={this.props.selectedCategory} stroke="#6bc1d3" />
+          </LineChart>
+            }
           </ResponsiveContainer>
         }
       </div>
