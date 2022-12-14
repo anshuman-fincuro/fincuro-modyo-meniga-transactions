@@ -99,8 +99,8 @@ class TransactionDetail extends Component {
       this.setState({showCategories: transactionID})
      }
     }
-    onSelectChartData = (chartdata) => {
-      this.setState({lineChartData: chartdata});
+    onSelectChartData = (chartdata, selectedMonthLabel) => {
+      this.setState({lineChartData: chartdata, selectedMonthLabel:selectedMonthLabel});
   }
   render() {
     const data = [
@@ -376,7 +376,7 @@ class TransactionDetail extends Component {
                       role="tabpanel"
                       aria-labelledby="nav-home-tab"
                     >
-                      {this.state.lineChartData && <LineCharts selectedCategory={this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)} selectedTransaction={this.state.selectedTransaction.text} lineChartData={this.state.lineChartData} spendingData={this.props.spendingData} /> }
+                      {this.state.lineChartData && <LineCharts selectedCategory={this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)} selectedTransaction={this.state.selectedTransaction.text} selectedMonthLabel={this.state.selectedMonthLabel} lineChartData={this.state.lineChartData} spendingData={this.props.spendingData} /> }
                       <table className="TransactionChartTable">
                         <thead>
                           <tr>
