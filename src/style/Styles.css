@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'MeniconCategories';
-    src:url('../fonts/MeniconCategories.eot');
-    src:url('../fonts/MeniconCategories.eot#iefix') format('embedded-opentype'),
-      url('../fonts/MeniconCategories.ttf') format('truetype'),
-      url('../fonts/MeniconCategories.woff') format('woff'),
-      url('../fonts/MeniconCategories.svg#@{MeniconCategories}') format('svg');
+    src:url('https://d3s87pah5oatx.cloudfront.net/uploads/2247e0ff-b989-434a-8be0-20774efc6203/original/MeniconCategories.eot');
+    src:url('https://d3s87pah5oatx.cloudfront.net/uploads/2247e0ff-b989-434a-8be0-20774efc6203/original/MeniconCategories.eot#iefix') format('embedded-opentype'),
+      url('https://d3s87pah5oatx.cloudfront.net/uploads/47fa8eb5-7764-4908-ae9a-638f336a5069/original/MeniconCategories.ttf') format('truetype'),
+      url('https://d3s87pah5oatx.cloudfront.net/uploads/78a58c4c-a441-4fa0-ae85-2a8d55f31771/original/MeniconCategories.woff') format('woff'),
+      url('https://d3s87pah5oatx.cloudfront.net/uploads/dfee7fc7-d949-4158-9d01-62c622350b77/original/MeniconCategories.svg#@{MeniconCategories}') format('svg');
     font-weight: normal;
     font-style: normal;
 }  
