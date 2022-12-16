@@ -377,7 +377,7 @@ class TransactionDetail extends Component {
                       aria-labelledby="nav-home-tab"
                     >
                       {this.state.lineChartData && <LineCharts selectedCategory={this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)} selectedTransaction={this.state.selectedTransaction.text} selectedMonthLabel={this.state.selectedMonthLabel} lineChartData={this.state.lineChartData} spendingData={this.props.spendingData} /> }
-                      <table className="TransactionChartTable">
+                      {this.state.lineChartData && <table className="TransactionChartTable">
                         <thead>
                           <tr>
                             <th className="TransactionChartTable-icon"></th>
@@ -413,7 +413,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  -30.00
+                                  {Math.round(this.state.lineChartData[0].statistics.currentMonthTotal)+'.00'}
                                 </span>
                               </span>
                             </td>
@@ -423,7 +423,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  -25.67
+                                {Math.round(this.state.lineChartData[0].statistics.average)+'.00'}
                                 </span>
                               </span>
                             </td>
@@ -433,13 +433,13 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  -184.00
+                                {Math.round(this.state.lineChartData[0].statistics.total)+'.00'}
                                 </span>
                               </span>
                             </td>
-                            <td className="TransactionChartTable-row-action">
+                            {/* <td className="TransactionChartTable-row-action">
                               <i className="Icon Icon--normal Icon--xs Icon--line Icon--right"></i>
-                            </td>
+                            </td> */}
                           </tr>
                           <tr className="TransactionChartTable-row ">
                             <td
@@ -459,7 +459,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  -30.00
+                                {Math.round(this.state.lineChartData[1].statistics.currentMonthTotal)+'.00'}
                                 </span>
                               </span>
                             </td>
@@ -469,7 +469,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  -15.00
+                                {Math.round(this.state.lineChartData[1].statistics.average)+'.00'}
                                 </span>
                               </span>
                             </td>
@@ -479,16 +479,17 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  -120.00
+                                {Math.round(this.state.lineChartData[1].statistics.total)+'.00'}
                                 </span>
                               </span>
                             </td>
-                            <td className="TransactionChartTable-row-action">
+                            {/* <td className="TransactionChartTable-row-action">
                               <i className="Icon Icon--normal Icon--xs Icon--line Icon--right"></i>
-                            </td>
+                            </td> */}
                           </tr>
                         </tbody>
                       </table>
+                      }
                     </div>
                   </div>
                 </div>
