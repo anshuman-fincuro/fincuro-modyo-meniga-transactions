@@ -84,6 +84,43 @@ class TransactionDetail extends Component {
         }
       });
     }
+    if(selectedTransaction.merchantId && this.state.selectedTransaction.categoryId){
+      let param = {
+        "transactionFilter": {
+          "periodFrom": moment().subtract(11, 'months').startOf("month").format("YYYY-MM-DD"),
+          "periodTo": moment().endOf("month").format("YYYY-MM-DD"),
+          "hideExcluded": true
+        },
+        "options": {
+          "timeResolution": "Month",
+          "overTime": true,
+          "type": "categorySeries",
+          "includeCarbonFootprint": true
+        },
+        "seriesSelectors": [
+          {
+            "filter": {
+              "categoryIds": [
+                this.state.selectedTransaction.categoryId
+              ]
+            }
+          },
+          {
+            "filter": {
+              "merchantIds": [
+                selectedTransaction.merchantId
+              ], "useParentMerchantIds": true
+            }
+          }
+        ]
+      }
+      axios.post(`${API_URL}/transactions/series?token=Bearer ${token}`, param).then((response) => {
+        if (response.status === 200) {
+          this.setState( { totalExpenses: response.data.data})
+        }
+        console.log('totalExpenses',this.state.totalExpenses)
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -324,7 +361,8 @@ class TransactionDetail extends Component {
                       {this.state.selectedTransaction.text}
                       </div>
                       <div className="transactionOverviewChart-amount">
-                        £ {this.totalSelectedMerchantAmt(this.state.selectedTransaction.text)}
+                        {/* £ {this.totalSelectedMerchantAmt(this.state.selectedTransaction.text)} */}
+                        £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[1].statistics.total))+'.00':''}
                       </div>
                     </div>
                     <div className="transactionOverviewChart-list-item me-3 border-color-blue">
@@ -332,7 +370,7 @@ class TransactionDetail extends Component {
                         Carbon footprint
                       </div>
                       <div className="transactionOverviewChart-amount">
-                        £ 0.00
+                      £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[0].statistics.carbonFootprint.total) + Math.round(this.state.totalExpenses[1].statistics.carbonFootprint.total))+'.00':''}
                       </div>
                     </div>
                     <div className="transactionOverviewChart-list-item me-3 border-color-purpel">
@@ -340,7 +378,7 @@ class TransactionDetail extends Component {
                       {this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
                       </div>
                       <div className="transactionOverviewChart-amount">
-                        £ -180.00
+                        £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[0].statistics.total))+'.00':''}
                       </div>
                     </div>
                   </div>
