@@ -370,7 +370,7 @@ class TransactionDetail extends Component {
                         Carbon footprint
                       </div>
                       <div className="transactionOverviewChart-amount">
-                      £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[0].statistics.carbonFootprint.total) + Math.round(this.state.totalExpenses[1].statistics.carbonFootprint.total))+'.00':''}
+                      £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[0].statistics.carbonFootprint.total))+'.00':''}
                       </div>
                     </div>
                     <div className="transactionOverviewChart-list-item me-3 border-color-purpel">
