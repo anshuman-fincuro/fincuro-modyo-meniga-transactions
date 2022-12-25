@@ -75,6 +75,14 @@ class TransactionDetail extends Component {
   }
   async componentDidMount(){
     const { selectedTransaction, token } = this.props;
+    let merchantData;
+    if(selectedTransaction.id !== null){
+      axios.get(`${API_URL}/transactions/${selectedTransaction.id}/split?token=Bearer ${token}&includeCarbonFootprint=true`).then((response) => {
+       if (response.status === 200) {
+         this.setState( { carbonFootprint: response.data.data})
+       }
+     });
+   }
     if(selectedTransaction && selectedTransaction.merchantId){
       axios
       .get(`${API_URL}/merchants/${selectedTransaction.merchantId}?token=Bearer ${token}`)
@@ -84,7 +92,22 @@ class TransactionDetail extends Component {
         }
       });
     }
-    if(selectedTransaction.merchantId && this.state.selectedTransaction.categoryId){
+    console.log('this.state.selectedTransaction.categoryId',selectedTransaction.id , this.state.selectedTransaction.categoryId)
+    if((selectedTransaction.merchantId !== null?selectedTransaction.merchantId:selectedTransaction.text) && this.state.selectedTransaction.categoryId){
+      if (selectedTransaction.merchantId !== null) {
+        merchantData = {
+          "merchantIds": [
+            selectedTransaction.merchantId
+          ], "useParentMerchantIds": true
+        }
+      }
+      else {
+        merchantData = {
+          "merchantTexts": [
+            selectedTransaction.text
+          ], useExactMerchantTexts : true
+        }
+      }
       let param = {
         "transactionFilter": {
           "periodFrom": moment().subtract(11, 'months').startOf("month").format("YYYY-MM-DD"),
@@ -94,7 +117,7 @@ class TransactionDetail extends Component {
         "options": {
           "timeResolution": "Month",
           "overTime": true,
-          "type": "categorySeries",
+          "type": "yearSeries",
           "includeCarbonFootprint": true
         },
         "seriesSelectors": [
@@ -106,11 +129,7 @@ class TransactionDetail extends Component {
             }
           },
           {
-            "filter": {
-              "merchantIds": [
-                selectedTransaction.merchantId
-              ], "useParentMerchantIds": true
-            }
+            "filter": merchantData
           }
         ]
       }
@@ -152,6 +171,9 @@ class TransactionDetail extends Component {
     ];
 
     const { merchantDetails } = this.state;
+    
+    
+    console.log('carbonFootprint',this.state.carbonFootprint)
     
     return (
       <div>
@@ -244,7 +266,7 @@ class TransactionDetail extends Component {
                   </div>
                   {/*  */}
                   <div className="transactionActionList">
-                    <div className="transactionActionList-list">
+                    {/* <div className="transactionActionList-list">
                       <div className="transactionActionList-item">
                         <button
                           className="transactionActionList-btn"
@@ -335,7 +357,7 @@ class TransactionDetail extends Component {
                           </span>
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 
@@ -349,7 +371,7 @@ class TransactionDetail extends Component {
                     </span>
                   </div>
                   <div className="content-right">
-                    <span className="formattedNumber">99</span>
+                    <span className="formattedNumber">{this.state.carbonFootprint && (this.state.carbonFootprint[0].carbonFootprint !== null?Math.round(this.state.carbonFootprint[0].carbonFootprint/1000):0)}</span>
                     <span className="estimated-text ">kg CO2e</span>
                   </div>
                 </div>
