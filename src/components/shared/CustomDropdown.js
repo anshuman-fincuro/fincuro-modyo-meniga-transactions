@@ -4,7 +4,7 @@ import './CustomDropdown.css';
 
 const CustomDropdown = (props) => {
     const { items, handleSelection, detectedCategories, defaultSelect, rowId } = props;
-    const [selectedValue, setSelectedValue] = useState(defaultSelect);
+    const [selectedValue, setSelectedValue] = useState('');
     const [showAllCategorie, setShowAllCategories] = useState('');
     const [show, setShow] = useState();
     const [search, setSearch] = useState('');
@@ -25,6 +25,9 @@ const CustomDropdown = (props) => {
 
         console.log('items', props.items);
     }, [show]);
+    useEffect(() => {
+        setSelectedValue(defaultSelect);
+    }, [defaultSelect])
     return (
         <div className="custom-dropdown-wrapper">
             <Dropdown show={show}
