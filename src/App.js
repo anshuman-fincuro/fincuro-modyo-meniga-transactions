@@ -75,6 +75,12 @@ class App extends Component {
   setAmountFilterValue(value) {
     this.setState({ amountFilterValue: value });
   }
+  activeIndex(value){
+    this.setState({activeIndexVal:value})
+  }
+  setAccountActiveId(value){
+    this.setState({accountActiveId:value})
+  }
   onTrigger = (index) => {
     if (this.props.activeCheckboxCurrent) {
       return this.setState({ activeCheckboxCurrent: true });
@@ -150,6 +156,10 @@ class App extends Component {
                   <div className="account-top-bar">
                     <AccountDropdown
                       accountsData={accountDropdownData}
+                      activeIndex={this.activeIndex.bind(this)}
+                      setAccountActiveId={this.setAccountActiveId.bind(this)}
+                      activeIndexVal={this.state.activeIndexVal}
+                      accountActiveId={this.state.accountActiveId}
                     ></AccountDropdown>
                   </div>
                   <div className="bill-table-form-wrap">
