@@ -3,19 +3,25 @@ import "./../style/Base.css";
 import "./../App.css";
 import { useDispatch, useSelector} from 'react-redux';
 import { setSpendingData } from "../store/actions/component-action";
+import { useEffect } from "react";
 
-const AccountDropdown = ({ accountsData }) => {
+const AccountDropdown = ({ accountsData, activeIndex, activeIndexVal, setAccountActiveId, accountActiveId }) => {
 
-  const [active, setActive] = React.useState(null);
+  const [active, setActive] = React.useState(activeIndexVal);
   const dispatch = useDispatch();
   const { token } = useSelector((store) => store.authReducer);
 
   const changeAccount = (account, index)=>{
       setActive(index);
-      dispatch(setSpendingData(token, { accountIds : account.id}))
+      activeIndex(index);
+      setAccountActiveId(account.id);
   }
-
-  return (
+  useEffect(()=>{     
+    if(accountActiveId !== undefined ){s
+      dispatch(setSpendingData(token, { accountIds : accountActiveId}))
+    }
+  }, [accountActiveId, active])
+    return (
     <div className="account-wrapper">
       <ul>
         {accountsData.map((x, i) => (
