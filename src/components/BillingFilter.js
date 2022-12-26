@@ -77,9 +77,14 @@ class BillingFilter extends Component {
   }
 
   onTextChange(data) {
-    this.setState({ searchText: data }, () => {
+    if(this.props.accountActiveId !== undefined && data === null) {
+      this.props.setSpendingData(this.props.token, { accountIds : this.props.accountActiveId});
+    }
+    else {      
+      this.setState({ searchText: data }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
+    }
   }
 
   debounceChange = debounce(() => {
