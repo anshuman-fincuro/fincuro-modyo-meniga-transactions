@@ -182,6 +182,7 @@ class App extends Component {
                         )}
                         amountFilterValue={this.setAmountFilterValue.bind(this)}
                         activeAccount={this.state.activeAccount}
+                        accountActiveId={this.state.accountActiveId}
                       ></BillingFilter>
                     </div>
                   </div>
