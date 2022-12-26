@@ -17,7 +17,7 @@ const AccountDropdown = ({ accountsData, activeIndex, activeIndexVal, setAccount
       setAccountActiveId(account.id);
   }
   useEffect(()=>{     
-    if(accountActiveId !== undefined ){s
+    if(accountActiveId !== undefined ){
       dispatch(setSpendingData(token, { accountIds : accountActiveId}))
     }
   }, [accountActiveId, active])
