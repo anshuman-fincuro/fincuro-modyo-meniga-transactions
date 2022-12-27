@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { getFromToDate } from "../../../utils";
 import DateInput from "../DateInput/DateInput";
 
-function DateFilter({ onChange }) {
+function DateFilter({ onChange, accountActiveId }) {
   const [showDateRange, setShowDateRange] = React.useState(false);
   const [fromDate, setFromDate] = React.useState(null);
   const [toDate, setTodate] = React.useState(null);
@@ -28,6 +28,12 @@ function DateFilter({ onChange }) {
         onChange({ periodFrom: fromDate, periodTo: toDate });
     }
   }, [fromDate, toDate]);
+
+  React.useEffect(() => {
+    setShowDateRange('');
+    setFromDate('');
+    setTodate('');
+  }, [accountActiveId]);
 
   return (
     <>

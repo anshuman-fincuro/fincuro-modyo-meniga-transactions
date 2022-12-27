@@ -73,7 +73,11 @@ class CategoriesDropdown extends Component {
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.outsideClick);
   }
-
+  componentDidUpdate(previousProps){
+    if(previousProps.accountActiveId !== this.props.accountActiveId) {
+      this.setState({selectedCategories:[]})
+    }
+  }
   selectClick() {
     this.setState((prevstate) => ({ isOpen: !prevstate.isOpen }));
   }

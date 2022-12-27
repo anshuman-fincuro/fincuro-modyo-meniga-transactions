@@ -38,11 +38,9 @@ class BillingFilter extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.activeAccount !== this.props.activeAccount)
-      this.setState({ activeAccount: this.props.activeAccount }, () => {
-        this.props.setSpendingData(this.props.token, this.state);
-      });
-
+    if (prevProps.accountActiveId !== this.props.accountActiveId){
+        this.setState({ searchText: '' })
+      }
   }
 
   filterbyAmount(value) {
@@ -94,13 +92,13 @@ class BillingFilter extends Component {
 
   uncertainHandleChange(event) {
     const flag = event.target.value == "on" ? true : false;
-    this.setState({ onlyUncertain: flag }, () => {
+    this.setState({ onlyUncertain: flag, accountIds : this.props.accountActiveId }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
   categoryChange(cats) {
-    this.setState({ categoryIds: cats.join(",") }, () => {
+    this.setState({ categoryIds: cats.join(","), accountIds : this.props.accountActiveId }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
@@ -110,11 +108,12 @@ class BillingFilter extends Component {
       <div className="billingFilter-wrapper">
         <Form className="billing-form-wrap">
           <div className="form-row">
-            <SearchTextFilter onSearchChange={(event)=> this.onTextChange(event)} />
+            <SearchTextFilter accountActiveId={this.props.accountActiveId} onSearchChange={(event)=> this.onTextChange(event)} />
           </div>
           <div className="form-row">
             <div className="form-group col-md-12">
               <CategoriesDropdown
+                accountActiveId={this.props.accountActiveId}
                 placeholder="Select categories"
                 onChange={(value) => this.categoryChange(value)}
               ></CategoriesDropdown>
@@ -131,6 +130,7 @@ class BillingFilter extends Component {
           </div>
 
           <AmountFilterDropdown
+            accountActiveId={this.props.accountActiveId} 
             typeChange={(val) => this.filterbyAmount(val)}
             amountFromChange = {(val) => this.filterbyAmountFrom(val)}
             amountToChange = {(val) => this.filterbyAmountTo(val)}
@@ -138,7 +138,7 @@ class BillingFilter extends Component {
 
 
           <div className="form-row">
-            <DateFilter onChange={(date) => this.dateOnChange(date)}></DateFilter>
+            <DateFilter accountActiveId={this.props.accountActiveId} onChange={(date) => this.dateOnChange(date)}></DateFilter>
           </div>
           {/* <div className="form-row">
               <AccountListing activeAccount={this.props.activeAccount} />
