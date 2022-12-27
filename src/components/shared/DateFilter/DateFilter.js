@@ -8,6 +8,7 @@ function DateFilter({ onChange, accountActiveId }) {
   const [showDateRange, setShowDateRange] = React.useState(false);
   const [fromDate, setFromDate] = React.useState(null);
   const [toDate, setTodate] = React.useState(null);
+  const [selectedVal, setSelectedVal] = React.useState('')
 
   const periodChange = (value) => {
     if (value !== "custom") {
@@ -33,6 +34,7 @@ function DateFilter({ onChange, accountActiveId }) {
     setShowDateRange('');
     setFromDate('');
     setTodate('');
+    setSelectedVal('');
   }, [accountActiveId]);
 
   return (
@@ -41,7 +43,8 @@ function DateFilter({ onChange, accountActiveId }) {
         <label htmlFor="inputEmail4">Date</label>
         <Form.Select
           aria-label="Default select example"
-          onChange={(event) => periodChange(event.target.value)}
+          value={selectedVal} 
+          onChange={(event) => {periodChange(event.target.value);setSelectedVal(event.target.value)}}
         >
           <option value="">Select period</option>
           <option value="0">This month</option>

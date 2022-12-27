@@ -39,7 +39,8 @@ class BillingFilter extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.accountActiveId !== this.props.accountActiveId){
-        this.setState({ searchText: '' })
+        this.setState({ searchText: '' });
+        this.setState({ onlyUncertain: false})
       }
   }
 
@@ -92,7 +93,7 @@ class BillingFilter extends Component {
 
   uncertainHandleChange(event) {
     const flag = event.target.value == "on" ? true : false;
-    this.setState({ onlyUncertain: flag, accountIds : this.props.accountActiveId }, () => {
+    this.setState({ onlyUncertain: !this.state.onlyUncertain, accountIds : this.props.accountActiveId }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
@@ -121,6 +122,7 @@ class BillingFilter extends Component {
                 <Form.Check
                   aria-label="option 1"
                   onChange={this.uncertainHandleChange.bind(this)}
+                  checked={this.state.onlyUncertain}
                 />
                 <span className="checkbox-text">
                   Only uncertain categorization
