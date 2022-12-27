@@ -42,22 +42,23 @@ class BillingFilter extends Component {
       this.setState({ activeAccount: this.props.activeAccount }, () => {
         this.props.setSpendingData(this.props.token, this.state);
       });
+
   }
 
   filterbyAmount(value) {
-    this.setState({ amountType: value }, () => {
+    this.setState({ amountType: value, accountIds : this.props.accountActiveId }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
   filterbyAmountFrom(value) {
-    this.setState({ amountFrom: value }, () => {
+    this.setState({ amountFrom: value, accountIds : this.props.accountActiveId }, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
 
   filterbyAmountTo(value) {
-    this.setState({ amountTo: value }, () => {
+    this.setState({ amountTo: value , accountIds : this.props.accountActiveId}, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
   }
@@ -81,7 +82,7 @@ class BillingFilter extends Component {
       this.props.setSpendingData(this.props.token, { accountIds : this.props.accountActiveId});
     }
     else {      
-      this.setState({ searchText: data }, () => {
+      this.setState({ searchText: data , accountIds : this.props.accountActiveId}, () => {
       this.props.setSpendingData(this.props.token, this.state);
     });
     }
