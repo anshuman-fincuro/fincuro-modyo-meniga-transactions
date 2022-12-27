@@ -10,9 +10,12 @@ const AmountFilterDropdown = ({
   typeChange,
   amountFromChange,
   amountToChange,
+  accountActiveId
 }) => {
   const { token } = useSelector((store) => store.authReducer);
   const [categoryTypes, setCategoryTypes] = useState([]);
+  const [fromVal, setFromVal] = useState('');
+  const [toVal, setToVal] = useState('');
 
   const getCategoryTypes = () => {
     axios
@@ -32,6 +35,12 @@ const AmountFilterDropdown = ({
   useEffect(() => {
     getCategoryTypes();
   }, []);
+  useEffect(() => {
+    setCategoryTypes([]);
+    setFromVal('');
+    setToVal('');
+    getCategoryTypes();
+  }, [accountActiveId]);
 
   const filteredCategoryTypes = React.useMemo(() => {
       return categoryTypes.filter((item) => (item.name === 'Expenses' || item.name === 'Income'));
@@ -61,6 +70,8 @@ const AmountFilterDropdown = ({
             type="text"
             placeholder="From"
             name="amountFrom"
+            value={fromVal}
+            onChange={(e) => e.target.value && setFromVal(e.target.value)}
             onBlur={(e) => e.target.value && amountFromChange(e.target.value)}
           />
         </div>
@@ -69,6 +80,8 @@ const AmountFilterDropdown = ({
             type="text"
             placeholder="To"
             name="amountTo"
+            value={toVal}
+            onChange={(e) => e.target.value && setToVal(e.target.value)}
             onBlur={(e) => e.target.value && amountToChange(e.target.value)}
           />
         </div>

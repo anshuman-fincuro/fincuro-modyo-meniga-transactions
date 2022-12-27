@@ -9,14 +9,14 @@ import useDebounce from "./../../../hooks/useDebounce";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
-const SearchTextFilter = ({ onSearchChange }) => {
-  const [searchText, setSearchText] = React.useState("");
+const SearchTextFilter = ({ accountActiveId, onSearchChange }) => {
+  const [searchText, setSearchText] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const { token } = useSelector((store) => store.authReducer);
   const ref = React.useRef(null);
   const [loading, setLoading] = React.useState(false);
-
+  
   const getSuggestions = (searchText) => {
     setLoading(true);
     axios
@@ -37,7 +37,9 @@ const SearchTextFilter = ({ onSearchChange }) => {
         setLoading(false);
       });
   };
-
+  React.useEffect(()=>{     
+    setSearchText('')
+  },[accountActiveId])
   const handleClickOutside = (event) => {
     if (ref.current && !ref.current.contains(event.target)) {
       setIsOpen(false);
