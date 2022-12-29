@@ -42,9 +42,12 @@ const AmountFilterDropdown = ({
     getCategoryTypes();
   }, [accountActiveId]);
 
+  
   const filteredCategoryTypes = React.useMemo(() => {
       return categoryTypes.filter((item) => (item.name === 'Expenses' || item.name === 'Income'));
   }, [categoryTypes]);
+
+  const regex = /^[0-9]*(\.[0-9]{0,2})?$/;
 
   return (
     <>
@@ -71,8 +74,8 @@ const AmountFilterDropdown = ({
             placeholder="From"
             name="amountFrom"
             value={fromVal}
-            onChange={(e) => e.target.value && setFromVal(e.target.value)}
-            onBlur={(e) => e.target.value && amountFromChange(e.target.value)}
+            onChange={(e) => regex.test(e.target.value) && setFromVal(e.target.value)}
+            onBlur={(e) => regex.test(e.target.value) && amountFromChange(e.target.value)}
           />
         </div>
         <div className="form-group col-md-6 col-sm-12">
@@ -81,8 +84,8 @@ const AmountFilterDropdown = ({
             placeholder="To"
             name="amountTo"
             value={toVal}
-            onChange={(e) => e.target.value && setToVal(e.target.value)}
-            onBlur={(e) => e.target.value && amountToChange(e.target.value)}
+            onChange={(e) => regex.test(e.target.value) && setToVal(e.target.value)}
+            onBlur={(e) => regex.test(e.target.value) && amountToChange(e.target.value)}
           />
         </div>
       </div>

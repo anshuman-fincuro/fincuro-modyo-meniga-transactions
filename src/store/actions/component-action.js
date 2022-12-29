@@ -71,13 +71,14 @@ export const setPlanningData = (token) => {
 };
 
 export const setSpendingData = (token, filter = {}) => {
-  console.log(filter);
+  console.log(filter,"filter");
   let query = "";
   let fromDate = getFromDate();
   let toDate = getToDate();
   if (filter.chartDateRange && filter.chartDateRange != null) {
     fromDate = filter.chartDateRange.split(",")[0];
     toDate = filter.chartDateRange.split(",")[1];
+    query+= `&periodFrom=${fromDate}&periodTo=${toDate}`;
   }
 
   // if ((filter.periodFrom || filter.periodTo) && filter.period) {
@@ -93,7 +94,7 @@ export const setSpendingData = (token, filter = {}) => {
   if(filter.periodFrom  && filter.periodTo){
     query += `&periodFrom=${filter.periodFrom}&periodTo=${filter.periodTo}`;
   }else{
-     query+= `&periodFrom=${fromDate}&periodTo=${toDate}`;
+    // query+= `&periodFrom=${fromDate}&periodTo=${toDate}`;
   }
 
   if (filter.amountType) {

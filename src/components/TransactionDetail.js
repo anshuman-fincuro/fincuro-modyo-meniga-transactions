@@ -35,7 +35,10 @@ class TransactionDetail extends Component {
       selectedTransactionGroup: this.props.selectedTransactionGroup,
       categoriesData: this.props.categorydata,
       merchantDetails : {},
-      selectedDropCategory:''
+      selectedDropCategory:'',
+      averageCalculatedValue:'',
+      averageCategCalculatedValue:'',
+      accountName:''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -171,11 +174,8 @@ class TransactionDetail extends Component {
     ];
 
     const { merchantDetails } = this.state;
-    
-    
-    console.log('carbonFootprint',this.state.carbonFootprint)
-    
     return (
+      
       <div>
         {this.state.showDetails === true ? (
           <div className="">
@@ -255,7 +255,7 @@ class TransactionDetail extends Component {
                       </div>
                       <div className="transactionReceipt-amountAndAccount">
                         <span className="transactionReceipt-account">
-                          My Creditcard
+                        {this.state.accountName = this.state.selectedTransaction.accountId === 136 ? "My Bank Account" : "My Credit Card"}
                         </span>
                         <span className="transactionReceipt-amount">
                           <span className="formatCurrency-symbol">£ </span>
@@ -483,7 +483,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.round(this.state.lineChartData[0].statistics.average)+'.00'}
+                                {Math.abs(((this.state.lineChartData[0].statistics.total)-(this.state.lineChartData[0].statistics.currentMonthTotal))/(this.state.lineChartData[0].values.length - 1)).toFixed(2)}
                                 </span>
                               </span>
                             </td>
@@ -529,7 +529,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.round(this.state.lineChartData[1].statistics.average)+'.00'}
+                                {Math.abs(((this.state.lineChartData[1].statistics.total)-(this.state.lineChartData[1].statistics.currentMonthTotal))/(this.state.lineChartData[1].values.length - 1)).toFixed(2)}
                                 </span>
                               </span>
                             </td>
