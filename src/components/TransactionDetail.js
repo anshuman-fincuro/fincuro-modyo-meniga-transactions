@@ -483,7 +483,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.abs(((this.state.lineChartData[0].statistics.total)-(this.state.lineChartData[0].statistics.currentMonthTotal))/(this.state.lineChartData[0].values.length - 1)).toFixed(2)}
+                                {(((this.state.lineChartData[0].statistics.total)-(this.state.lineChartData[0].statistics.currentMonthTotal))/(this.state.lineChartData[0].values.length - 1)).toFixed(2)}
                                 </span>
                               </span>
                             </td>
@@ -529,7 +529,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.abs(((this.state.lineChartData[1].statistics.total)-(this.state.lineChartData[1].statistics.currentMonthTotal))/(this.state.lineChartData[1].values.length - 1)).toFixed(2)}
+                                {(((this.state.lineChartData[1].statistics.total)-(this.state.lineChartData[1].statistics.currentMonthTotal))/(this.state.lineChartData[1].values.length - 1)).toFixed(2)}
                                 </span>
                               </span>
                             </td>
