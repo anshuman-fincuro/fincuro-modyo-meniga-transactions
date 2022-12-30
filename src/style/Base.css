@@ -1317,6 +1317,7 @@ height: 2rem !important;
 /* map start  */
 .map-wapper{
   margin: 50px 44px;
+  justify-content: center;
 }
 .map-wapper iframe{
   width: 100%;
