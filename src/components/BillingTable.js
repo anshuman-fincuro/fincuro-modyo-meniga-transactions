@@ -34,7 +34,9 @@ class BillingTable extends Component {
   }
   render() {
     return (
+    
       <div>
+         {console.log(this.props.transactionData,"transactiondata")}
         {this.props.transactionData.length > 0 ? (
           <div className="billingTable-wrapper">
             {this.props.transactionData.map((x, i) => (
@@ -78,9 +80,12 @@ class BillingTable extends Component {
                             />                           
                           </div>
                         </div>
+                        {item.amount > 0?  <div className="billingTable-TransactionAmount text-color-green">
+                          £ {item.amount}
+                        </div> :
                         <div className="billingTable-TransactionAmount text-color-red">
                           £ {item.amount}
-                        </div>
+                        </div>}
                       </div>
                     </div>
                   ))}

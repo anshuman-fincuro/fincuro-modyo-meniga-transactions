@@ -127,13 +127,15 @@ class App extends Component {
       "November",
       "December",
     ];
+   
     var groups = transactionData.reduce((r, o) => {
-      var m = o.date.split("-")[1];
+      var m = o.date.split("-")[0] + "-" + o.date.split("-")[1];
       r[m]
         ? r[m].data.push(o)
-        : (r[m] = { group: months[parseInt(m)], data: [o] });
+        : (r[m] = { group: months[parseInt(m.split("-")[1])] + " " + m.split("-")[0], data: [o] });
       return r;
     }, {});
+    console.log("groups",groups)
     var groupedTransactions = Object.keys(groups)
       .sort()
       .reverse()

@@ -10,9 +10,11 @@ function Map({ latitude, longitude }) {
     return (
       <LoadScript googleMapsApiKey={GOOGLE_MAP_API_KEY}>
         <GoogleMap
-          zoom={16}
+          zoom={18}
           center={center}
           mapContainerClassName="map__container"
+          options={{scrollwheel: false,zoomControl: false,fullscreenControl: false}}
+          
         >
           <Marker position={center}></Marker>
         </GoogleMap>

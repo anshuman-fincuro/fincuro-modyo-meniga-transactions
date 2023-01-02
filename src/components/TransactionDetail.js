@@ -113,7 +113,7 @@ class TransactionDetail extends Component {
       }
       let param = {
         "transactionFilter": {
-          "periodFrom": moment().subtract(11, 'months').startOf("month").format("YYYY-MM-DD"),
+          "periodFrom": moment().startOf("month").format("YYYY-MM-DD"),
           "periodTo": moment().endOf("month").format("YYYY-MM-DD"),
           "hideExcluded": true
         },
@@ -384,7 +384,7 @@ class TransactionDetail extends Component {
                       </div>
                       <div className="transactionOverviewChart-amount">
                         {/* £ {this.totalSelectedMerchantAmt(this.state.selectedTransaction.text)} */}
-                        £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[1].statistics.total))+'.00':''}
+                        £ {this.state.totalExpenses !== undefined?((this.state.totalExpenses[1].statistics.total)).toFixed(2):''}
                       </div>
                     </div>
                     <div className="transactionOverviewChart-list-item me-3 border-color-blue">
@@ -392,7 +392,7 @@ class TransactionDetail extends Component {
                         Carbon footprint
                       </div>
                       <div className="transactionOverviewChart-amount">
-                      £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[0].statistics.carbonFootprint.total))+'.00':''}
+                      £ {this.state.totalExpenses !== undefined?((this.state.totalExpenses[0].statistics.carbonFootprint.total)).toFixed(2):''}
                       </div>
                     </div>
                     <div className="transactionOverviewChart-list-item me-3 border-color-purpel">
@@ -400,7 +400,7 @@ class TransactionDetail extends Component {
                       {this.state.selectedDropCategory!==''?this.state.selectedDropCategory:this.defaultDropdownSelect(this.state.selectedTransaction.categoryId)}
                       </div>
                       <div className="transactionOverviewChart-amount">
-                        £ {this.state.totalExpenses !== undefined?(Math.round(this.state.totalExpenses[0].statistics.total))+'.00':''}
+                        £ {this.state.totalExpenses !== undefined?((this.state.totalExpenses[0].statistics.total)).toFixed(2):""}
                       </div>
                     </div>
                   </div>
@@ -473,7 +473,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                  {Math.round(this.state.lineChartData[0].statistics.currentMonthTotal)+'.00'}
+                                  {(this.state.lineChartData[0].statistics.currentMonthTotal).toFixed(2)}
                                 </span>
                               </span>
                             </td>
@@ -493,7 +493,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.round(this.state.lineChartData[0].statistics.total)+'.00'}
+                                {(this.state.lineChartData[0].statistics.total).toFixed(2)}
                                 </span>
                               </span>
                             </td>
@@ -519,7 +519,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.round(this.state.lineChartData[1].statistics.currentMonthTotal)+'.00'}
+                                {(this.state.lineChartData[1].statistics.currentMonthTotal).toFixed(2)}
                                 </span>
                               </span>
                             </td>
@@ -539,7 +539,7 @@ class TransactionDetail extends Component {
                                   £{" "}
                                 </span>
                                 <span className="FormatCurrency-value">
-                                {Math.round(this.state.lineChartData[1].statistics.total)+'.00'}
+                                {(this.state.lineChartData[1].statistics.total).toFixed(2)}
                                 </span>
                               </span>
                             </td>
