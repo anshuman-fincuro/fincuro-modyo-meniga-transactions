@@ -81,10 +81,10 @@ class BillingTable extends Component {
                           </div>
                         </div>
                         {item.amount > 0?  <div className="billingTable-TransactionAmount text-color-green">
-                          £ {item.amount}
+                          £ {(item.amount).toFixed(2)}
                         </div> :
                         <div className="billingTable-TransactionAmount text-color-red">
-                          £ {item.amount}
+                          £ {(item.amount).toFixed(2)}
                         </div>}
                       </div>
                     </div>

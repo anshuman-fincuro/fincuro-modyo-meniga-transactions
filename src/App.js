@@ -8,7 +8,7 @@ import "./../src/style/Styles.css";
 import { setAuthToken } from "./store/actions/auth-action";
 import { SpinningCircles } from "react-loading-icons";
 import AccountDropdown from "./components/AccountDropdown";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import {
   setAccountsData,
   setCategoriesData,
