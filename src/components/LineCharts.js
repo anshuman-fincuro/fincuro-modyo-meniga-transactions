@@ -57,14 +57,14 @@ class LineCharts extends Component {
           <ResponsiveContainer width="98%" height={250}>
             {this.props.selectedMonthLabel === "Last month" ? <BarChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
               <XAxis dataKey="date" padding={{ left: 50, right: 50 }} />
-              <YAxis type="number" reversed />
+              {(this.props.lineChartData[0].statistics.currentMonthTotal) > 0 ? <YAxis type="number"/> : <YAxis type="number" reversed/> } <YAxis type="number"/>
               <Tooltip />              
               <Bar type="monotone" dataKey={this.props.selectedTransaction} fill="#feb734" />
               <Bar type="monotone" dataKey={this.props.selectedCategory} fill="#6bc1d3" />
             </BarChart> :
             <LineChart layout="horizontal" data={this.state.data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <XAxis dataKey="date" padding={{ left: 50, right: 50 }} />
-            <YAxis type="number" reversed />
+           {(this.props.lineChartData[0].statistics.currentMonthTotal) > 0 ? <YAxis type="number"/> : <YAxis type="number" reversed/> } <YAxis type="number"/>
             <Tooltip />              
             <Line type="monotone" dataKey={this.props.selectedTransaction} stroke="#feb734" />
             <Line type="monotone" dataKey={this.props.selectedCategory} stroke="#6bc1d3" />

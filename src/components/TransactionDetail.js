@@ -427,7 +427,8 @@ class TransactionDetail extends Component {
                         aria-controls="nav-home"
                         aria-selected="true"
                       >
-                        Spending
+                       {(this.state.totalExpenses !== undefined?((this.state.totalExpenses[1].statistics.total)).toFixed(2):'') > 0 ?  <h2 className="heading"> Income </h2>
+                 : <h2 className="heading"> Spending </h2> }
                       </a>
                     </div>
                   </nav>
