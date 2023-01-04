@@ -376,7 +376,8 @@ class TransactionDetail extends Component {
                   </div>
                 </div>
                 <div className="transactionOverviewChart-graph-wrapper mt-5">
-                  <h2 className="heading">Total expenses this year</h2>
+                {(this.state.totalExpenses !== undefined?((this.state.totalExpenses[1].statistics.total)).toFixed(2):'') > 0 ?  <h2 className="heading">Total income this year</h2>
+                 : <h2 className="heading">Total expenses this year</h2> }
                   <div className="transactionOverviewChart-list">
                     <div className="transactionOverviewChart-list-item me-3">
                       <div className="transactionOverviewChart-text">
@@ -408,7 +409,8 @@ class TransactionDetail extends Component {
               </div>
             </div>
             <div className="linechart-wrapper">
-              <h2 className="heading">Total expenses this period</h2>
+            {(this.state.totalExpenses !== undefined?((this.state.totalExpenses[1].statistics.total)).toFixed(2):'') > 0 ?  <h2 className="heading">Total income this period</h2>
+                 : <h2 className="heading">Total expenses this period</h2> }
               <div className="TransactionOverviewChart-tabs-wrapper">                
               <div className="TransactionOverviewChart-dropdown">
               <ChartDateFilter onSelectChartData={this.onSelectChartData} categoryId={this.state.selectedTransaction.categoryId} merchantId={this.props.selectedTransaction.merchantId} merchantTexts={this.state.selectedTransaction.text}></ChartDateFilter>
